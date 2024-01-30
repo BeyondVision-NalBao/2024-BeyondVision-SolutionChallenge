@@ -1,4 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/ui/workout/widgets/workout_camera_view.dart';
 import 'package:flutter/material.dart';
 
 class SuggestBox extends StatelessWidget {
@@ -18,7 +19,12 @@ class SuggestBox extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CameraView()),
+            );
+          },
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
