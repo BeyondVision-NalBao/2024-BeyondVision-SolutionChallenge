@@ -1,8 +1,10 @@
 ---
-Name: "✨ Feature"
-About: 새로운 기능 또는 명세가 있나요?
-Labels: ✨ Feature
-Assignees: ''
+name: "✨ Feature"
+about: 새로운 기능이 있나요?
+title: "[FEAT]"
+labels: ''
+assignees: ''
+
 ---
 
 ## 📄 DESCRIPTION
@@ -14,5 +16,3 @@ Assignees: ''
 
 ## 🙋🏻 More
 기타사항을 적어주세요.
-
-

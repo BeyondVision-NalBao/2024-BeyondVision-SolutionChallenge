@@ -1,8 +1,10 @@
 ---
-Name: "🐞 Bug"
-About: 버그가 발생했나요?
-Labels: 🐞 Bug
-Assignees: ''
+name: "\U0001F41E Bug"
+about: 버그가 발생했나요?
+title: "[BUG]"
+labels: ''
+assignees: ''
+
 ---
 
 ## 🐞 DESCRIPTION
