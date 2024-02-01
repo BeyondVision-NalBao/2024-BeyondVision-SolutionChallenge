@@ -3,14 +3,10 @@ package beyondvision.routine.domain;
 import beyondvision.exercise.domain.Exercise;
 import beyondvision.global.BaseEntity;
 import beyondvision.member.domain.Member;
-import beyondvision.record.domain.Record;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
