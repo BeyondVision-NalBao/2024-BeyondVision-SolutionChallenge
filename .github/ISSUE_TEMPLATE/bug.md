@@ -1,0 +1,22 @@
+---
+Name: "🐞 Bug"
+About: 버그가 발생했나요?
+Labels: 🐞 Bug
+Assignees: ''
+---
+
+## 🐞 DESCRIPTION
+버그 설명
+
+## ✅ EXPECTED RESULT
+- [ ] todo
+- [ ] todo
+
+## 📌 ACTUAL RESULT
+기타사항을 적어주세요.
+
+## 📄 LOG
+로그가 있다면 작성해주세요.
+
+## 🙋🏻 More
+기타사항을 적어주세요.
