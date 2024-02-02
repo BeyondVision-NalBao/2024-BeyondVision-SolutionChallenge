@@ -17,6 +17,9 @@ class Routine extends StatelessWidget {
       ),
       const RoutineButton(index: "2", name: "요가"),
       const RoutineButton(index: "3", name: "하체 근력"),
+      const NewButton(
+        previousPage: true,
+      )
     ];
     return Scaffold(
       appBar: MyAppBar(context, titleText: "당신의 루틴"),
@@ -31,9 +34,6 @@ class Routine extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          const NewButton(
-            previousPage: true,
-          )
         ],
       ),
     );
