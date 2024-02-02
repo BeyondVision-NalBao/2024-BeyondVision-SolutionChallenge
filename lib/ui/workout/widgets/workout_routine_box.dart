@@ -1,4 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/ui/routine/routine.dart';
 import 'package:flutter/material.dart';
 
 class RoutineBox extends StatelessWidget {
@@ -18,7 +19,10 @@ class RoutineBox extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Routine()));
+          },
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
