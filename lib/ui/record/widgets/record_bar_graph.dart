@@ -54,8 +54,6 @@ class RecordBarState extends State<RecordBar> {
     double width = 22,
   }) {
     barColor ??= widget.barColor;
-    print(x);
-    print(isSelected);
     return BarChartGroupData(
       x: x,
       barRods: [

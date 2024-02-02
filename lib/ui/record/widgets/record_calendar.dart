@@ -12,18 +12,6 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   selectedDay = DateTime.now();
-  // }
-
-  // void _changeSelectedDay(DateTime day, DateTime focusedDay) {
-  //   setState(() {
-  //     selectedDay = day;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     DateProvider provider = Provider.of<DateProvider>(context);

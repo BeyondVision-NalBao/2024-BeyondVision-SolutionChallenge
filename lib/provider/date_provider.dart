@@ -4,6 +4,10 @@ class DateProvider extends ChangeNotifier {
   DateTime selectedDay = DateTime.now();
   int selectedIndex = -1;
 
+  DateProvider() {
+    selectedIndex = selectedDay.weekday - 1;
+  }
+
   void updateSelectedDay(DateTime newDay, DateTime focusedDay) {
     selectedDay = newDay;
     selectedIndex = selectedDay.weekday - 1;
