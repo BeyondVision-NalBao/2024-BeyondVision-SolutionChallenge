@@ -5,8 +5,10 @@ import beyondvision.record.domain.Record;
 import beyondvision.routine.domain.Routine;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
+@DynamicInsert
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
 public class Member extends BaseEntity {
@@ -50,6 +53,7 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member")
     private List<Record> records = new ArrayList<>();
 
+    @Builder
     public Member(
             final String name,
             final String email,
