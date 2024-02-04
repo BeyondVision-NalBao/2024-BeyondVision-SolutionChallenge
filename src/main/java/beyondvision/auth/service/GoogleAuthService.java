@@ -29,19 +29,21 @@ public class GoogleAuthService {
         Member member = memberRepository.findMemberBySocialId(googleMember.getId());
 
         if (member == null) {
-            AuthResponse.builder()
+            return AuthResponse.builder()
                     .isNewMember(true)
                     .socialId(googleMember.getId())
                     .name(googleMember.getName())
                     .email(googleMember.getEmail())
+                    .profileImageUrl(googleMember.getPicture())
                     .build();
         }
 
         return AuthResponse.builder()
-                .isNewMember(true)
+                .isNewMember(false)
                 .socialId(member.getSocialId())
                 .name(member.getName())
                 .email(member.getEmail())
+                .profileImageUrl(googleMember.getPicture())
                 .build();
     }
 
