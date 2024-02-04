@@ -20,8 +20,6 @@ public class GoogleAuthService {
 
     private final MemberRepository memberRepository;
     private final WebClient webClient;
-    @Value("${oauth2.google.user-base-url}")
-    private String GOOGLE_USER_BASE_URL;
 
     public AuthResponse googleLogin(String accessToken) {
         GoogleMemberInfoResponse googleMember = getGoogleMemberInfo(accessToken);
@@ -49,7 +47,7 @@ public class GoogleAuthService {
 
     public GoogleMemberInfoResponse getGoogleMemberInfo(String accessToken) {
         GoogleMemberInfoResponse googleMemberInfo = webClient.get()
-                .uri(GOOGLE_USER_BASE_URL, uriBuilder -> uriBuilder.queryParam("access_token", accessToken).build())
+                .uri("https://www.googleapis.com/oauth2/v1/userinfo", uriBuilder -> uriBuilder.queryParam("access_token", accessToken).build())
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, response -> Mono.error(new RuntimeException("Social Access Token is unauthorized")))
                 .onStatus(HttpStatusCode::is5xxServerError, response -> Mono.error(new RuntimeException("Internal Server Error")))
