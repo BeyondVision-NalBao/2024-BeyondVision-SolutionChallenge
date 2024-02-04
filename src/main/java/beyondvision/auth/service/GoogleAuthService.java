@@ -6,7 +6,6 @@ import beyondvision.global.exeption.AuthException;
 import beyondvision.member.domain.Member;
 import beyondvision.member.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -24,7 +23,7 @@ public class GoogleAuthService {
     public AuthResponse googleLogin(String accessToken) {
         GoogleMemberInfoResponse googleMember = getGoogleMemberInfo(accessToken);
 
-        Member member = memberRepository.findMemberBySocialId(googleMember.getId());
+        final Member member = memberRepository.findMemberBySocialId(googleMember.getId()).orElse(null);
 
         if (member == null) {
             return AuthResponse.builder()

@@ -3,8 +3,10 @@ package beyondvision.member.domain.repository;
 import beyondvision.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    Member findMemberBySocialId(String socialId);
+    Optional<Member> findMemberBySocialId(String socialId);
 
     boolean existsBySocialId(String socialId);
 
