@@ -1,7 +1,7 @@
 package beyondvision.auth.service;
 
-import beyondvision.auth.dto.response.GoogleMemberInfoResponse;
 import beyondvision.auth.dto.response.AuthResponse;
+import beyondvision.auth.dto.response.GoogleMemberInfoResponse;
 import beyondvision.global.exeption.AuthException;
 import beyondvision.member.domain.Member;
 import beyondvision.member.domain.repository.MemberRepository;
