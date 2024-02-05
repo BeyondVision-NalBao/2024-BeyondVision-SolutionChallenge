@@ -36,16 +36,13 @@ class HomeButton extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const Setting()));
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Text(
-              name,
-              style: const TextStyle(
-                  fontSize: 36,
-                  color: Color(fontYellowColor),
-                  fontWeight: FontWeight.bold),
-            ),
+        child: Center(
+          child: Text(
+            name,
+            style: const TextStyle(
+                fontSize: 40,
+                color: Color(fontYellowColor),
+                fontWeight: FontWeight.bold),
           ),
         ),
       ),
