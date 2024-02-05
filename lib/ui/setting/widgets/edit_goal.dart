@@ -51,10 +51,12 @@ class _EditGoalState extends State<EditGoal> {
             controller: _count,
             // onSubmitted: (String value) async{await showDialog()},
           ),
+          const SizedBox(height: 10),
           TextButton(
               onPressed: () {},
-              child: const Text("저장",
-                  style: TextStyle(color: Colors.white, fontSize: 24)))
+              child: const Text("생성하기",
+                  style:
+                      TextStyle(color: Color(fontYellowColor), fontSize: 24)))
         ]),
       ),
     );
