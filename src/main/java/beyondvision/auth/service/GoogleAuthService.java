@@ -5,6 +5,7 @@ import beyondvision.auth.dto.response.GoogleMemberInfoResponse;
 import beyondvision.global.exeption.AuthException;
 import beyondvision.member.domain.Member;
 import beyondvision.member.domain.repository.MemberRepository;
+import beyondvision.member.dto.response.MemberProfileResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -37,10 +38,14 @@ public class GoogleAuthService {
 
         return AuthResponse.builder()
                 .isNewMember(false)
+                .memberId(member.getId())
                 .socialId(member.getSocialId())
                 .name(member.getName())
                 .email(member.getEmail())
-                .profileImageUrl(googleMember.getPicture())
+                .profileImageUrl(member.getProfileImageUrl())
+                .age(member.getAge())
+                .gender(member.getGender())
+                .exerciseGoal(member.getExerciseGoal())
                 .build();
     }
 

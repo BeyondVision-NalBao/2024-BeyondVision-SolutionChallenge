@@ -26,8 +26,7 @@ public class MemberController {
 
     @PostMapping(value = "/signup")
     public ResponseEntity<?> signup(@RequestBody @Valid SignUpMemberRequest signUpMemberRequest) {
-        authService.signUp(signUpMemberRequest);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(authService.signUp(signUpMemberRequest));
     }
 
     @GetMapping(value = "/profile/{memberId}")
