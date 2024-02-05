@@ -16,6 +16,11 @@ public class ExerciseController {
     private final RecordService recordService;
     private final ExerciseService exerciseService;
 
+    @GetMapping("/record/{memberId}")
+    public ResponseEntity<?> getExerciseRecord(@PathVariable("memberId") final Long memberId) {
+        return ResponseEntity.ok().body(recordService.getExerciseRecord(memberId));
+    }
+
     @PostMapping("/record/{memberId}")
     public ResponseEntity<?> saveExerciseRecord(@PathVariable("memberId") final Long memberId, @RequestBody @Valid final ExerciseRecordRequest exerciseRecordRequest) {
         return ResponseEntity.ok().body(recordService.saveExerciseRecord(memberId, exerciseRecordRequest));
