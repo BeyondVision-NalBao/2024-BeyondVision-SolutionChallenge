@@ -30,9 +30,9 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "/profile/{socialId}")
-    public ResponseEntity<?> getProfile(@PathVariable(name = "socialId") String socialId) {
-        return ResponseEntity.ok().body(memberService.getMemberProfile(socialId));
+    @GetMapping(value = "/profile/{memberId}")
+    public ResponseEntity<?> getProfile(@PathVariable(name = "memberId") Long memberId) {
+        return ResponseEntity.ok().body(memberService.getMemberProfile(memberId));
     }
 
     @PostMapping(value = "/profile/{memberId}")

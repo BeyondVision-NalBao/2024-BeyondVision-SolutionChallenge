@@ -18,8 +18,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public MemberProfileResponse getMemberProfile(String socialId) {
-        final Member member =  memberRepository.findMemberBySocialId(socialId)
+    public MemberProfileResponse getMemberProfile(final Long memberId) {
+        final Member member =  memberRepository.findMemberById(memberId)
                 .orElseThrow(() -> new BadRequestException(INVALID_MEMBER));
         return MemberProfileResponse.of(member);
     }
