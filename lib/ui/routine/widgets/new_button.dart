@@ -1,3 +1,4 @@
+import 'package:beyond_vision/ui/routine/widgets/new_routine_name.dart';
 import 'package:beyond_vision/ui/routine/widgets/new_workout.dart';
 import 'package:beyond_vision/ui/routine/widgets/routine_detail.dart';
 import 'package:flutter/material.dart';
@@ -21,11 +22,9 @@ class NewButton extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RoutineDetail()),
-                );
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => const NewName());
               },
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
