@@ -6,6 +6,7 @@ import beyondvision.member.domain.Member;
 import beyondvision.routine.domain.Routine;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
@@ -26,7 +27,7 @@ public class Record extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Long exerciseTime;
+    private Integer exerciseTime;
 
     private Integer caloriesBurnedSum;
 
@@ -45,4 +46,23 @@ public class Record extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
+
+    @Builder
+    public Record(
+            final Integer exerciseTime,
+            final Integer caloriesBurnedSum,
+            final Integer averageHeartRate,
+            final Integer exerciseCount,
+            final Member member,
+            final Routine routine,
+            final Exercise exercise
+    ) {
+        this.exerciseTime = exerciseTime;
+        this.caloriesBurnedSum = caloriesBurnedSum;
+        this.averageHeartRate = averageHeartRate;
+        this.exerciseCount = exerciseCount;
+        this.member = member;
+        this.routine = routine;
+        this.exercise = exercise;
+    }
 }
