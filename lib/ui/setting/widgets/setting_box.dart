@@ -31,7 +31,7 @@ class SettingBox extends StatelessWidget {
             showDialog(
                 context: context,
                 builder: (BuildContext context) => const DeleteAccount());
-          } else if (name == "운동 기록") {
+          } else if (name == "로그아웃") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const Record()));
           } else {
