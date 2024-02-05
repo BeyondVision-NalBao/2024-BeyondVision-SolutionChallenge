@@ -6,11 +6,13 @@ import 'package:provider/provider.dart';
 
 void main() {
   initializeDateFormatting().then((_) => runApp(ChangeNotifierProvider(
-      create: (context) => DateProvider(), child: const MyApp())));
+      create: (context) => DateProvider(), child: MyApp())));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final routes = {HomePage: (context) => const HomePage()};
 
   // This widget is the root of your application.
   @override
