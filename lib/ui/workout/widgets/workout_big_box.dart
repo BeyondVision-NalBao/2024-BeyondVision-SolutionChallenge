@@ -1,4 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/ui/workout/widgets/workout_categories.dart';
 import 'package:flutter/material.dart';
 
 class BigBox extends StatelessWidget {
@@ -19,7 +20,29 @@ class BigBox extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            if (name == "상체") {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Categories(cate: "상체")));
+            } else if (name == "하체") {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Categories(cate: "하체")));
+            } else if (name == "코어") {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Categories(cate: "코어")));
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Categories(cate: "스트레칭")));
+            }
+          },
           child: Center(
             child: Text(
               name,
