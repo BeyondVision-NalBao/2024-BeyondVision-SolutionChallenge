@@ -20,7 +20,7 @@ class RecordDetail extends StatelessWidget {
           DetailLine(),
           SizedBox(height: 10),
           DetailText(title: "운동 시간", text: "23분 02초"),
-          DetailText(title: "소모 칼로리", text: "--:--"),
+          DetailText(title: "소모 칼로리", text: "-"),
           SizedBox(height: 50),
           DetailTitle(title: "운동 기록"),
           DetailLine(),

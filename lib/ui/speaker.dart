@@ -44,9 +44,9 @@ class _SpeakerState extends State<Speaker> {
                   child: Text(
                     "무엇을 하고\n싶으신가요?",
                     style: TextStyle(
-                      fontSize: 40,
-                      color: Color(fontYellowColor),
-                    ),
+                        fontSize: 40,
+                        color: Color(fontYellowColor),
+                        fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -60,10 +60,11 @@ class _SpeakerState extends State<Speaker> {
               height: 30,
             ),
             const CircleAvatar(
-              radius: 170,
+              radius: 150,
               backgroundColor: Colors.transparent,
               backgroundImage: AssetImage('lib/config/assets/Logo.png'),
             ),
+            const SizedBox(height: 50),
             CircleAvatar(
               radius: 50,
               backgroundColor: const Color(boxColor),
