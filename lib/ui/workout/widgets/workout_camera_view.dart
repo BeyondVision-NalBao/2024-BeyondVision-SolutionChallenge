@@ -76,7 +76,7 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
       Size screenSize = MediaQuery.of(context).size;
       CameraSettings.screenSize = screenSize;
       // 프리뷰 프레임의 너비와 화면 너비 간의 비율
-      // CameraSettings.ratio = screenSize.width / (previewSize.height ?? 0);
+      CameraSettings.ratio = 0.5;
     });
   }
 
