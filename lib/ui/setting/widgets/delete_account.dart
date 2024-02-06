@@ -48,7 +48,14 @@ class _DeleteAccountState extends State<DeleteAccount> {
           TextButton(
               onPressed: () {},
               child: const Text("회원탈퇴",
-                  style: TextStyle(color: Colors.red, fontSize: 24)))
+                  style: TextStyle(color: Colors.red, fontSize: 24))),
+          const SizedBox(height: 10),
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("취소",
+                  style: TextStyle(color: Colors.white, fontSize: 24)))
         ]),
       ),
     );

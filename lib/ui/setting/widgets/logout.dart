@@ -1,14 +1,14 @@
 import 'package:beyond_vision/core/constants.dart';
 import 'package:flutter/material.dart';
 
-class DeleteAccount extends StatefulWidget {
-  const DeleteAccount({super.key});
+class LogOut extends StatefulWidget {
+  const LogOut({super.key});
 
   @override
-  State<DeleteAccount> createState() => _DeleteAccountState();
+  State<LogOut> createState() => _LogOutState();
 }
 
-class _DeleteAccountState extends State<DeleteAccount> {
+class _LogOutState extends State<LogOut> {
   late TextEditingController _count;
 
   @override
@@ -34,22 +34,26 @@ class _DeleteAccountState extends State<DeleteAccount> {
         padding: const EdgeInsets.all(10),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           const Text(
-            "로그아웃",
+            "로그아웃\n하시겠습니까?",
+            textAlign: TextAlign.center,
             style: TextStyle(
                 color: Color(fontYellowColor),
                 fontSize: 40,
                 fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 30),
-          const Text("회원 탈퇴 시,\n개인정보는 모두 폐기되며, 복구할 수 없습니다.",
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 24)),
-          const SizedBox(height: 30),
+          const SizedBox(height: 50),
           TextButton(
               onPressed: () {},
-              child: const Text("회원탈퇴",
+              child: const Text("확인",
                   style:
-                      TextStyle(color: Color(fontYellowColor), fontSize: 24)))
+                      TextStyle(color: Color(fontYellowColor), fontSize: 24))),
+          const SizedBox(height: 10),
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("취소",
+                  style: TextStyle(color: Colors.white, fontSize: 24)))
         ]),
       ),
     );

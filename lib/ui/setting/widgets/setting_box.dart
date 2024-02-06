@@ -4,6 +4,7 @@ import 'package:beyond_vision/ui/routine/routine.dart';
 import 'package:beyond_vision/ui/setting/setting.dart';
 import 'package:beyond_vision/ui/setting/widgets/delete_account.dart';
 import 'package:beyond_vision/ui/setting/widgets/edit_goal.dart';
+import 'package:beyond_vision/ui/setting/widgets/logout.dart';
 import 'package:flutter/material.dart';
 
 class SettingBox extends StatelessWidget {
@@ -32,8 +33,9 @@ class SettingBox extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) => const DeleteAccount());
           } else if (name == "로그아웃") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Record()));
+            showDialog(
+                context: context,
+                builder: (BuildContext context) => const LogOut());
           } else {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const Setting()));
