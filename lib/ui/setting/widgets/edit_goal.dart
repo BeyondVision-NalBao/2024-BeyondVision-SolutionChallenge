@@ -42,7 +42,7 @@ class _EditGoalState extends State<EditGoal> {
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 30),
-            const Text("운동 횟수 또는 시간을 \n설정하세요",
+            const Text("운동 횟수 또는 시간을 \n수정하세요\n(분 단위로 입력)",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 24)),
             const SizedBox(height: 30),
