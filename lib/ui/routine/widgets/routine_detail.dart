@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/ui/appbar.dart';
 import 'package:beyond_vision/ui/routine/widgets/new_button.dart';
@@ -14,6 +13,7 @@ class RoutineDetail extends StatefulWidget {
 }
 
 class _RoutineDetailState extends State<RoutineDetail> {
+  bool isChanged = false;
   final List<List<String>> _items = [
     ['스쿼트', '30회'],
     ['런지', '30회'],
@@ -51,6 +51,8 @@ class _RoutineDetailState extends State<RoutineDetail> {
                     }
                     final item = _items.removeAt(oldIndex);
                     _items.insert(newIndex, item);
+
+                    isChanged = true;
                   });
                 },
                 buildDefaultDragHandles: false,
@@ -66,9 +68,30 @@ class _RoutineDetailState extends State<RoutineDetail> {
               ),
             ),
             const SizedBox(height: 20),
-            const NewButton(
-              previousPage: false,
-            )
+            isChanged
+                ? Center(
+                    child: Material(
+                      shape: const CircleBorder(side: BorderSide.none),
+                      elevation: 15,
+                      child: CircleAvatar(
+                          radius: 50,
+                          backgroundColor: const Color(boxColor),
+                          child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  isChanged = false;
+                                });
+                              },
+                              icon: const Icon(
+                                Icons.check,
+                                size: 80,
+                                color: Color(fontYellowColor),
+                              ))),
+                    ),
+                  )
+                : const NewButton(
+                    previousPage: false,
+                  )
           ]),
         ));
   }
