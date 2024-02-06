@@ -1,4 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/ui/workout/widgets/workout_camera_view.dart';
 import 'package:flutter/material.dart';
 
 class WorkOutExplain extends StatelessWidget {
@@ -32,6 +33,10 @@ class WorkOutExplain extends StatelessWidget {
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CameraView()));
                   },
                   child: const Text("확인 후 운동하기",
                       style: TextStyle(
