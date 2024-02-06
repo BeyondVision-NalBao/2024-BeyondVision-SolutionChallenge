@@ -25,17 +25,12 @@ class Routine extends StatelessWidget {
       appBar: MyAppBar(context, titleText: "운동루틴"),
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
-              child: GridView.count(
-                crossAxisCount: 2,
-                children: routine,
-              ),
-            ),
-            const SizedBox(height: 20),
-          ],
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.7,
+          child: GridView.count(
+            crossAxisCount: 2,
+            children: routine,
+          ),
         ),
       ),
     );
