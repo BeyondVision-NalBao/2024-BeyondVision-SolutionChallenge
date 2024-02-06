@@ -2,7 +2,8 @@ import 'package:beyond_vision/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class NewName extends StatefulWidget {
-  const NewName({super.key});
+  final bool isExist;
+  const NewName({super.key, required this.isExist});
 
   @override
   State<NewName> createState() => _NewNameState();
@@ -33,17 +34,17 @@ class _NewNameState extends State<NewName> {
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          const Text(
-            "새로운 루틴",
-            style: TextStyle(
+          Text(
+            widget.isExist ? "새로운 이름" : "새로운 루틴",
+            style: const TextStyle(
                 color: Color(fontYellowColor),
                 fontSize: 40,
                 fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 30),
-          const Text("새로운 루틴의 이름을\n설정하세요",
+          Text(widget.isExist ? "새로운 이름을\n설정하세요" : "새로운 루틴의 이름을\n설정하세요",
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 24)),
+              style: const TextStyle(color: Colors.white, fontSize: 24)),
           const SizedBox(height: 30),
           TextField(
             style: const TextStyle(color: Color(fontYellowColor), fontSize: 40),
@@ -52,10 +53,12 @@ class _NewNameState extends State<NewName> {
           ),
           const SizedBox(height: 10),
           TextButton(
-              onPressed: () {},
-              child: const Text("생성하기",
-                  style:
-                      TextStyle(color: Color(fontYellowColor), fontSize: 24)))
+              onPressed: () {
+                //운동 루틴에
+              },
+              child: Text(widget.isExist ? "수정하기" : "생성하기",
+                  style: const TextStyle(
+                      color: Color(fontYellowColor), fontSize: 24)))
         ]),
       ),
     );

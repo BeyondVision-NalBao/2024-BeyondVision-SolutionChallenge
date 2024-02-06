@@ -24,7 +24,8 @@ class NewButton extends StatelessWidget {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (BuildContext context) => const NewName());
+                    builder: (BuildContext context) =>
+                        const NewName(isExist: false));
               },
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
