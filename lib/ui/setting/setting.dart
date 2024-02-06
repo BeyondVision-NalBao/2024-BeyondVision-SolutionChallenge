@@ -1,4 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/ui/appbar.dart';
 import 'package:beyond_vision/ui/home/widgets/home_grid_button.dart';
 import 'package:beyond_vision/ui/setting/widgets/edit_goal.dart';
 import 'package:beyond_vision/ui/setting/widgets/setting_box.dart';
@@ -10,16 +11,17 @@ class Setting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MyAppBar(context, titleText: "설정"),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const Icon(speakerIcon, color: Color(fontYellowColor), size: 50),
+            const SizedBox(height: 150),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: MediaQuery.of(context).size.height * 0.5,
               child: GridView.count(
                 crossAxisCount: 2,
                 children: const [
