@@ -13,7 +13,7 @@ class WorkOut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar(context, titleText: "운동 하기"),
+        appBar: MyAppBar(context, titleText: "운동하기"),
         backgroundColor: Colors.black,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

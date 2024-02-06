@@ -22,7 +22,7 @@ class Routine extends StatelessWidget {
       )
     ];
     return Scaffold(
-      appBar: MyAppBar(context, titleText: "당신의 루틴"),
+      appBar: MyAppBar(context, titleText: "운동루틴"),
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Column(

@@ -54,7 +54,7 @@ class _EditGoalState extends State<EditGoal> {
           const SizedBox(height: 10),
           TextButton(
               onPressed: () {},
-              child: const Text("생성하기",
+              child: const Text("수정하기",
                   style:
                       TextStyle(color: Color(fontYellowColor), fontSize: 24)))
         ]),
