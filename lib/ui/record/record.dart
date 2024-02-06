@@ -10,7 +10,7 @@ class Record extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar(context, titleText: "운동기록"),
+        appBar: MyAppBar(context, titleText: "운동 기록"),
         backgroundColor: Colors.black,
         body: const Column(
           children: [

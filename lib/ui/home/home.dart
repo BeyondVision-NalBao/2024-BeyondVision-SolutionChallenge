@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
             child: GridView.count(
               crossAxisCount: 2,
               children: const [
-                HomeButton(name: "운동하기"),
+                HomeButton(name: "운동 하기"),
                 HomeButton(name: "운동 루틴"),
                 HomeButton(name: "운동 기록"),
                 HomeButton(name: "앱 설정")
