@@ -15,6 +15,22 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          Center(
+            child: Column(
+              children: [
+                const CircleAvatar(
+                  radius: 70,
+                  backgroundColor: Colors.transparent,
+                  backgroundImage: AssetImage('lib/config/assets/Logo.png'),
+                ),
+                Container(
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                                'lib/config/assets/logoBlack.png')))),
+              ],
+            ),
+          ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
             child: GridView.count(
