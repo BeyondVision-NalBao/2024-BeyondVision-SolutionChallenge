@@ -13,9 +13,6 @@ public class ExerciseRecordRequest {
     private Integer exerciseTime;
     private Integer exerciseCount;
 
-    @NotNull(message = "루틴 id는 필수입니다.")
-    private Long routineId;
-
     @NotNull(message = "회원 id는 필수입니다.")
     private Long memberId;
 }

@@ -2,14 +2,13 @@ package beyondvision.record.service;
 
 import beyondvision.exercise.domain.Exercise;
 import beyondvision.exercise.domain.repository.ExerciseRepository;
-import beyondvision.record.dto.request.ExerciseRecordRequest;
-import beyondvision.record.dto.response.ExerciseRecordResponse;
 import beyondvision.global.exeption.BadRequestException;
 import beyondvision.member.domain.Member;
 import beyondvision.member.domain.repository.MemberRepository;
 import beyondvision.record.domain.Record;
 import beyondvision.record.domain.repository.RecordRepository;
-import beyondvision.routine.domain.Routine;
+import beyondvision.record.dto.request.ExerciseRecordRequest;
+import beyondvision.record.dto.response.ExerciseRecordResponse;
 import beyondvision.routine.domain.repository.RoutineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,6 @@ public class RecordService {
 
     private final MemberRepository memberRepository;
     private final ExerciseRepository exerciseRepository;
-    private final RoutineRepository routineRepository;
     private final RecordRepository recordRepository;
 
     @Transactional(readOnly = true)
@@ -42,14 +40,14 @@ public class RecordService {
     public ExerciseRecordResponse saveExerciseRecord(final Long exerciseId, final ExerciseRecordRequest exerciseRecordRequest) {
         Member member = checkExistMember(exerciseRecordRequest.getMemberId());
 
-        Routine routine = routineRepository.findRoutineById(exerciseRecordRequest.getRoutineId()).orElse(null);
+        Exercise exercise = exerciseRepository.findExerciseById(exerciseId)
+                .orElseThrow(() -> new BadRequestException(INVALID_EXERCISE));
 
         Record record = Record.builder()
                 .exerciseTime(exerciseRecordRequest.getExerciseTime())
                 .exerciseCount(exerciseRecordRequest.getExerciseCount())
                 .member(member)
-                .routine(routine)
-                .exercise(routine.getExercise())
+                .exercise(exercise)
                 .build();
 
         recordRepository.save(record);

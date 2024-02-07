@@ -32,7 +32,6 @@ public class Exercise extends BaseEntity {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
     private Integer caloriesBurned;
 
     @Column(nullable = false)

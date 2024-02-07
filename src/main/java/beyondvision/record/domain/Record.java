@@ -26,7 +26,6 @@ public class Record extends BaseEntity {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private Integer exerciseTime;
 
     private Integer caloriesBurnedSum;
@@ -50,7 +49,6 @@ public class Record extends BaseEntity {
             final Integer averageHeartRate,
             final Integer exerciseCount,
             final Member member,
-            final Routine routine,
             final Exercise exercise
     ) {
         this.exerciseTime = exerciseTime;
@@ -58,7 +56,6 @@ public class Record extends BaseEntity {
         this.averageHeartRate = averageHeartRate;
         this.exerciseCount = exerciseCount;
         this.member = member;
-        this.routine = routine;
         this.exercise = exercise;
     }
 }
