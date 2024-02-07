@@ -1,6 +1,7 @@
-package beyondvision.routine.domain;
+package beyondvision.detail.domain;
 
 import beyondvision.exercise.domain.Exercise;
+import beyondvision.routine.domain.Routine;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

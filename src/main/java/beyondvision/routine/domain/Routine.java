@@ -1,6 +1,6 @@
 package beyondvision.routine.domain;
 
-import beyondvision.exercise.domain.Exercise;
+import beyondvision.detail.domain.RoutineDetail;
 import beyondvision.global.BaseEntity;
 import beyondvision.member.domain.Member;
 import jakarta.persistence.*;

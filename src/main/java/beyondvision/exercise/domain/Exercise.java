@@ -2,8 +2,7 @@ package beyondvision.exercise.domain;
 
 import beyondvision.global.BaseEntity;
 import beyondvision.record.domain.Record;
-import beyondvision.routine.domain.Routine;
-import beyondvision.routine.domain.RoutineDetail;
+import beyondvision.detail.domain.RoutineDetail;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
