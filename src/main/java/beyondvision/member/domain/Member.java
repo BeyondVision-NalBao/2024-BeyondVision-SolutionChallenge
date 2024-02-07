@@ -5,6 +5,7 @@ import beyondvision.record.domain.Record;
 import beyondvision.routine.domain.Routine;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
@@ -49,4 +50,24 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member")
     private List<Record> records = new ArrayList<>();
+
+    @Builder
+    public Member(
+            final String name,
+            final String email,
+            final String socialId,
+            final String profileImageUrl,
+            final Integer age,
+            final String gender,
+            final Integer exerciseGoal
+
+    ) {
+        this.name = name;
+        this.email = email;
+        this.socialId = socialId;
+        this.profileImageUrl = profileImageUrl;
+        this.age = age;
+        this.gender = gender;
+        this.exerciseGoal = exerciseGoal;
+    }
 }
