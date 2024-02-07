@@ -39,8 +39,6 @@ public class Member extends BaseEntity {
     @Column(nullable = false)
     private String profileImageUrl;
 
-    //private String refreshToken;
-
     private Integer age;
 
     private String gender;
