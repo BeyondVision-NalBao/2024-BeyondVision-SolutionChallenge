@@ -71,15 +71,7 @@ public class Member extends BaseEntity {
         this.exerciseGoal = exerciseGoal;
     }
 
-    public void updateMember(
-            final String name,
-            final Integer age,
-            final String gender,
-            final Integer exerciseGoal
-    ) {
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
+    public void updateMember(final Integer exerciseGoal) {
         this.exerciseGoal = exerciseGoal;
     }
 }
