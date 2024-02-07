@@ -1,5 +1,6 @@
 package beyondvision.auth.service;
 
+import beyondvision.auth.dto.response.AuthResponse;
 import beyondvision.global.exeption.BadRequestException;
 import beyondvision.member.domain.Member;
 import beyondvision.member.domain.repository.MemberRepository;
@@ -14,13 +15,12 @@ import static beyondvision.global.exeption.ExceptionCode.EXIST_MEMBER;
 public class AuthService {
     private final MemberRepository memberRepository;
 
-    public void signUp(SignUpMemberRequest signUpMemberRequest) {
+    public AuthResponse signUp(SignUpMemberRequest signUpMemberRequest) {
 
         if (memberRepository.existsBySocialId(signUpMemberRequest.getSocialId()))
             throw new BadRequestException(EXIST_MEMBER);
 
-
-        memberRepository.save(Member.builder()
+        Member member = memberRepository.save(Member.builder()
                 .name(signUpMemberRequest.getName())
                 .email(signUpMemberRequest.getEmail())
                 .socialId(signUpMemberRequest.getSocialId())
@@ -29,5 +29,17 @@ public class AuthService {
                 .gender(signUpMemberRequest.getGender())
                 .exerciseGoal(signUpMemberRequest.getExerciseGoal())
                 .build());
+
+        return AuthResponse.builder()
+                .isNewMember(false)
+                .memberId(member.getId())
+                .socialId(member.getSocialId())
+                .name(member.getName())
+                .email(member.getEmail())
+                .profileImageUrl(member.getProfileImageUrl())
+                .age(member.getAge())
+                .gender(member.getGender())
+                .exerciseGoal(member.getExerciseGoal())
+                .build();
     }
 }

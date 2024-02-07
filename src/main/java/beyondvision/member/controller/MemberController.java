@@ -3,6 +3,8 @@ package beyondvision.member.controller;
 import beyondvision.auth.service.AuthService;
 import beyondvision.auth.service.GoogleAuthService;
 import beyondvision.member.dto.request.SignUpMemberRequest;
+import beyondvision.member.dto.request.UpdateMemberInfoRequest;
+import beyondvision.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ public class MemberController {
 
     public final GoogleAuthService googleAuthService;
     public final AuthService authService;
+    public final MemberService memberService;
 
     @GetMapping("/google/{accessToken}")
     public ResponseEntity<?> googleLogin(@PathVariable(name = "accessToken") String accessToken) {
@@ -23,7 +26,19 @@ public class MemberController {
 
     @PostMapping(value = "/signup")
     public ResponseEntity<?> signup(@RequestBody @Valid SignUpMemberRequest signUpMemberRequest) {
-        authService.signUp(signUpMemberRequest);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(authService.signUp(signUpMemberRequest));
+    }
+
+    @GetMapping(value = "/info/{memberId}")
+    public ResponseEntity<?> getMemberInfo(@PathVariable(name = "memberId") Long memberId) {
+        return ResponseEntity.ok().body(memberService.getMemberInfo(memberId));
+    }
+
+    @PostMapping(value = "/info/{memberId}")
+    public ResponseEntity<?> updateMemberInfo(
+            @PathVariable(name = "memberId") Long memberId,
+            @RequestBody UpdateMemberInfoRequest updateMemberInfoRequest
+    ) {
+        return ResponseEntity.ok().body(memberService.updateMemberInfo(memberId, updateMemberInfoRequest));
     }
 }
