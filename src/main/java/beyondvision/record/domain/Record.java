@@ -39,10 +39,6 @@ public class Record extends BaseEntity {
     private Member member;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "routine_id", nullable = false)
-    private Routine routine;
-
-    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 }

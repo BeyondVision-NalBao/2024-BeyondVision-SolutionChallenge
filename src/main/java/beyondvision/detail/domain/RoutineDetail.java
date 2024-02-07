@@ -1,16 +1,12 @@
-package beyondvision.routine.domain;
+package beyondvision.detail.domain;
 
-import beyondvision.detail.domain.RoutineDetail;
-import beyondvision.global.BaseEntity;
-import beyondvision.member.domain.Member;
+import beyondvision.exercise.domain.Exercise;
+import beyondvision.routine.domain.Routine;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -21,18 +17,21 @@ import static lombok.AccessLevel.PROTECTED;
 @DynamicInsert
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
-public class Routine extends BaseEntity {
+public class RoutineDetail {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    private String name;
+    private Integer exerciseCount;
+
+    private Integer exerciseOrder;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+    @JoinColumn(name = "routine_id", nullable = false)
+    private Routine routine;
 
-    @OneToMany(mappedBy = "routine")
-    private List<RoutineDetail> routineDetails = new ArrayList<>();
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "exercise_id", nullable = false)
+    private Exercise exercise;
 }
