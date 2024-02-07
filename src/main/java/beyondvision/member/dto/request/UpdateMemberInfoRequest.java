@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateMemberProfileRequest {
+public class UpdateMemberInfoRequest {
 
-    private String name;
-    private Integer age;
-    private String gender;
     private Integer exerciseGoal;
 }

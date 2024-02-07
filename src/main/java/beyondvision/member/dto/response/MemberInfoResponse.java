@@ -8,7 +8,7 @@ import static lombok.AccessLevel.PRIVATE;
 
 @Getter
 @RequiredArgsConstructor(access = PRIVATE)
-public class MemberProfileResponse {
+public class MemberInfoResponse {
 
     private final String name;
     private final String email;
@@ -18,7 +18,7 @@ public class MemberProfileResponse {
     private final String gender;
     private final Integer exerciseGoal;
 
-    public static MemberProfileResponse of(final Member member) {
-        return new MemberProfileResponse(member.getName(), member.getEmail(), member.getSocialId(), member.getProfileImageUrl(), member.getAge(), member.getGender(), member.getExerciseGoal());
+    public static MemberInfoResponse of(final Member member) {
+        return new MemberInfoResponse(member.getName(), member.getEmail(), member.getSocialId(), member.getProfileImageUrl(), member.getAge(), member.getGender(), member.getExerciseGoal());
     }
 }

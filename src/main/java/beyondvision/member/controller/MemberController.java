@@ -3,7 +3,7 @@ package beyondvision.member.controller;
 import beyondvision.auth.service.AuthService;
 import beyondvision.auth.service.GoogleAuthService;
 import beyondvision.member.dto.request.SignUpMemberRequest;
-import beyondvision.member.dto.request.UpdateMemberProfileRequest;
+import beyondvision.member.dto.request.UpdateMemberInfoRequest;
 import beyondvision.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,16 +29,16 @@ public class MemberController {
         return ResponseEntity.ok().body(authService.signUp(signUpMemberRequest));
     }
 
-    @GetMapping(value = "/profile/{memberId}")
-    public ResponseEntity<?> getProfile(@PathVariable(name = "memberId") Long memberId) {
-        return ResponseEntity.ok().body(memberService.getMemberProfile(memberId));
+    @GetMapping(value = "/info/{memberId}")
+    public ResponseEntity<?> getMemberInfo(@PathVariable(name = "memberId") Long memberId) {
+        return ResponseEntity.ok().body(memberService.getMemberInfo(memberId));
     }
 
-    @PostMapping(value = "/profile/{memberId}")
-    public ResponseEntity<?> updateProfile(
+    @PostMapping(value = "/info/{memberId}")
+    public ResponseEntity<?> updateMemberInfo(
             @PathVariable(name = "memberId") Long memberId,
-            @RequestBody UpdateMemberProfileRequest updateMemberProfileRequest
+            @RequestBody UpdateMemberInfoRequest updateMemberInfoRequest
     ) {
-        return ResponseEntity.ok().body(memberService.updateMemberProfile(memberId, updateMemberProfileRequest));
+        return ResponseEntity.ok().body(memberService.updateMemberInfo(memberId, updateMemberInfoRequest));
     }
 }
