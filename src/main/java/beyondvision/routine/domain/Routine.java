@@ -35,4 +35,12 @@ public class Routine extends BaseEntity {
 
     @OneToMany(mappedBy = "routine")
     private List<RoutineDetail> routineDetails = new ArrayList<>();
+
+    public Routine(
+            final String name,
+            final Member member
+    ) {
+        this.name = name;
+        this.member = member;
+    }
 }

@@ -32,7 +32,6 @@ public class Exercise extends BaseEntity {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
     private Integer caloriesBurned;
 
     @Column(nullable = false)
@@ -46,4 +45,18 @@ public class Exercise extends BaseEntity {
 
     @OneToMany(mappedBy = "exercise")
     private List<RoutineDetail> routineDetails = new ArrayList<>();
+
+    public Exercise(
+            final String name,
+            final String description,
+            final Integer caloriesBurned,
+            final Integer difficulty,
+            final Integer categoryNumber
+    ) {
+        this.name = name;
+        this.description = description;
+        this.caloriesBurned = caloriesBurned;
+        this.difficulty = difficulty;
+        this.categoryNumber = categoryNumber;
+    }
 }

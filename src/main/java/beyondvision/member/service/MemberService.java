@@ -19,20 +19,20 @@ public class MemberService {
 
     @Transactional
     public MemberInfoResponse getMemberInfo(final Long memberId) {
-        final Member member =  memberRepository.findMemberById(memberId)
-                .orElseThrow(() -> new BadRequestException(INVALID_MEMBER));
+        final Member member = checkExistMember(memberId);
         return MemberInfoResponse.of(member);
     }
 
     @Transactional
     public MemberInfoResponse updateMemberInfo(final Long memberId, final UpdateMemberInfoRequest profileRequest) {
-        final Member member = memberRepository.findMemberById(memberId)
-                .orElseThrow(() -> new BadRequestException(INVALID_MEMBER));
-
+        final Member member = checkExistMember(memberId);
         member.updateMember(profileRequest.getExerciseGoal());
-
         memberRepository.save(member);
-
         return MemberInfoResponse.of(member);
+    }
+
+    private Member checkExistMember(final Long memberId) {
+        return memberRepository.findMemberById(memberId)
+                .orElseThrow(() -> new BadRequestException(INVALID_MEMBER));
     }
 }
