@@ -4,9 +4,11 @@ import 'package:speech_to_text/speech_to_text.dart';
 
 class Speech {
   late SpeechToText speechText;
-  String lastWords = "";
+  String _lastWords = "";
   bool speechEnabled = false;
   String notice = "설명과 이동 중 하나를 선택해주세요";
+
+  String get lastWords => _lastWords;
 
   Speech(SpeechToText speechToText) {
     speechText = speechToText;
@@ -17,7 +19,7 @@ class Speech {
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) {
-    lastWords = result.recognizedWords;
+    _lastWords = result.recognizedWords;
   }
 
   void speechString(String words) {}

@@ -14,15 +14,15 @@ class Speaker extends StatefulWidget {
 
 class _SpeakerState extends State<Speaker> {
   late SpeechToText _speechToText;
-  late Speech speech;
+  late Speech _speech;
   bool isListening = false;
 
   @override
   void initState() {
     // TODO: implement initState
     _speechToText = SpeechToText();
-    speech = Speech(_speechToText);
-    speech.initSpeech(_speechToText);
+    _speech = Speech(_speechToText);
+    _speech.initSpeech(_speechToText);
     super.initState();
   }
 
@@ -60,7 +60,7 @@ class _SpeakerState extends State<Speaker> {
               height: 30,
             ),
             const CircleAvatar(
-              radius: 150,
+              radius: 140,
               backgroundColor: Colors.transparent,
               backgroundImage: AssetImage('lib/config/assets/Logo.png'),
             ),
@@ -73,9 +73,9 @@ class _SpeakerState extends State<Speaker> {
                   // 상태 변경 및 setState() 호출
                   setState(() {
                     if (isListening) {
-                      speech.stopListening();
+                      _speech.stopListening();
                     } else {
-                      speech.startListening();
+                      _speech.startListening();
                     }
                     isListening = !isListening;
                   });
@@ -93,10 +93,11 @@ class _SpeakerState extends State<Speaker> {
               padding: const EdgeInsets.all(16),
               child: Text(
                 _speechToText.isListening
-                    ? speech.lastWords
-                    : speech.speechEnabled
+                    ? _speech.lastWords
+                    : _speech.speechEnabled
                         ? 'Tap the microphone to start listening...'
                         : 'Speech not available',
+                style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
           ],
