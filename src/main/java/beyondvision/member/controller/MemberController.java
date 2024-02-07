@@ -41,4 +41,10 @@ public class MemberController {
     ) {
         return ResponseEntity.ok().body(memberService.updateMemberInfo(memberId, updateMemberInfoRequest));
     }
+
+    @DeleteMapping(value = "/signout/{memberId}")
+    public ResponseEntity<?> signOut(@PathVariable(name = "memberId") Long memberId) {
+        memberService.signOut(memberId);
+        return ResponseEntity.ok().build();
+    }
 }
