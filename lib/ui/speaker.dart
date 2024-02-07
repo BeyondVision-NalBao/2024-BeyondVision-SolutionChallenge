@@ -89,14 +89,15 @@ class _SpeakerState extends State<Speaker> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(16),
               child: Text(
                 _speechToText.isListening
-                    ? _speech.lastWords
+                    ? '듣는 중'
                     : _speech.speechEnabled
-                        ? 'Tap the microphone to start listening...'
-                        : 'Speech not available',
+                        ? ' '
+                        : '마이크를 사용할 수 없습니다.',
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
