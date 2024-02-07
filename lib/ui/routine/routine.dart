@@ -22,7 +22,7 @@ class Routine extends StatelessWidget {
       )
     ];
     return Scaffold(
-      appBar: MyAppBar(context, titleText: "운동루틴"),
+      appBar: MyAppBar(context, titleText: "운동 루틴"),
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: SizedBox(
