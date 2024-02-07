@@ -38,13 +38,11 @@ public class Member extends BaseEntity {
     @Column(nullable = false)
     private String profileImageUrl;
 
-    //private String refreshToken;
-
     private Integer age;
 
     private String gender;
 
-    private String exerciseGoal;
+    private Integer exerciseGoal;
 
     @OneToMany(mappedBy = "member")
     private List<Routine> routines = new ArrayList<>();

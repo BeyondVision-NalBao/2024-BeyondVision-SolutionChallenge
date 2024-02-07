@@ -3,6 +3,7 @@ package beyondvision.exercise.domain;
 import beyondvision.global.BaseEntity;
 import beyondvision.record.domain.Record;
 import beyondvision.routine.domain.Routine;
+import beyondvision.routine.domain.RoutineDetail;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,5 +46,5 @@ public class Exercise extends BaseEntity {
     private List<Record> records = new ArrayList<>();
 
     @OneToMany(mappedBy = "exercise")
-    private List<Routine> routines = new ArrayList<>();
+    private List<RoutineDetail> routineDetails = new ArrayList<>();
 }
