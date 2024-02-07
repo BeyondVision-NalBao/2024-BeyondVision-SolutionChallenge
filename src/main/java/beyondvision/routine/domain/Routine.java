@@ -37,4 +37,18 @@ public class Routine extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
+
+    public Routine(
+            final String name,
+            final Integer exerciseCount,
+            final Integer exerciseOrder,
+            final Member member,
+            final Exercise exercise
+    ) {
+        this.name = name;
+        this.exerciseCount = exerciseCount;
+        this.exerciseOrder = exerciseOrder;
+        this.member = member;
+        this.exercise = exercise;
+    }
 }

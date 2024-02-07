@@ -2,14 +2,13 @@ package beyondvision.record.service;
 
 import beyondvision.exercise.domain.Exercise;
 import beyondvision.exercise.domain.repository.ExerciseRepository;
-import beyondvision.exercise.dto.request.ExerciseRecordRequest;
-import beyondvision.exercise.dto.response.ExerciseRecordResponse;
+import beyondvision.record.dto.request.ExerciseRecordRequest;
+import beyondvision.record.dto.response.ExerciseRecordResponse;
 import beyondvision.global.exeption.BadRequestException;
 import beyondvision.member.domain.Member;
 import beyondvision.member.domain.repository.MemberRepository;
 import beyondvision.record.domain.Record;
 import beyondvision.record.domain.repository.RecordRepository;
-import beyondvision.record.dto.response.ExerciseRecordDetailResponse;
 import beyondvision.routine.domain.Routine;
 import beyondvision.routine.domain.repository.RoutineRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,37 +30,31 @@ public class RecordService {
     private final RecordRepository recordRepository;
 
     @Transactional(readOnly = true)
-    public List<ExerciseRecordDetailResponse> getExerciseRecord(final Long memberId) {
+    public List<ExerciseRecordResponse> getExerciseRecord(final Long memberId) {
         Member member = checkExistMember(memberId);
         List<Record> records = recordRepository.getRecordByMemberIdBetween(member.getId());
         return records.stream()
-                .map(ExerciseRecordDetailResponse::of)
+                .map(ExerciseRecordResponse::of)
                 .toList();
     }
 
     @Transactional
-    public ExerciseRecordResponse saveExerciseRecord(final Long memberId, final ExerciseRecordRequest exerciseRecordRequest) {
-        Member member = checkExistMember(memberId);
-
-        Exercise exercise = exerciseRepository.findExerciseById(exerciseRecordRequest.getExerciseId())
-                .orElseThrow(() -> new BadRequestException(INVALID_EXERCISE));
+    public ExerciseRecordResponse saveExerciseRecord(final Long exerciseId, final ExerciseRecordRequest exerciseRecordRequest) {
+        Member member = checkExistMember(exerciseRecordRequest.getMemberId());
 
         Routine routine = routineRepository.findRoutineById(exerciseRecordRequest.getRoutineId()).orElse(null);
 
-        Integer caloriesBurnedSum = exerciseRecordRequest.getExerciseTime() * exercise.getCaloriesBurned();
-
         Record record = Record.builder()
                 .exerciseTime(exerciseRecordRequest.getExerciseTime())
-                .caloriesBurnedSum(caloriesBurnedSum)
                 .exerciseCount(exerciseRecordRequest.getExerciseCount())
                 .member(member)
                 .routine(routine)
-                .exercise(exercise)
+                .exercise(routine.getExercise())
                 .build();
 
         recordRepository.save(record);
 
-        return ExerciseRecordResponse.of(record.getId(), caloriesBurnedSum);
+        return ExerciseRecordResponse.of(record);
     }
 
     private Member checkExistMember(final Long memberId) {

@@ -1,6 +1,6 @@
 package beyondvision.exercise.controller;
 
-import beyondvision.exercise.dto.request.ExerciseRecordRequest;
+import beyondvision.record.dto.request.ExerciseRecordRequest;
 import beyondvision.exercise.service.ExerciseService;
 import beyondvision.record.service.RecordService;
 import jakarta.validation.Valid;
@@ -21,9 +21,9 @@ public class ExerciseController {
         return ResponseEntity.ok().body(recordService.getExerciseRecord(memberId));
     }
 
-    @PostMapping("/record/{memberId}")
-    public ResponseEntity<?> saveExerciseRecord(@PathVariable("memberId") final Long memberId, @RequestBody @Valid final ExerciseRecordRequest exerciseRecordRequest) {
-        return ResponseEntity.ok().body(recordService.saveExerciseRecord(memberId, exerciseRecordRequest));
+    @PostMapping("/record/{exerciseId}")
+    public ResponseEntity<?> saveExerciseRecord(@PathVariable("exerciseId") final Long exerciseId, @RequestBody @Valid final ExerciseRecordRequest exerciseRecordRequest) {
+        return ResponseEntity.ok().body(recordService.saveExerciseRecord(exerciseId, exerciseRecordRequest));
     }
 
     @GetMapping("/detail/{categoryNumber}")
