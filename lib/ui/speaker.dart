@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class Speaker extends StatefulWidget {
   const Speaker({super.key});
@@ -13,16 +14,21 @@ class Speaker extends StatefulWidget {
 }
 
 class _SpeakerState extends State<Speaker> {
+  final FlutterTts tts = FlutterTts();
   late SpeechToText _speechToText;
-  late Speech _speech;
+  late StsService _speech;
   bool isListening = false;
+  int isResult = 1;
 
   @override
   void initState() {
     // TODO: implement initState
     _speechToText = SpeechToText();
-    _speech = Speech(_speechToText);
+    _speech = StsService(_speechToText);
     _speech.initSpeech(_speechToText);
+    tts.setSpeechRate(0.4);
+    tts.setPitch(1.0);
+    tts.speak("무엇을 하고 싶으신가요?");
     super.initState();
   }
 
@@ -59,12 +65,26 @@ class _SpeakerState extends State<Speaker> {
             const SizedBox(
               height: 30,
             ),
-            const CircleAvatar(
-              radius: 140,
-              backgroundColor: Colors.transparent,
-              backgroundImage: AssetImage('lib/config/assets/Logo.png'),
+            SizedBox(
+              height: 360,
+              child: isResult == 1
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [_box("이동"), _box("설명")],
+                    )
+                  : Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [_box("운동 하기"), _box("운동 루틴")],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [_box("운동 기록"), _box("앱 설정")],
+                        )
+                      ],
+                    ),
             ),
-            const SizedBox(height: 50),
             CircleAvatar(
               radius: 50,
               backgroundColor: const Color(boxColor),
@@ -73,10 +93,26 @@ class _SpeakerState extends State<Speaker> {
                   // 상태 변경 및 setState() 호출
                   setState(() {
                     if (isListening) {
-                      _speech.stopListening();
+                      _speech.stopListening().then((value) => {
+                            if (value == "이동")
+                              {isResult = 5, tts.speak("어느 페이지로 이동할까요?")}
+                            else if (value == "설명")
+                              {}
+                            else if (value == "운동 하기")
+                              {}
+                            else if (value == "운동 기록")
+                              {}
+                            else if (value == "운동 루틴")
+                              {}
+                            else if (value == "앱 설정")
+                              {}
+                            else
+                              {tts.speak("이동과 설명 중 하나를 말씀해주세요")}
+                          });
                     } else {
                       _speech.startListening();
                     }
+                    if (isResult == 5) isResult == 2;
                     isListening = !isListening;
                   });
                 },
@@ -89,7 +125,7 @@ class _SpeakerState extends State<Speaker> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.all(16),
               child: Text(
@@ -103,6 +139,30 @@ class _SpeakerState extends State<Speaker> {
             ),
           ],
         ));
+  }
+
+  Widget _box(String text) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+          decoration: BoxDecoration(
+            color: const Color(boxColor),
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: SizedBox(
+            width: 150,
+            height: 150,
+            child: Center(
+              child: Text(
+                text,
+                style: const TextStyle(
+                    fontSize: 36,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          )),
+    );
   }
 }
 

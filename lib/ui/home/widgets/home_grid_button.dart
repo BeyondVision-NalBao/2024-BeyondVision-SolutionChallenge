@@ -22,7 +22,7 @@ class HomeButton extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          if (name == "운동하기") {
+          if (name == "운동 하기") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const WorkOut()));
           } else if (name == "운동 루틴") {

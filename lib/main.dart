@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Beyond Vision',
       home: const HomePage(),
+      debugShowCheckedModeBanner: false,
       builder: (context, child) {
         return MediaQuery(
             data: MediaQuery.of(context)
