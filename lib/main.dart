@@ -1,5 +1,6 @@
 import 'package:beyond_vision/provider/date_provider.dart';
 import 'package:beyond_vision/ui/home/home.dart';
+import 'package:beyond_vision/ui/login/google_login.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Beyond Vision',
-      home: const HomePage(),
+      home: const LoginPage(),
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
         return MediaQuery(
