@@ -2,6 +2,8 @@ import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/ui/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:beyond_vision/service/date_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,8 +15,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   void signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final DateService dateService = DateService();
 
     if (googleUser != null) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      prefs.setBool("isLogined", true);
+      prefs.setString("loginDate", dateService.loginDate(DateTime.now()));
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const HomePage()),

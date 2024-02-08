@@ -18,6 +18,7 @@ dependencies:
   camera: ^0.9.8+1
   speech_to_text: ^6.6.0
   flutter_tts: ^3.8.5
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
