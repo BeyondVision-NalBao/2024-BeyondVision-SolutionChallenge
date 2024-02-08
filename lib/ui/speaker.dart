@@ -1,8 +1,6 @@
 import 'package:beyond_vision/core/core.dart';
 import 'package:beyond_vision/service/speech_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -27,7 +25,7 @@ class _SpeakerState extends State<Speaker> {
     _speech = StsService(_speechToText);
     _speech.initSpeech(_speechToText);
     tts.setSpeechRate(0.4);
-    tts.setPitch(1.0);
+    tts.setPitch(0.9);
     tts.speak("무엇을 하고 싶으신가요?");
     super.initState();
   }
