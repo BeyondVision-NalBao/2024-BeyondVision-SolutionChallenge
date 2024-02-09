@@ -12,5 +12,7 @@ public interface RoutineRepository extends JpaRepository<Routine, Long> {
 
     List<Routine> findRoutinesByMemberId(final Long memberId);
 
+    Routine findByMemberIdAndId(final Long memberId, final Long routineId);
+
     void deleteAllByMember(Member member);
 }

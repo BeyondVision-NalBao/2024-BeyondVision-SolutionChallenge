@@ -37,11 +37,16 @@ public class RoutineService {
 
     @Transactional
     public List<RoutineResponse> getRoutine(final Long memberId) {
-        Member member = checkExistMember(memberId);
         List<Routine> routines = routineRepository.findRoutinesByMemberId(memberId);
         return routines.stream()
                 .map(RoutineResponse::of)
                 .toList();
+    }
+
+    @Transactional
+    public void deleteRoutine(final Long memberId, final Long routineId){
+        Routine deletedroutine = routineRepository.findByMemberIdAndId(memberId, routineId);
+        routineRepository.delete(deletedroutine);
     }
 
     private Member checkExistMember(final Long memberId) {

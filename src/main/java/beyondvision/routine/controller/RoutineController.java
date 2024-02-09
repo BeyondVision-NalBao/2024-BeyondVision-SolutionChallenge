@@ -25,4 +25,8 @@ public class RoutineController {
     }
 
     @DeleteMapping("routine/delete/{memberId}/{routineId}")
+    public ResponseEntity<?> deleteRoutine(@PathVariable("memberId") final Long memberId, @PathVariable("routineId") final Long routineId){
+        routineService.deleteRoutine(memberId, routineId);
+        return ResponseEntity.ok().build();
+    }
 }
