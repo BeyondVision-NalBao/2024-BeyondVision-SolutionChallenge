@@ -5,6 +5,7 @@ import beyondvision.global.BaseEntity;
 import beyondvision.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
@@ -36,11 +37,14 @@ public class Routine extends BaseEntity {
     @OneToMany(mappedBy = "routine")
     private List<RoutineDetail> routineDetails = new ArrayList<>();
 
+    @Builder
     public Routine(
             final String name,
-            final Member member
+            final Member member,
+            final List<RoutineDetail> routineDetails
     ) {
         this.name = name;
         this.member = member;
+        this.routineDetails = routineDetails;
     }
 }
