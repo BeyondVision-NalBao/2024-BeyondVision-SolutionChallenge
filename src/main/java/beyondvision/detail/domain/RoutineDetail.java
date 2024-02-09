@@ -23,6 +23,8 @@ public class RoutineDetail {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    private String exerciseName;
+
     private Integer exerciseCount;
 
     private Integer exerciseOrder;

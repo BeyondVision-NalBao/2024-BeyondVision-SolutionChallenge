@@ -14,14 +14,12 @@ import static lombok.AccessLevel.PRIVATE;
 public class RoutineResponse {
     private final Long routineId;
     private final String routineName;
-    private final Long memberId;
     private final List<RoutineDetail> routineDetails;
 
     public static RoutineResponse of (final Routine routine){
         return new RoutineResponse(
                 routine.getId(),
                 routine.getName(),
-                routine.getMember().getId(),
                 routine.getRoutineDetails());
     }
 }
