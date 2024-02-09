@@ -36,9 +36,9 @@ public class RoutineService {
     }
 
     @Transactional
-    public List<RoutineResponse> getRoutine(final Long memberId, final Long routineId) {
+    public List<RoutineResponse> getRoutine(final Long memberId) {
         Member member = checkExistMember(memberId);
-        List<Routine> routines = routineRepository.findRoutinesByMemberIdAndId(memberId, routineId);
+        List<Routine> routines = routineRepository.findRoutinesByMemberId(memberId);
         return routines.stream()
                 .map(RoutineResponse::of)
                 .toList();

@@ -2,6 +2,7 @@ package beyondvision.routine.controller;
 
 import beyondvision.routine.dto.request.RoutinePostRequest;
 import beyondvision.routine.service.RoutineService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +19,10 @@ public class RoutineController {
         return ResponseEntity.ok().body(routineService.postRoutine(memberId, routinePostRequest));
     }
 
-    @GetMapping("routine/modify/{memberId}/{routineId}")
-    public ResponseEntity<?> getRoutine(@PathVariable("memberId") final Long memberId, @PathVariable("routineId") final Long routineId){
-        return ResponseEntity.ok().body(routineService.getRoutine(memberId, routineId));
+    @GetMapping("routine/modify/{memberId}")
+    public ResponseEntity<?> getRoutine(@PathVariable("memberId") final Long memberId){
+        return ResponseEntity.ok().body(routineService.getRoutine(memberId));
     }
+
+    @DeleteMapping("routine/delete/{memberId}/{routineId}")
 }

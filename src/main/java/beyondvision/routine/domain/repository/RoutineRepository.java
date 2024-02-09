@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface RoutineRepository extends JpaRepository<Routine, Long> {
 
 
-    List<Routine> findRoutinesByMemberIdAndId(final Long memberId, final Long routineId);
+    List<Routine> findRoutinesByMemberId(final Long memberId);
 
     void deleteAllByMember(Member member);
 }
