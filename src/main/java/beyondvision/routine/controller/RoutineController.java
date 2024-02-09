@@ -1,8 +1,7 @@
 package beyondvision.routine.controller;
 
-import beyondvision.routine.dto.request.RoutinePostRequest;
+import beyondvision.routine.dto.request.RoutineRequest;
 import beyondvision.routine.service.RoutineService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +14,18 @@ public class RoutineController {
     private final RoutineService routineService;
 
     @PostMapping("routine/register/{memberId}")
-    public ResponseEntity<?> postRoutine(@PathVariable("memberId") final Long memberId, RoutinePostRequest routinePostRequest){
+    public ResponseEntity<?> postRoutine(@PathVariable("memberId") final Long memberId, RoutineRequest routinePostRequest){
         return ResponseEntity.ok().body(routineService.postRoutine(memberId, routinePostRequest));
     }
 
-    @GetMapping("routine/modify/{memberId}")
+    @GetMapping("routine/detail/{memberId}")
     public ResponseEntity<?> getRoutine(@PathVariable("memberId") final Long memberId){
         return ResponseEntity.ok().body(routineService.getRoutine(memberId));
+    }
+
+    @PutMapping("routine/modify/{memberId}/{routineId}")
+    public ResponseEntity<?> putRouine(@PathVariable("memberId") final Long memberId, @PathVariable("routineId") final Long routineId, RoutineRequest routinePutRequest){
+        return ResponseEntity.ok().body(routineService.putRoutine(memberId, routineId, routinePutRequest));
     }
 
     @DeleteMapping("routine/delete/{memberId}/{routineId}")

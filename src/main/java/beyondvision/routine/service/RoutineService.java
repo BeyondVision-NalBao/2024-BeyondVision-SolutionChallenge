@@ -1,12 +1,11 @@
 package beyondvision.routine.service;
 
-import beyondvision.detail.domain.RoutineDetail;
 import beyondvision.global.exeption.BadRequestException;
 import beyondvision.member.domain.Member;
 import beyondvision.member.domain.repository.MemberRepository;
 import beyondvision.routine.domain.Routine;
 import beyondvision.routine.domain.repository.RoutineRepository;
-import beyondvision.routine.dto.request.RoutinePostRequest;
+import beyondvision.routine.dto.request.RoutineRequest;
 import beyondvision.routine.dto.response.RoutineResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class RoutineService {
     final RoutineRepository routineRepository;
 
     @Transactional
-    public RoutineResponse postRoutine(final Long memberId, final RoutinePostRequest routinePostRequest){
+    public RoutineResponse postRoutine(final Long memberId, final RoutineRequest routinePostRequest) {
         Member member = checkExistMember(memberId);
         Routine routine = Routine.builder()
                 .name(routinePostRequest.getName())
@@ -41,6 +40,16 @@ public class RoutineService {
         return routines.stream()
                 .map(RoutineResponse::of)
                 .toList();
+    }
+
+    @Transactional
+    public RoutineResponse putRoutine(final Long memberId, final Long routineId, RoutineRequest routinePutRequest) {
+        Routine updatedRoutine = routineRepository.findByMemberIdAndId(memberId, routineId);
+        updatedRoutine.update(
+                routinePutRequest.getName(),
+                routinePutRequest.getRoutineDetails()
+        );
+        return RoutineResponse.of(updatedRoutine);
     }
 
     @Transactional

@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoutinePostRequest {
+public class RoutineRequest {
 
     private String name;
     private List<RoutineDetail> routineDetails;

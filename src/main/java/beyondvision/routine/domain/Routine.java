@@ -47,4 +47,9 @@ public class Routine extends BaseEntity {
         this.member = member;
         this.routineDetails = routineDetails;
     }
+
+    public void update(String name, List<RoutineDetail> routineDetails){
+        this.name = name;
+        this.routineDetails = routineDetails;
+    }
 }
