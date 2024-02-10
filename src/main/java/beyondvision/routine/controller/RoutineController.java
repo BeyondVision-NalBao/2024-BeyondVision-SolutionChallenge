@@ -2,8 +2,11 @@ package beyondvision.routine.controller;
 
 import beyondvision.routine.dto.request.RoutineRequest;
 import beyondvision.routine.service.RoutineService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,10 +14,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/exercise")
 public class RoutineController {
 
+    @Autowired
     private final RoutineService routineService;
 
+    @ResponseBody
     @PostMapping("routine/register/{memberId}")
-    public ResponseEntity<?> postRoutine(@PathVariable("memberId") final Long memberId, RoutineRequest routinePostRequest){
+    public ResponseEntity<?> postRoutine(@PathVariable("memberId") final Long memberId, @RequestBody final RoutineRequest routinePostRequest, HttpServletRequest request){
+        System.out.println("Request Content-Type: " + request.getContentType());
+        System.out.println("Request Body: " + routinePostRequest.getRoutineName());
         return ResponseEntity.ok().body(routineService.postRoutine(memberId, routinePostRequest));
     }
 
@@ -24,7 +31,7 @@ public class RoutineController {
     }
 
     @PutMapping("routine/modify/{memberId}/{routineId}")
-    public ResponseEntity<?> putRouine(@PathVariable("memberId") final Long memberId, @PathVariable("routineId") final Long routineId, RoutineRequest routinePutRequest){
+    public ResponseEntity<?> putRouine(@PathVariable("memberId") final Long memberId, @PathVariable("routineId") final Long routineId, @RequestBody RoutineRequest routinePutRequest){
         return ResponseEntity.ok().body(routineService.putRoutine(memberId, routineId, routinePutRequest));
     }
 

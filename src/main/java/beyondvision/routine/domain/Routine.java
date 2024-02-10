@@ -1,13 +1,11 @@
 package beyondvision.routine.domain;
 
 import beyondvision.detail.domain.RoutineDetail;
+import beyondvision.detail.dto.RoutineDetailRequest;
 import beyondvision.global.BaseEntity;
 import beyondvision.member.domain.Member;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.util.ArrayList;
@@ -19,6 +17,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
+@Setter
 @DynamicInsert
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
@@ -34,10 +33,10 @@ public class Routine extends BaseEntity {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @OneToMany(mappedBy = "routine")
+    @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
     private List<RoutineDetail> routineDetails = new ArrayList<>();
 
-    @Builder
+    @Builder(toBuilder = true)
     public Routine(
             final String name,
             final Member member,
@@ -45,7 +44,15 @@ public class Routine extends BaseEntity {
     ) {
         this.name = name;
         this.member = member;
-        this.routineDetails = routineDetails;
+        this.routineDetails = (routineDetails != null) ? new ArrayList<>(routineDetails) : new ArrayList<>();
+    }
+
+    public void setRoutineDetails(List<RoutineDetail> routineDetails) {
+        this.routineDetails.clear();
+        if (routineDetails != null) {
+            this.routineDetails.addAll(routineDetails);
+        }
+        this.routineDetails.forEach(detail -> detail.setRoutine(this));
     }
 
     public void update(String name, List<RoutineDetail> routineDetails){
