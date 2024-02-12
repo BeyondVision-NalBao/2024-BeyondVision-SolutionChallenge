@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  LoginService loginService = LoginService();
+  UserService loginService = UserService();
   bool isLogined = false;
 
   @override
