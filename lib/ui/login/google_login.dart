@@ -17,15 +17,28 @@ class _LoginPageState extends State<LoginPage> {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final DateService dateService = DateService();
 
-    if (googleUser != null) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
 
-      prefs.setBool("isLogined", true);
-      prefs.setString("loginDate", dateService.loginDate(DateTime.now()));
+        final String? accessToken = googleAuth.accessToken;
+        SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        prefs.setBool("isLogined", true);
+        prefs.setString("loginDate", dateService.loginDate(DateTime.now()));
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      }
+    } catch (error) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => const AlertDialog(
+          content: Text("구글 로그인에 오류가 발생했습니다."),
+        ),
       );
     }
   }

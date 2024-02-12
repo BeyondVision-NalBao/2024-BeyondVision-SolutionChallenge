@@ -19,14 +19,14 @@ class RoutineDetail {
       };
 }
 
-class WorkOut {
+class Routine {
   final Long routineId;
   final String routineName;
   final List<RoutineDetail> routineDetail;
 
-  WorkOut(this.routineId, this.routineName, this.routineDetail);
+  Routine(this.routineId, this.routineName, this.routineDetail);
 
-  WorkOut.fromJson(Map<String, dynamic> json)
+  Routine.fromJson(Map<String, dynamic> json)
       : routineId = json['routineId'],
         routineName = json['routineName'],
         routineDetail = (json['routineDetail'] as List)

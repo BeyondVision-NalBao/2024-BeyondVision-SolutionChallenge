@@ -1,6 +1,6 @@
 import 'package:beyond_vision/provider/date_provider.dart';
 import 'package:beyond_vision/service/date_service.dart';
-import 'package:beyond_vision/service/login_service.dart';
+import 'package:beyond_vision/service/user_service.dart';
 import 'package:beyond_vision/ui/home/home.dart';
 import 'package:beyond_vision/ui/login/google_login.dart';
 import 'package:flutter/material.dart';

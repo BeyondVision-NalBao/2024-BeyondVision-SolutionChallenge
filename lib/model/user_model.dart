@@ -1,14 +1,14 @@
 import 'dart:ffi';
 
 class User {
-  final Long memberId;
+  final Long? memberId;
   final String name;
   final String email;
   final String socialId;
   final String profileImageUrl;
-  final int age;
-  final String gender;
-  final int exerciseGoal;
+  final int? age;
+  final String? gender;
+  final int? exerciseGoal;
   final bool isNewMember;
 
   User(
