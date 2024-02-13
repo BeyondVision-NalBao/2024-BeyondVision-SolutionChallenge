@@ -26,8 +26,8 @@ def insert_exercise_record(member_id, exercise_id, record_id, exercise_count, ex
         print("Fail to insert exercise record")
 
 def get_exercise_id(exercise_name):
-    try: 
-        exercise_mapping = ["레터럴레이즈", "숄더프레스", "프론트레이즈", "스쿼트", "런지", "플랭크", "헌드레드", "브릿지"]
+    try:
+        exercise_mapping = ["스쿼트", "숄더프레스", "레터럴레이즈", "헌드레드", "플랭크", "프론트레이즈", "제트업", "브릿지"]
         return exercise_mapping.index(exercise_name) + 1
     except:
         print("Fail to get exercise id")
