@@ -40,6 +40,8 @@ public class Exercise extends BaseEntity {
     @Column(nullable = false)
     private Integer categoryNumber;
 
+    private String exerciseImageUrl;
+
     @OneToMany(mappedBy = "exercise")
     private List<Record> records = new ArrayList<>();
 
