@@ -1,10 +1,10 @@
-from flask import Flask, request, jsonify, current_app
+from flask import Flask
+import db
 from datetime import datetime
-from db import connect_to_db
 
 app = Flask(__name__)
 
-conn = connect_to_db()
+conn = db.conn
 cursor = conn.cursor()
 
 @app.route('/exercise/output', methods=['GET'])
@@ -23,21 +23,23 @@ def insert_exercise_record(member_id, exercise_id, record_id, exercise_count, ex
         cursor.execute(sql, data)
         conn.commit()
     except:
-        return jsonify({"code": 400, "message": "기록 저장에 실패했습니다."})
+        print("Fail to insert exercise record")
 
 def get_exercise_id(exercise_name):
-    try:
+    try: 
         exercise_mapping = ["레터럴 레이즈", "숄더 프레스", "프론트 레이즈", "스쿼트", "런지", "플랭크", "헌드레드", "브릿지", "V"]
         return exercise_mapping.index(exercise_name) + 1
     except:
-        return jsonify({"code": 400, "message": "운동 아이디 받기에 실패했습니다."})
+        print("Fail to get exercise id")
 
 def get_record_id():
     try:
         sql = """SELECT MAX(id) FROM record"""
-        return cursor.execute(sql)
+        cursor.execute(sql)
+        get_record_row = cursor.fetchone()
+        return get_record_row[0] + 1
     except:
-        return jsonify({"code": 400, "message": "레코드 아이디 받기에 실패했습니다."})
+        print("Fail to get record id")
 
 if __name__== "__main__":
     app.run(debug=True)
