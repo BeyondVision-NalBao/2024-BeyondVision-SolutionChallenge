@@ -7,7 +7,7 @@ import time
 import squat
 import shoulderPress
 import lateralRaise
-import ready
+import ready as ready
 from speechRecognition import tts
 np.set_printoptions(threshold=np.inf, linewidth=np.inf)
 
