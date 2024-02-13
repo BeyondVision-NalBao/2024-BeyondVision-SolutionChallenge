@@ -4,7 +4,7 @@ from pymysql import connect
 
 app = Flask(__name__)
 
-@app.route("/<int:memberId>/start", methods=["POST"])
+@app.route("/<int:memberId>/ready", methods=["POST"])
 def start(memberId):
     data = request.json
     routineName = data['routineName']

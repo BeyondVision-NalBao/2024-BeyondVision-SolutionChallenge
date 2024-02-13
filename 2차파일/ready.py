@@ -3,7 +3,8 @@
 
 
 global countNumber
-global exerciseCode, messege
+global exerciseCode
+global messege
 
 # 솔챌에서는 음성인식 과정을 거치지 않고 프론트에서 직접 값을 받아오기로 함. 
 # 원래 코드는 ready_ver0.py 파일에 저장되어있습니다
@@ -12,24 +13,26 @@ global exerciseCode, messege
 #횟수 설정하기
 print('this is test messege')
 def selectExercise(name,count='30'): #경원이가 디폴트 30으로 해놓으라고 했음 ㅎㅎ
+    global exerciseCode
     if name=='스쿼트':
-        exersiceCode = 1
+        exerciseCode = 1
     elif name=='숄더프레스':
-        excersiceCode = 2
+        exerciseCode = 2
     elif name=='레터럴레이즈':
-        excersiceCode = 3
+        exerciseCode = 3
     elif name=='헌드레드':
-        excersiceCode = 4
+        exerciseCode = 4
     elif name=='플랭크':
-        excersiceCode = 5
+        exerciseCode = 5
     elif name=='프론트레이즈':
-        excersiceCode = 6
+        exerciseCode = 6
     elif name=='제트업':
-        excersiceCode = 7
+        exerciseCode = 7
     elif name=='브릿지':
-        excersiceCode = 8
+        exerciseCode = 8
     
     countNumber = int(count)
+    return exerciseCode
         
     
 def isReady(keypoint):
