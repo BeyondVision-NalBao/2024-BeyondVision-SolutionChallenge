@@ -1,7 +1,6 @@
 import 'package:beyond_vision/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:beyond_vision/service/date_service.dart';
-import 'package:beyond_vision/model/workout_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:ffi';
@@ -73,8 +72,9 @@ class UserService {
     return false;
   }
 
-  Future<bool> logout(Long memberId) async {
+  Future<bool> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
     int allPrefs = prefs.getKeys().length;
 
     if (allPrefs == 0) {

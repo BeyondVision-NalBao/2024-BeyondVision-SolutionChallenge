@@ -1,5 +1,7 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/ui/login/google_login.dart';
 import 'package:flutter/material.dart';
+import 'package:beyond_vision/service/user_service.dart';
 
 class LogOut extends StatefulWidget {
   const LogOut({super.key});
@@ -9,21 +11,7 @@ class LogOut extends StatefulWidget {
 }
 
 class _LogOutState extends State<LogOut> {
-  late TextEditingController _count;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    _count = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _count.dispose();
-    super.dispose();
-  }
+  UserService userService = UserService();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +31,16 @@ class _LogOutState extends State<LogOut> {
           ),
           const SizedBox(height: 50),
           TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                bool isLoggedOut = await userService.logout();
+                if (isLoggedOut) {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()));
+                }
+              },
               child: const Text("확인",
                   style:
                       TextStyle(color: Color(fontYellowColor), fontSize: 24))),
