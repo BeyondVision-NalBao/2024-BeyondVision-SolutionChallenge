@@ -4,6 +4,7 @@ import 'package:beyond_vision/service/date_service.dart';
 import 'package:beyond_vision/model/workout_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:ffi';
 
 class UserService {
   DateService dateService = DateService();
@@ -70,5 +71,18 @@ class UserService {
       return true;
     }
     return false;
+  }
+
+  Future<bool> logout(Long memberId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int allPrefs = prefs.getKeys().length;
+
+    if (allPrefs == 0) {
+      // SharedPreferences가 비어 있는 경우 처리할 내용을 여기에 작성합니다.
+      return true;
+    } else {
+      // SharedPreferences에 데이터가 있는 경우 처리할 내용을 여기에 작성합니다.
+      return false;
+    }
   }
 }

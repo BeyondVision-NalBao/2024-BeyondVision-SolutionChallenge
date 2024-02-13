@@ -1,4 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/model/user_model.dart';
 import 'package:beyond_vision/ui/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -27,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
 
         prefs.setBool("isLogined", true);
         prefs.setString("loginDate", dateService.loginDate(DateTime.now()));
+        //멤버 아이디를 set 해두어야할듯함다
 
         Navigator.pushReplacement(
           context,
@@ -54,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
             const Column(
               children: [
                 CircleAvatar(
-                  radius: 100,
+                  radius: 80,
                   backgroundColor: Colors.transparent,
                   backgroundImage: AssetImage('lib/config/assets/Logo.png'),
                 ),

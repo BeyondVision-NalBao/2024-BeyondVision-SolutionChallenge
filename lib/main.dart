@@ -1,6 +1,8 @@
 import 'package:beyond_vision/provider/date_provider.dart';
-import 'package:beyond_vision/service/date_service.dart';
 import 'package:beyond_vision/service/user_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:beyond_vision/service/date_service.dart';
+
 import 'package:beyond_vision/ui/home/home.dart';
 import 'package:beyond_vision/ui/login/google_login.dart';
 import 'package:flutter/material.dart';
@@ -21,12 +23,25 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   UserService loginService = UserService();
+  DateService dateService = DateService();
   bool isLogined = false;
 
+  checkLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('loginDate') != null &&
+        prefs.getBool('isLogined') != null) {
+      if (dateService.compareDate(prefs.getString('loginDate')!)) {
+        setState(() {
+          isLogined = true;
+        });
+      }
+    }
+  }
+
   @override
-  void initState() async {
+  void initState() {
     // TODO: implement initState
-    isLogined = await loginService.checkLogin();
+    checkLogin();
     super.initState();
   }
 
