@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify, current_app
 from datetime import datetime
 from db import connect_to_db
-from pymysql import connect
 
 app = Flask(__name__)
 
@@ -24,21 +23,21 @@ def insert_exercise_record(member_id, exercise_id, record_id, exercise_count, ex
         cursor.execute(sql, data)
         conn.commit()
     except:
-        print("Error")
+        return jsonify({"code": 400, "message": "기록 저장에 실패했습니다."})
 
 def get_exercise_id(exercise_name):
     try:
         exercise_mapping = ["레터럴 레이즈", "숄더 프레스", "프론트 레이즈", "스쿼트", "런지", "플랭크", "헌드레드", "브릿지", "V"]
         return exercise_mapping.index(exercise_name) + 1
     except:
-        pass
+        return jsonify({"code": 400, "message": "운동 아이디 받기에 실패했습니다."})
 
 def get_record_id():
     try:
         sql = """SELECT MAX(id) FROM record"""
         return cursor.execute(sql)
     except:
-        pass
+        return jsonify({"code": 400, "message": "레코드 아이디 받기에 실패했습니다."})
 
 if __name__== "__main__":
     app.run(debug=True)
