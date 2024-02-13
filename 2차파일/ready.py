@@ -3,7 +3,7 @@
 
 
 global countNumber
-global exerciseCode
+#exerciseCode = 0
 global messege
 
 # 솔챌에서는 음성인식 과정을 거치지 않고 프론트에서 직접 값을 받아오기로 함. 
@@ -32,7 +32,7 @@ def selectExercise(name,count='30'): #경원이가 디폴트 30으로 해놓으�
         exerciseCode = 8
     
     countNumber = int(count)
-    return exerciseCode
+    return str(exerciseCode)
         
     
 def isReady(keypoint):
