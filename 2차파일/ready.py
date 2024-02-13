@@ -11,7 +11,7 @@ global messege
 
 #운동코드 받아오기
 #횟수 설정하기
-
+print('this is test messege')
 def selectExercise(name,count='30'): #경원이가 디폴트 30으로 해놓으라고 했음 ㅎㅎ
     global exerciseCode
     if name=='스쿼트':
