@@ -3,6 +3,7 @@ from db import connect_to_db
 from pymysql import connect
 import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import ready
 import camera
 
@@ -30,7 +31,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 @app.route("/frame", methods=["POST"])
 def frame():
-     file = request.files['file']
+     file = request.files['frame']
      camera.gen(file)
      return "Success"
 
