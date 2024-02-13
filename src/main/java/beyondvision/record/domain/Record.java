@@ -16,6 +16,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
+@Table(name = "record")
 @Getter
 @DynamicInsert
 @AllArgsConstructor

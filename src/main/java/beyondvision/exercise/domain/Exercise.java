@@ -43,7 +43,7 @@ public class Exercise extends BaseEntity {
     @OneToMany(mappedBy = "exercise")
     private List<Record> records = new ArrayList<>();
 
-    @OneToMany(mappedBy = "exercise")
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
     private List<RoutineDetail> routineDetails = new ArrayList<>();
 
     public Exercise(

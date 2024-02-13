@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface RoutineDetailRepository extends JpaRepository<RoutineDetail, Long> {
 
     @Modifying
@@ -14,4 +16,6 @@ public interface RoutineDetailRepository extends JpaRepository<RoutineDetail, Lo
             WHERE rd.routine.member.id = :memberId
             """)
     void deleteAllByMemberId(@Param("memberId") Long memberId);
+
+    void deleteByRoutineId(Long routineId);
 }
