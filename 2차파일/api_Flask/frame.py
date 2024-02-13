@@ -4,6 +4,7 @@ from pymysql import connect
 import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 import ready
+import camera
 
 app = Flask(__name__)
 
@@ -18,7 +19,9 @@ def start(memberId, routineId, routineDetailId):
     results = cursor.fetchall()
     cursor.close()
     conn.close()
-    result = ready.selectExercise(results)
+    print(results[0][0])
+    print(results[0][1])
+    result = ready.selectExercise(results[0][0],results[0][1])
     return result
 
 
@@ -26,14 +29,11 @@ UPLOAD_FOLDER = 'uploads'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-@app.route("/<int:memberId>/<int:routineDetailId>/frame", methods=["POST"])
-def start_2(memberId, routineDetailId):
-     file = request.files['frame']
-     filename = file.filename
-     file_path = os.path.join(UPLOAD_FOLDER, filename)
-     file.save(file_path)
-     'File successfully uploaded to {}'.format(file_path)
-     return "successful"
+@app.route("/frame", methods=["POST"])
+def frame():
+     file = request.files['file']
+     camera.gen(file)
+     return "Success"
 
 
 if __name__ == '__main__':

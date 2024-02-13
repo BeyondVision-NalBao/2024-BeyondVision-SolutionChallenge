@@ -12,7 +12,7 @@ import plank
 import zup
 import front_raise
 import bridge
-import ready
+import ready as ready
 #from speechRecognition import tts
 np.set_printoptions(threshold=np.inf, linewidth=np.inf)
 
@@ -23,6 +23,7 @@ position = ["코", "왼쪽눈", "오른쪽눈", "왼쪽귀", "오른쪽귀", "�
 
 # 척추상 : Spine At The Shoulder , 척추중 : Middle Of The Spine , 척추하 : Base Of Spine
 spine_position = ["척추상", "척추중", "척추하"]
+global message
 
 
 def getAverage(pos, n):

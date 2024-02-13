@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from django.http import HttpResponse
-import ready
+import ready as ready
 import speechRecognition.tts as tts
 
 import sys
