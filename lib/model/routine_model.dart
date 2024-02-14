@@ -20,7 +20,7 @@ class RoutineDetail {
 }
 
 class Routine {
-  final Long routineId;
+  final int routineId;
   final String routineName;
   final List<RoutineDetail> routineDetail;
 

@@ -1,12 +1,12 @@
-import 'dart:ui';
 import 'package:beyond_vision/core/constants.dart';
-import 'package:beyond_vision/ui/workout/widgets/workout_explaination.dart';
+import 'package:beyond_vision/model/workout_model.dart';
+import 'package:beyond_vision/ui/workout/widgets/workout_explain.dart';
 
 import 'package:flutter/material.dart';
 
 class WorkOutDetail extends StatelessWidget {
-  final String name;
-  const WorkOutDetail({super.key, required this.name});
+  final WorkOut workout;
+  const WorkOutDetail({super.key, required this.workout});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +16,14 @@ class WorkOutDetail extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(boxColor),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30), // 원하는 radius 값 설정
+            borderRadius: BorderRadius.circular(30),
           ),
         ),
         onPressed: () {
           showDialog(
               context: context,
-              builder: (BuildContext context) => const WorkOutExplain());
+              builder: (BuildContext context) =>
+                  WorkOutExplain(workout: workout));
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -32,7 +33,7 @@ class WorkOutDetail extends StatelessWidget {
               width: 290,
               height: 50,
               child: Text(
-                name,
+                workout.name,
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 35,

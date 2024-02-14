@@ -1,9 +1,9 @@
 import 'dart:ffi';
 
 class Record {
-  final Long recordId;
+  final int recordId;
   final int? exerciseCount;
-  final int? exerciseTime;
+  final int exerciseTime;
   final String exerciseName;
   final DateTime exerciseDate;
 

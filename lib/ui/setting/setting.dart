@@ -5,6 +5,7 @@ import 'package:beyond_vision/ui/setting/widgets/delete_account.dart';
 import 'package:beyond_vision/ui/setting/widgets/edit_goal.dart';
 import 'package:beyond_vision/ui/setting/widgets/setting_box.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Setting extends StatelessWidget {
   const Setting({super.key});

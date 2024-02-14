@@ -1,13 +1,17 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/service/workout_service.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_categories.dart';
 import 'package:flutter/material.dart';
 
 class BigBox extends StatelessWidget {
+  final int cateNum;
   final String name;
-  const BigBox({super.key, required this.name});
+  const BigBox({super.key, required this.cateNum, required this.name});
 
   @override
   Widget build(BuildContext context) {
+    WorkOutService workOutService = WorkOutService();
+
     return Container(
       margin: const EdgeInsets.all(10),
       child: Padding(
@@ -21,26 +25,30 @@ class BigBox extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            if (name == "상체") {
+            if (cateNum == 0) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const Categories(cate: "상체")));
-            } else if (name == "하체") {
+                      builder: (context) =>
+                          const Categories(cate: 0, name: "상체")));
+            } else if (cateNum == 1) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const Categories(cate: "하체")));
-            } else if (name == "코어") {
+                      builder: (context) =>
+                          const Categories(cate: 1, name: "하체")));
+            } else if (cateNum == 2) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const Categories(cate: "코어")));
+                      builder: (context) =>
+                          const Categories(cate: 2, name: "코어")));
             } else {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const Categories(cate: "스트레칭")));
+                      builder: (context) =>
+                          const Categories(cate: 3, name: "스트레칭")));
             }
           },
           child: Center(

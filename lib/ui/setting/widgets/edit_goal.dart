@@ -1,4 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/service/user_service.dart';
 import 'package:flutter/material.dart';
 
 class EditGoal extends StatefulWidget {
@@ -55,7 +56,11 @@ class _EditGoalState extends State<EditGoal> {
             ),
             const SizedBox(height: 30),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  UserService userService = UserService();
+                  userService.editUserInfo(int.parse(_count.text), 3);
+                  Navigator.pop(context);
+                },
                 child: const Text("수정하기",
                     style: TextStyle(
                         color: Color(fontYellowColor), fontSize: 24))),

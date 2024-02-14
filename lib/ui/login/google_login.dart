@@ -1,10 +1,12 @@
 import 'package:beyond_vision/core/constants.dart';
-import 'package:beyond_vision/model/user_model.dart';
+import 'package:beyond_vision/service/user_service.dart';
 import 'package:beyond_vision/ui/home/home.dart';
+import 'package:beyond_vision/ui/login/newInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:beyond_vision/service/date_service.dart';
+import 'package:beyond_vision/model/user_model.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   void signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    final DateService dateService = DateService();
+    final UserService userService = UserService();
 
     try {
       if (googleUser != null) {
@@ -24,16 +26,24 @@ class _LoginPageState extends State<LoginPage> {
             await googleUser.authentication;
 
         final String? accessToken = googleAuth.accessToken;
-        SharedPreferences prefs = await SharedPreferences.getInstance();
 
-        prefs.setBool("isLogined", true);
-        prefs.setString("loginDate", dateService.loginDate(DateTime.now()));
+        User currentUser = await userService.getUserData(accessToken);
+
         //멤버 아이디를 set 해두어야할듯함다
-
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-        );
+        if (currentUser.isNewMember!) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => NewInfo(
+                      currentUser: currentUser,
+                    )),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        }
       }
     } catch (error) {
       showDialog(

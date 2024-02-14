@@ -1,6 +1,10 @@
+import 'package:beyond_vision/provider/login_provider.dart';
+import 'package:beyond_vision/service/record_service.dart';
 import 'package:beyond_vision/ui/record/widgets/record_bar_graph.dart';
 import 'package:beyond_vision/ui/record/widgets/record_circle_graph.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 
 class GraphSlider extends StatefulWidget {
@@ -29,7 +33,7 @@ class _GraphSliderState extends State<GraphSlider> {
               });
             }),
         items: const [
-          SizedBox(height: 250, child: RecordCircle()),
+          SizedBox(height: 260, child: RecordCircle()),
           SizedBox(height: 250, child: RecordBar())
         ],
       ),

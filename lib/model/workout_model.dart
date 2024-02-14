@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 class WorkOut {
-  final Long exerciseId;
+  final int exerciseId;
   final String name;
   final String description;
   final int difficulty;

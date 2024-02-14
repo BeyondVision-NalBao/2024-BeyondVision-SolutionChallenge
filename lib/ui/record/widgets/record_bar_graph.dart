@@ -78,19 +78,26 @@ class RecordBarState extends State<RecordBar> {
     return List.generate(7, (i) {
       switch (i) {
         case 0:
-          return makeGroupData(0, 5, isSelected: i == selectedIndex);
+          return makeGroupData(0, provider.thisWeekExerciseTime[0].toDouble(),
+              isSelected: i == selectedIndex);
         case 1:
-          return makeGroupData(1, 6.5, isSelected: i == selectedIndex);
+          return makeGroupData(1, provider.thisWeekExerciseTime[1].toDouble(),
+              isSelected: i == selectedIndex);
         case 2:
-          return makeGroupData(2, 5, isSelected: i == selectedIndex);
+          return makeGroupData(2, provider.thisWeekExerciseTime[2].toDouble(),
+              isSelected: i == selectedIndex);
         case 3:
-          return makeGroupData(3, 7.5, isSelected: i == selectedIndex);
+          return makeGroupData(3, provider.thisWeekExerciseTime[3].toDouble(),
+              isSelected: i == selectedIndex);
         case 4:
-          return makeGroupData(4, 9, isSelected: i == selectedIndex);
+          return makeGroupData(4, provider.thisWeekExerciseTime[4].toDouble(),
+              isSelected: i == selectedIndex);
         case 5:
-          return makeGroupData(5, 11.5, isSelected: i == selectedIndex);
+          return makeGroupData(5, provider.thisWeekExerciseTime[5].toDouble(),
+              isSelected: i == selectedIndex);
         case 6:
-          return makeGroupData(6, 6.5, isSelected: i == selectedIndex);
+          return makeGroupData(6, provider.thisWeekExerciseTime[6].toDouble(),
+              isSelected: i == selectedIndex);
         default:
           return throw Error();
       }

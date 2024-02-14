@@ -110,7 +110,7 @@ class _SpeakerState extends State<Speaker> {
                     } else {
                       _speech.startListening();
                     }
-                    if (isResult == 5) isResult == 2;
+                    if (isResult == 5) isResult = 2;
                     isListening = !isListening;
                   });
                 },

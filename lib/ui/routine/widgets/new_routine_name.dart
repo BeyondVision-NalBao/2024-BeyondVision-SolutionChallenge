@@ -58,7 +58,13 @@ class _NewNameState extends State<NewName> {
               },
               child: Text(widget.isExist ? "수정하기" : "생성하기",
                   style: const TextStyle(
-                      color: Color(fontYellowColor), fontSize: 24)))
+                      color: Color(fontYellowColor), fontSize: 24))),
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("취소",
+                  style: TextStyle(color: Colors.white, fontSize: 24)))
         ]),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/model/record_model.dart';
 import 'package:beyond_vision/provider/date_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class _CalendarState extends State<Calendar> {
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: TableCalendar(
+      child: TableCalendar<Record>(
         daysOfWeekStyle:
             const DaysOfWeekStyle(weekdayStyle: TextStyle(color: Colors.white)),
         calendarStyle: const CalendarStyle(

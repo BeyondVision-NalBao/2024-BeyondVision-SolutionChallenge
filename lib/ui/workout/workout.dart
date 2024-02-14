@@ -1,6 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/ui/appbar.dart';
-import 'package:beyond_vision/ui/home/widgets/home_grid_button.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_suggest_box.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_routine_box.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_big_box.dart';
@@ -47,10 +46,10 @@ class WorkOut extends StatelessWidget {
               child: GridView.count(
                 crossAxisCount: 2,
                 children: const [
-                  BigBox(name: "상체"),
-                  BigBox(name: "하체"),
-                  BigBox(name: "코어"),
-                  BigBox(name: "스트레칭"),
+                  BigBox(cateNum: 0, name: "상체"),
+                  BigBox(cateNum: 1, name: "하체"),
+                  BigBox(cateNum: 2, name: "코어"),
+                  BigBox(cateNum: 3, name: "스트레칭"),
                 ],
               ),
             ),

@@ -1,9 +1,11 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/model/workout_model.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_camera_view.dart';
 import 'package:flutter/material.dart';
 
 class WorkOutExplain extends StatelessWidget {
-  const WorkOutExplain({super.key});
+  final WorkOut workout;
+  const WorkOutExplain({super.key, required this.workout});
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +16,21 @@ class WorkOutExplain extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          const Text(
-            "운동이름",
-            style: TextStyle(
+          Text(
+            workout.name,
+            style: const TextStyle(
                 color: Color(fontYellowColor),
                 fontSize: 40,
                 fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 50),
-          const SingleChildScrollView(
-            child: Text("운동 설명 블라블라블라",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 24)),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Text(workout.description,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white, fontSize: 28)),
+            ),
           ),
           const SizedBox(height: 50),
           Column(

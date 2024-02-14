@@ -9,11 +9,12 @@ class RoutineService {
   late List<Routine> _routineList;
   List<Routine> get routineList => _routineList;
 
-  Future<List<Routine>> getAllRoutine(Long memberId) async {
-    final url = Uri.https(baseUrl, '/routine/detail/:memberId');
+  Future<List<Routine>> getAllRoutine(int memberId) async {
+    final url = Uri.https(baseUrl, '/routine/detail/:$memberId');
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      final List<dynamic> routines = jsonDecode(response.body);
+      final List<dynamic> routines =
+          jsonDecode(utf8.decode(response.bodyBytes));
       for (var routine in routines) {
         _routineList.add(Routine.fromJson(routine));
       }
@@ -22,7 +23,7 @@ class RoutineService {
     throw Error();
   }
 
-  Future<bool> addRoutine(Routine newRoutine, Long memberId) async {
+  Future<bool> addRoutine(Routine newRoutine, int memberId) async {
     final url = Uri.https(baseUrl, '/routine/register/:$memberId');
     var response = await http.post(url, body: newRoutine);
 
@@ -41,7 +42,21 @@ class RoutineService {
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      //_routineList.add(data);
+      _routineList.add(data);
+      return true;
+    }
+    throw Error();
+  }
+
+  Future<bool> deleteRoutine(Routine routine, Long memberId) async {
+    final url =
+        Uri.https(baseUrl, '/routine/delete/:$memberId&${routine.routineId}');
+    var response = await http.post(url, body: routine);
+
+    if (response.statusCode == 200) {
+      _routineList = [];
+      var data = jsonDecode(response.body);
+      _routineList.add(data);
       return true;
     }
     throw Error();

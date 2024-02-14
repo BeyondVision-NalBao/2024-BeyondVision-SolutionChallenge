@@ -1,5 +1,10 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/provider/login_provider.dart';
+import 'package:beyond_vision/service/user_service.dart';
+import 'package:beyond_vision/ui/login/google_login.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DeleteAccount extends StatefulWidget {
   const DeleteAccount({super.key});
@@ -9,19 +14,27 @@ class DeleteAccount extends StatefulWidget {
 }
 
 class _DeleteAccountState extends State<DeleteAccount> {
-  late TextEditingController _count;
+  UserService userService = UserService();
+
+  int memberId = 2;
+
+  getMemberId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // memberId = prefs.getInt('memberId')!;
+    print(memberId);
+  }
 
   @override
   void initState() {
     // TODO: implement initState
-    _count = TextEditingController();
+    getMemberId();
     super.initState();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    _count.dispose();
+
     super.dispose();
   }
 
@@ -46,7 +59,11 @@ class _DeleteAccountState extends State<DeleteAccount> {
               style: TextStyle(color: Colors.white, fontSize: 24)),
           const SizedBox(height: 30),
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                userService.quitUser(memberId);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
+              },
               child: const Text("회원탈퇴",
                   style: TextStyle(color: Colors.red, fontSize: 24))),
           const SizedBox(height: 10),

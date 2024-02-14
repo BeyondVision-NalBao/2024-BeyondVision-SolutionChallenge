@@ -1,12 +1,16 @@
 import 'package:beyond_vision/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:beyond_vision/provider/date_provider.dart';
+import 'package:provider/provider.dart';
 
 class RecordCircle extends StatelessWidget {
   const RecordCircle({super.key});
 
   @override
   Widget build(BuildContext context) {
+    DateProvider provider = Provider.of<DateProvider>(context);
+
     return SizedBox(
       height: 250,
       child: AspectRatio(
@@ -36,27 +40,27 @@ class RecordCircle extends StatelessWidget {
                 sectionsSpace: 0,
                 centerSpaceRadius: 70,
                 startDegreeOffset: 270.0,
-                sections: showingSections(),
+                sections: showingSections(provider),
               ),
             ),
           )),
     );
   }
 
-  List<PieChartSectionData> showingSections() {
+  List<PieChartSectionData> showingSections(DateProvider provider) {
     return List.generate(2, (i) {
       switch (i) {
         case 0:
           return PieChartSectionData(
             color: const Color(fontYellowColor),
-            value: 50,
+            value: provider.todayExerciseTime.toDouble(),
             showTitle: false,
             radius: 35,
           );
         case 1:
           return PieChartSectionData(
             color: const Color(blurYellowColor),
-            value: 60,
+            value: 1 - provider.todayExerciseTime.toDouble(),
             showTitle: false,
             radius: 20,
           );
