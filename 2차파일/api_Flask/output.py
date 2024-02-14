@@ -1,13 +1,13 @@
 from flask import Flask
-import db
+from db import connect_to_db
 from datetime import datetime
 
 app = Flask(__name__)
 
-conn = db.conn
+conn = connect_to_db()
 cursor = conn.cursor()
 
-@app.route('/exercise/output', methods=['GET'])
+# @app.route('/exercise/output', methods=['GET'])
 def exercise_output(member_id, exercise_name, exercise_count, exercise_time):
     record_id = get_record_id();
     exercise_id = get_exercise_id(exercise_name);
@@ -34,7 +34,7 @@ def get_exercise_id(exercise_name):
 
 def get_record_id():
     try:
-        sql = """SELECT MAX(id) FROM record"""
+        sql = """SELECT COALESCE(MAX(id), 0) + 1 FROM record"""
         cursor.execute(sql)
         get_record_row = cursor.fetchone()
         return get_record_row[0] + 1
