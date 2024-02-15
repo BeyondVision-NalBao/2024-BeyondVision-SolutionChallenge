@@ -12,9 +12,9 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
 
     @Query(value = """
             SELECT *
-            FROM Record record
-            WHERE record.member_id = :memberId 
-            AND record.created_time >= DATE_ADD(NOW(), INTERVAL - 3 MONTH)
+            FROM record record
+            WHERE record.member_id = :memberId AND record.created_time >= DATE_ADD(NOW(), INTERVAL - 3 MONTH)
+            ORDER BY record.created_time DESC
             """, nativeQuery = true)
     List<Record> getRecordByMemberIdBetween(@Param("memberId") final Long memberId);
 
