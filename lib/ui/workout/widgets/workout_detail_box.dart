@@ -1,12 +1,15 @@
 import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/model/workout_model.dart';
+import 'package:beyond_vision/ui/routine/widgets/set_count.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_explain.dart';
 
 import 'package:flutter/material.dart';
 
 class WorkOutDetail extends StatelessWidget {
   final WorkOut workout;
-  const WorkOutDetail({super.key, required this.workout});
+  final bool? isRoutine;
+
+  const WorkOutDetail({super.key, required this.workout, this.isRoutine});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +23,16 @@ class WorkOutDetail extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  WorkOutExplain(workout: workout));
+          if (isRoutine == true) {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) => const SetCount());
+          } else {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    WorkOutExplain(workout: workout));
+          }
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),

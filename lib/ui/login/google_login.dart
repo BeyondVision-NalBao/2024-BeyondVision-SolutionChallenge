@@ -29,7 +29,6 @@ class _LoginPageState extends State<LoginPage> {
 
         User currentUser = await userService.getUserData(accessToken);
 
-        //멤버 아이디를 set 해두어야할듯함다
         if (currentUser.isNewMember!) {
           Navigator.pushReplacement(
             context,

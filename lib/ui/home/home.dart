@@ -8,6 +8,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //provider 적용시키기
     return Scaffold(
       appBar: MyAppBar(context, titleText: " "),
       backgroundColor: Colors.black,

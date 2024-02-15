@@ -7,8 +7,8 @@ class DateService {
 
   String loginDate(DateTime now) {
     DateTime date = now.add(const Duration(days: 30));
-    String formattedDate = DateFormat('yyyy-MM-dd').format(date);
 
+    String formattedDate = DateFormat('yyyy-mm-dd').format(date);
     return formattedDate;
   }
 
@@ -18,11 +18,9 @@ class DateService {
     DateTime now = DateTime.now();
 
     if (now.isBefore(standardDate)) {
-      return false;
-    } else if (standardDate.isAfter(now)) {
       return true;
     } else {
-      return true;
+      return false;
     }
   }
 }

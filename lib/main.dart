@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getInt('memberId') != null) {
-      if (dateService.compareDate(prefs.getString('loginDate')!)) {
+      if (dateService.compareDate(prefs.getString("loginDate")!)) {
         setState(() {
           isLogined = true;
         });

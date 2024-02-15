@@ -4,21 +4,20 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class RoutineService {
-  static const String baseUrl = "/api/v1/exercise";
+  static const String baseUrl = "http://34.64.89.205/api/v1/exercise";
 
-  late List<Routine> _routineList;
-  List<Routine> get routineList => _routineList;
+  List<Routine> routineList = [];
 
   Future<List<Routine>> getAllRoutine(int memberId) async {
-    final url = Uri.https(baseUrl, '/routine/detail/:$memberId');
+    final url = Uri.parse('$baseUrl/routine/detail/1');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final List<dynamic> routines =
           jsonDecode(utf8.decode(response.bodyBytes));
       for (var routine in routines) {
-        _routineList.add(Routine.fromJson(routine));
+        routineList.add(Routine.fromJson(routine));
       }
-      return _routineList;
+      return routineList;
     }
     throw Error();
   }
@@ -28,8 +27,9 @@ class RoutineService {
     var response = await http.post(url, body: newRoutine);
 
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      _routineList.add(data);
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+      routineList.add(data);
       return true;
     }
     throw Error();
@@ -41,8 +41,8 @@ class RoutineService {
     var response = await http.post(url, body: routine);
 
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      _routineList.add(data);
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+      routineList.add(data);
       return true;
     }
     throw Error();
@@ -54,9 +54,9 @@ class RoutineService {
     var response = await http.post(url, body: routine);
 
     if (response.statusCode == 200) {
-      _routineList = [];
-      var data = jsonDecode(response.body);
-      _routineList.add(data);
+      routineList = [];
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+      routineList.add(data);
       return true;
     }
     throw Error();

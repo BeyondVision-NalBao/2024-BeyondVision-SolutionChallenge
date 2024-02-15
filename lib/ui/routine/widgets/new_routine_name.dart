@@ -1,4 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/ui/routine/widgets/new_workout.dart';
 import 'package:flutter/material.dart';
 
 class NewName extends StatefulWidget {
@@ -54,7 +55,17 @@ class _NewNameState extends State<NewName> {
           const SizedBox(height: 10),
           TextButton(
               onPressed: () {
-                //운동 루틴에
+                if (widget.isExist) {
+                  //수정
+                  //현재 받아온 list에서 해당 내용을 변경 후 전달
+                } else {
+                  //생성
+                  //운동하기 페이지로 넘어가기
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const NewWorkOut()),
+                  );
+                }
               },
               child: Text(widget.isExist ? "수정하기" : "생성하기",
                   style: const TextStyle(

@@ -7,11 +7,13 @@ import 'package:beyond_vision/service/workout_service.dart';
 class Categories extends StatelessWidget {
   final int cate;
   final String name;
+  final bool? isRoutine;
 
   const Categories({
     super.key,
     required this.cate,
     required this.name,
+    this.isRoutine,
   });
 
   @override
@@ -31,7 +33,10 @@ class Categories extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return WorkOutDetail(workout: snapshot.data![index]);
+                      return WorkOutDetail(
+                        workout: snapshot.data![index],
+                        isRoutine: isRoutine,
+                      );
                     }),
               );
             } else {

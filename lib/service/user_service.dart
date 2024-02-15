@@ -25,6 +25,9 @@ class UserService {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool("isLogined", true);
         prefs.setString("loginDate", dateService.loginDate(DateTime.now()));
+        if (!currentUser.isNewMember!) {
+          prefs.setInt("memberId", currentUser.memberId!);
+        }
 
         return currentUser;
       }
@@ -51,10 +54,9 @@ class UserService {
       var data = jsonDecode(utf8.decode(response.bodyBytes));
       User currentUser = User.fromJson(data);
       auth.getMemberId(currentUser.memberId!);
-      auth.getGoal(currentUser.exerciseGoal!);
+      auth.getGoal(currentUser.exerciseGoal);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setInt("memberId", currentUser.memberId!);
-      print(currentUser.memberId);
       return currentUser;
     }
     throw Error();
@@ -82,11 +84,10 @@ class UserService {
         headers: {"Content-Type": "application/json; charset=UTF-8"},
         body: json.encode({"exerciseGoal": newGoal}));
 
-    print(response.statusCode);
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
       User currentUser = User.fromJson(data);
-      print(currentUser.exerciseGoal);
+      auth.getGoal(currentUser.exerciseGoal);
       return true;
     }
     return false;

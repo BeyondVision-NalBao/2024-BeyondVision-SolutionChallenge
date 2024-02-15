@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 class BigBox extends StatelessWidget {
   final int cateNum;
   final String name;
-  const BigBox({super.key, required this.cateNum, required this.name});
+  final bool? isRoutine;
+  const BigBox(
+      {super.key, required this.cateNum, required this.name, this.isRoutine});
 
   @override
   Widget build(BuildContext context) {
-    WorkOutService workOutService = WorkOutService();
-
     return Container(
       margin: const EdgeInsets.all(10),
       child: Padding(
@@ -29,26 +29,38 @@ class BigBox extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const Categories(cate: 0, name: "상체")));
+                      builder: (context) => Categories(
+                            cate: 0,
+                            name: "상체",
+                            isRoutine: isRoutine,
+                          )));
             } else if (cateNum == 1) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const Categories(cate: 1, name: "하체")));
+                      builder: (context) => Categories(
+                            cate: 1,
+                            name: "하체",
+                            isRoutine: isRoutine,
+                          )));
             } else if (cateNum == 2) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const Categories(cate: 2, name: "코어")));
+                      builder: (context) => Categories(
+                            cate: 2,
+                            name: "코어",
+                            isRoutine: isRoutine,
+                          )));
             } else {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const Categories(cate: 3, name: "스트레칭")));
+                      builder: (context) => Categories(
+                            cate: 3,
+                            name: "스트레칭",
+                            isRoutine: isRoutine,
+                          )));
             }
           },
           child: Center(

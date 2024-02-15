@@ -6,7 +6,7 @@ class User {
   final String profileImageUrl;
   late int? age;
   late String? gender;
-  late int? exerciseGoal;
+  late int exerciseGoal = 0;
   final bool? isNewMember;
 
   User(

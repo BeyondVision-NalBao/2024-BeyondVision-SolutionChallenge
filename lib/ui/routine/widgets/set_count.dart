@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:beyond_vision/core/constants.dart';
 
 class SetCount extends StatefulWidget {
   const SetCount({super.key});
@@ -27,15 +28,53 @@ class _SetCountState extends State<SetCount> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: const Color(boxColor),
+      elevation: 5,
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(children: [
-          const Text("운동 횟수 또는 시간을 설정하세요"),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          const Text(
+            "운동 횟수 또는\n시간을 설정하세요",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Color(fontYellowColor),
+                fontSize: 38,
+                fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 20),
           TextField(
             controller: _count,
+            keyboardType: TextInputType.number,
+            style: const TextStyle(color: Colors.white, fontSize: 40),
             // onSubmitted: (String value) async{await showDialog()},
           ),
-          TextButton(onPressed: () {}, child: const Text("저장"))
+          const SizedBox(height: 20),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+            child: const Text(
+              "저장",
+              style: TextStyle(
+                  color: Color(fontYellowColor),
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text(
+              "취소",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
         ]),
       ),
     );

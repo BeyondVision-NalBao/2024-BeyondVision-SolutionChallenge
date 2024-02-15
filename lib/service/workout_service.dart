@@ -19,4 +19,29 @@ class WorkOutService {
     }
     throw Error();
   }
+
+  Future<void> postReady() async {
+    final url = Uri.parse('$baseUrl/1/ready');
+
+    var response = await http.post(url,
+        headers: {"Content-Type": "application/json; charset=UTF-8"},
+        body: json.encode({"routineName": "멋지게 살자"}));
+
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+      postStart();
+    }
+    throw Error();
+  }
+
+  Future<void> postStart() async {
+    final url = Uri.parse('$baseUrl/1/1/1/start');
+
+    var response = await http.post(url);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
+    }
+    throw Error();
+  }
 }

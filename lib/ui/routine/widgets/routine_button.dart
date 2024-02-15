@@ -23,7 +23,7 @@ class RoutineButton extends StatelessWidget {
             "이름 변경 및 삭제",
             style: TextStyle(
                 color: Color(fontYellowColor),
-                fontSize: 40,
+                fontSize: 38,
                 fontWeight: FontWeight.bold),
           ),
           content: SingleChildScrollView(
@@ -48,6 +48,18 @@ class RoutineButton extends StatelessWidget {
                 ListTile(
                   title: const Text(
                     '루틴 삭제',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    '취소',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 28,
