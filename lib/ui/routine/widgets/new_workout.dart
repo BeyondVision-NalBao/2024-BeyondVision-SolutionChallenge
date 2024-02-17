@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 class NewWorkOut extends StatelessWidget {
   const NewWorkOut({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

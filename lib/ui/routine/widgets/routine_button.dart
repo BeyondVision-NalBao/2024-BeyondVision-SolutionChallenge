@@ -1,19 +1,16 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/model/routine_model.dart';
 import 'package:beyond_vision/ui/routine/widgets/new_routine_name.dart';
 import 'package:beyond_vision/ui/routine/widgets/routine_detail.dart';
 import 'package:flutter/material.dart';
 
 class RoutineButton extends StatelessWidget {
-  final String index;
-  final String name;
+  final Routine routine;
+  final int index;
 
-  const RoutineButton({
-    super.key,
-    required this.index,
-    required this.name,
-  });
+  const RoutineButton({super.key, required this.routine, required this.index});
 
-  void showOptionsDialog(BuildContext context) {
+  void showOptionsDialog(BuildContext context, int index) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -42,7 +39,7 @@ class RoutineButton extends StatelessWidget {
                     showDialog(
                         context: context,
                         builder: (BuildContext context) =>
-                            const NewName(isExist: true));
+                            NewName(isExist: true, index: index));
                   },
                 ),
                 ListTile(
@@ -81,7 +78,7 @@ class RoutineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {
-        showOptionsDialog(context);
+        showOptionsDialog(context, index);
       },
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -94,20 +91,23 @@ class RoutineButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const RoutineDetail()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        RoutineDetail(routine: routine, index: index)));
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Text(index,
+                Text((index + 1).toString(),
                     style: const TextStyle(
                         color: Color(fontYellowColor),
                         fontWeight: FontWeight.w900,
                         fontSize: 64)),
                 Text(
-                  name,
+                  routine.routineName,
                   style: const TextStyle(
                       fontSize: 36,
                       color: Colors.white,

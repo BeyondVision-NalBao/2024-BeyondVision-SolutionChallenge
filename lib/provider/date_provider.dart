@@ -10,7 +10,17 @@ class DateProvider extends ChangeNotifier {
     0,
   ];
   DateProvider dateProvider = DateProvider();
-  List<Record> records = [];
+  List<Record> records = [
+    Record(1, null, 30, "숄더프레스", DateTime.now()),
+    Record(2, 30, 45, "프론트레이즈", DateTime.now()),
+    Record(3, null, 30, "레터럴레이즈", DateTime.now()),
+    Record(4, null, 30, "스쿼트", DateTime.parse('2024-02-11')),
+    Record(5, null, 30, "스쿼트", DateTime.parse('2024-02-11')),
+    Record(6, null, 30, "스쿼트", DateTime.parse('2024-02-11')),
+    Record(7, null, 30, "스쿼트", DateTime.parse('2024-02-17')),
+    Record(8, null, 30, "스쿼트", DateTime.parse('2024-02-17')),
+    Record(9, null, 30, "스쿼트", DateTime.parse('2024-02-17')),
+  ];
   List<List<Record>> thisWeek = [];
   List<Record> todayRecords = [];
 
@@ -55,6 +65,6 @@ class DateProvider extends ChangeNotifier {
       }
       thisWeekExerciseTime.add(sum);
     }
-    notifyListeners(); // 상태가 변경될 때마다 리스너들에게 알림
+    //notifyListeners(); // 상태가 변경될 때마다 리스너들에게 알림
   }
 }

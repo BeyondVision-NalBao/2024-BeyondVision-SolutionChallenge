@@ -1,10 +1,13 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/provider/routine_provider.dart';
 import 'package:beyond_vision/ui/routine/widgets/new_workout.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NewName extends StatefulWidget {
   final bool isExist;
-  const NewName({super.key, required this.isExist});
+  int? index;
+  NewName({super.key, required this.isExist, this.index});
 
   @override
   State<NewName> createState() => _NewNameState();
@@ -29,11 +32,13 @@ class _NewNameState extends State<NewName> {
 
   @override
   Widget build(BuildContext context) {
+    RoutineProvider routineProvider = Provider.of<RoutineProvider>(context);
+    String textContent = "";
     return Dialog(
       backgroundColor: const Color(boxColor),
       elevation: 5,
       child: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.all(20),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(
             widget.isExist ? "새로운 이름" : "새로운 루틴",
@@ -50,7 +55,9 @@ class _NewNameState extends State<NewName> {
           TextField(
             style: const TextStyle(color: Color(fontYellowColor), fontSize: 40),
             controller: _name,
-            // onSubmitted: (String value) async{await showDialog()},
+            onChanged: (value) {
+              setState(() => textContent = _name.text);
+            },
           ),
           const SizedBox(height: 10),
           TextButton(
@@ -58,9 +65,12 @@ class _NewNameState extends State<NewName> {
                 if (widget.isExist) {
                   //수정
                   //현재 받아온 list에서 해당 내용을 변경 후 전달
+                  routineProvider.editName(widget.index!, _name.text);
+                  Navigator.pop(context);
                 } else {
                   //생성
-                  //운동하기 페이지로 넘어가기
+
+                  routineProvider.newName = _name.text;
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const NewWorkOut()),

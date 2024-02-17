@@ -1,8 +1,11 @@
+import 'package:beyond_vision/provider/routine_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:beyond_vision/core/constants.dart';
+import 'package:provider/provider.dart';
 
 class SetCount extends StatefulWidget {
-  const SetCount({super.key});
+  final String workoutName;
+  const SetCount({super.key, required this.workoutName});
 
   @override
   State<SetCount> createState() => _SetCountState();
@@ -27,6 +30,7 @@ class _SetCountState extends State<SetCount> {
 
   @override
   Widget build(BuildContext context) {
+    RoutineProvider routineProvider = Provider.of<RoutineProvider>(context);
     return Dialog(
       backgroundColor: const Color(boxColor),
       elevation: 5,
@@ -51,6 +55,10 @@ class _SetCountState extends State<SetCount> {
           const SizedBox(height: 20),
           TextButton(
             onPressed: () {
+              routineProvider.addWorkout(
+                  widget.workoutName, int.parse(_count.text));
+              Navigator.pop(context);
+
               Navigator.pop(context);
               Navigator.pop(context);
               Navigator.pop(context);

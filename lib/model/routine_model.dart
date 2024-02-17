@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class RoutineExercise {
   final String exerciseName;
   final int exerciseCount;
@@ -21,8 +19,8 @@ class RoutineExercise {
 
 class Routine {
   final int routineId;
-  final String routineName;
-  final List<RoutineExercise> routineDetail;
+  late String routineName;
+  late List<RoutineExercise> routineDetail;
 
   Routine(this.routineId, this.routineName, this.routineDetail);
 

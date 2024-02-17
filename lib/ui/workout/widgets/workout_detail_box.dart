@@ -26,7 +26,9 @@ class WorkOutDetail extends StatelessWidget {
           if (isRoutine == true) {
             showDialog(
                 context: context,
-                builder: (BuildContext context) => const SetCount());
+                builder: (BuildContext context) => SetCount(
+                      workoutName: workout.name,
+                    ));
           } else {
             showDialog(
                 context: context,

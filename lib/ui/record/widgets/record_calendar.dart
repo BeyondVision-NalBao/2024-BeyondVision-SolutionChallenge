@@ -20,7 +20,7 @@ class _CalendarState extends State<Calendar> {
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: TableCalendar<Record>(
+      child: TableCalendar(
         daysOfWeekStyle:
             const DaysOfWeekStyle(weekdayStyle: TextStyle(color: Colors.white)),
         calendarStyle: const CalendarStyle(

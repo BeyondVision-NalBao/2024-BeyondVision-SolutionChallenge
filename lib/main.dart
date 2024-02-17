@@ -1,5 +1,6 @@
 import 'package:beyond_vision/provider/date_provider.dart';
 import 'package:beyond_vision/provider/login_provider.dart';
+import 'package:beyond_vision/provider/routine_provider.dart';
 import 'package:beyond_vision/service/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:beyond_vision/service/date_service.dart';
@@ -51,6 +52,7 @@ class _MyAppState extends State<MyApp> {
         providers: [
           ChangeNotifierProvider(create: (_) => DateProvider()),
           ChangeNotifierProvider(create: (_) => AuthProvider()),
+          ChangeNotifierProvider(create: (_) => RoutineProvider()),
         ],
         child: MaterialApp(
           title: 'Beyond Vision',

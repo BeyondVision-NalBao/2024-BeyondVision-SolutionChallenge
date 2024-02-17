@@ -35,7 +35,7 @@ class RoutineService {
     throw Error();
   }
 
-  Future<bool> editRoutine(Routine routine, Long memberId) async {
+  Future<bool> editRoutine(Routine routine, int memberId) async {
     final url =
         Uri.https(baseUrl, '/routine/modify/:$memberId&${routine.routineId}');
     var response = await http.post(url, body: routine);
@@ -48,7 +48,7 @@ class RoutineService {
     throw Error();
   }
 
-  Future<bool> deleteRoutine(Routine routine, Long memberId) async {
+  Future<bool> deleteRoutine(Routine routine, int memberId) async {
     final url =
         Uri.https(baseUrl, '/routine/delete/:$memberId&${routine.routineId}');
     var response = await http.post(url, body: routine);

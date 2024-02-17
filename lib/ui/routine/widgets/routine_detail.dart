@@ -1,24 +1,24 @@
 import 'dart:ui';
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/model/routine_model.dart';
+import 'package:beyond_vision/provider/routine_provider.dart';
+import 'package:beyond_vision/service/routine_service.dart';
 import 'package:beyond_vision/ui/appbar.dart';
 import 'package:beyond_vision/ui/routine/widgets/new_button.dart';
 import 'package:beyond_vision/ui/routine/widgets/routine_detail_box.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RoutineDetail extends StatefulWidget {
-  const RoutineDetail({super.key});
+  final Routine routine;
+  final int index;
+  const RoutineDetail({super.key, required this.routine, required this.index});
 
   @override
   State<RoutineDetail> createState() => _RoutineDetailState();
 }
 
 class _RoutineDetailState extends State<RoutineDetail> {
-  bool isChanged = false;
-  final List<List<String>> _items = [
-    ['스쿼트', '30회'],
-    ['런지', '30회'],
-    ['사이드런지', '30회']
-  ];
   Widget proxyDecorator(Widget child, int index, Animation<double> animation) {
     return AnimatedBuilder(
       animation: animation,
@@ -33,9 +33,18 @@ class _RoutineDetailState extends State<RoutineDetail> {
 
   @override
   Widget build(BuildContext context) {
+    RoutineProvider routineProvider = Provider.of<RoutineProvider>(context);
+    RoutineService routineService = RoutineService();
+    List<RoutineExercise> items = widget.routine.routineDetail;
+    // @override
+    // void dispose() {
+    //   routineService.editRoutine(routineProvider.routines[widget.index], 3);
+    //   super.dispose();
+    // }
+
     return Scaffold(
         backgroundColor: Colors.black,
-        appBar: MyAppBar(context, titleText: "매일 저녁"),
+        appBar: MyAppBar(context, titleText: widget.routine.routineName),
         body: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Column(children: [
@@ -49,49 +58,51 @@ class _RoutineDetailState extends State<RoutineDetail> {
                     if (oldIndex < newIndex) {
                       newIndex -= 1;
                     }
-                    final item = _items.removeAt(oldIndex);
-                    _items.insert(newIndex, item);
+                    final item = items.removeAt(oldIndex);
+                    items.insert(newIndex, item);
 
-                    isChanged = true;
+                    routineProvider.isChanged = true;
                   });
                 },
                 buildDefaultDragHandles: false,
-                children: _items.asMap().entries.map((entry) {
-                  int index = entry.key;
-                  List<String> item = entry.value;
-                  return DetailBox(
+                children: List.generate(
+                  items.length,
+                  (index) {
+                    return DetailBox(
                       key: ValueKey(index),
                       index: index,
-                      title: item[0],
-                      time: item[1]);
-                }).toList(),
+                      title: items[index].exerciseName,
+                      time: items[index].exerciseCount.toString(),
+                    );
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 20),
-            isChanged
-                ? Center(
-                    child: Material(
-                      shape: const CircleBorder(side: BorderSide.none),
-                      elevation: 15,
-                      child: CircleAvatar(
-                          radius: 50,
-                          backgroundColor: const Color(boxColor),
-                          child: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  isChanged = false;
-                                });
-                              },
-                              icon: const Icon(
-                                Icons.check,
-                                size: 80,
-                                color: Color(fontYellowColor),
-                              ))),
-                    ),
-                  )
-                : const NewButton(
-                    previousPage: false,
-                  )
+            if (routineProvider.isChanged)
+              Center(
+                child: Material(
+                  shape: const CircleBorder(side: BorderSide.none),
+                  elevation: 15,
+                  child: CircleAvatar(
+                      radius: 50,
+                      backgroundColor: const Color(boxColor),
+                      child: IconButton(
+                          onPressed: () {
+                            routineProvider.editOrder(widget.index, items);
+                            setState(() {
+                              routineProvider.isChanged = false;
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.check,
+                            size: 80,
+                            color: Color(fontYellowColor),
+                          ))),
+                ),
+              )
+            else
+              NewButton(previousPage: false, index: widget.index)
           ]),
         ));
   }

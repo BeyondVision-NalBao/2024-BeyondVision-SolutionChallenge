@@ -35,7 +35,7 @@ class DetailBox extends StatelessWidget {
                         fontWeight: FontWeight.bold)),
               ),
               Center(
-                child: Text(time,
+                child: Text('$time회',
                     style: const TextStyle(color: Colors.white, fontSize: 20)),
               ),
               ReorderableDragStartListener(
