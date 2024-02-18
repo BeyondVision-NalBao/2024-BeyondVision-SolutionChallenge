@@ -23,6 +23,21 @@ class WorkOutService {
     throw Error();
   }
 
+  Future<WorkOut> getRandom() async {
+    final url = Uri.parse('$baseUrl/random');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data =
+          jsonDecode(utf8.decode(response.bodyBytes));
+      WorkOut randomWorkout = WorkOut.fromJson(data);
+
+      return randomWorkout;
+    }
+    throw Error();
+  }
+
   // Future<void> postReady() async {
   //   final url = Uri.parse('$baseUrl/1/ready');
 
