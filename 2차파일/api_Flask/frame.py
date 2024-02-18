@@ -55,7 +55,7 @@ def start_exercise(memberId):
     #cursor.close()
     #conn.close()
 
-    result = ready.selectExercise(exerciseName, exerciseCount)
+    result = ready.selectExercise(exerciseName, memberId, exerciseCount)
     print(result)
     return str(result) #postnat
 
