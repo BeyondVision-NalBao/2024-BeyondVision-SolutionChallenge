@@ -41,8 +41,8 @@ def ready_exercise(memberId):
 @app.route("/<int:memberId>/start", methods=["POST"]) #클라이언트 정보를 select운동 어쩌구에 넘기는 함수
 def start_exercise(memberId):
     data = request.json
-    routineName = data['routineName']
-    routineCount = data['routineCount']
+    exerciseName = data['exerciseName']
+    exerciseCount = data['exerciseCount']
 
     #미사용 부분   
     #conn = connect_to_db()
@@ -55,7 +55,7 @@ def start_exercise(memberId):
     #cursor.close()
     #conn.close()
 
-    result = ready.selectExercise(routineName,routineCount)
+    result = ready.selectExercise(exerciseName, exerciseCount)
     print(result)
     return str(result) #postnat
 
