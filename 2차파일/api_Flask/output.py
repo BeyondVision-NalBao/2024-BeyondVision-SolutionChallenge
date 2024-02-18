@@ -1,13 +1,13 @@
 from flask import Flask
-import db
+from db import connect_to_db
 from datetime import datetime
 
 app = Flask(__name__)
 
-conn = db.conn
+conn = connect_to_db()
 cursor = conn.cursor()
 
-@app.route('/exercise/output', methods=['GET'])
+# @app.route('/exercise/output', methods=['GET'])
 def exercise_output(member_id, exercise_name, exercise_count, exercise_time):
     record_id = get_record_id();
     exercise_id = get_exercise_id(exercise_name);
@@ -26,15 +26,15 @@ def insert_exercise_record(member_id, exercise_id, record_id, exercise_count, ex
         print("Fail to insert exercise record")
 
 def get_exercise_id(exercise_name):
-    try: 
-        exercise_mapping = ["레터럴레이즈", "숄더프레스", "프론트레이즈", "스쿼트", "런지", "플랭크", "헌드레드", "브릿지"]
+    try:
+        exercise_mapping = ["스쿼트", "숄더프레스", "레터럴레이즈", "헌드레드", "플랭크", "프론트레이즈", "제트업", "브릿지"]
         return exercise_mapping.index(exercise_name) + 1
     except:
         print("Fail to get exercise id")
 
 def get_record_id():
     try:
-        sql = """SELECT MAX(id) FROM record"""
+        sql = """SELECT COALESCE(MAX(id), 0) + 1 FROM record"""
         cursor.execute(sql)
         get_record_row = cursor.fetchone()
         return get_record_row[0] + 1
