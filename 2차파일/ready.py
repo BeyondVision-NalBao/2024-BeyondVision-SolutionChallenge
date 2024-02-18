@@ -7,8 +7,9 @@ global countNumber, exerciseCode, message
 #운동코드 받아오기
 #횟수 설정하기
 print('this is test message ')
-def selectExercise(name,count='30'): #경원이가 디폴트 30으로 해놓으라고 했음 ㅎㅎ
+def selectExercise(name,count): #경원이가 디폴트 30으로 해놓으라고 했음 ㅎㅎ
     global exerciseCode
+    global countNumber
     if name=='스쿼트':
         exerciseCode = 1
     elif name=='숄더프레스':
