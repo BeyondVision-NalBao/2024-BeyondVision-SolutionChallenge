@@ -7,6 +7,7 @@ import time
 import stretching4
 import stretching5
 import stretching10
+import squat
 import shoulderPress
 import lateralRaise
 import hundred
@@ -15,6 +16,8 @@ import zup
 import front_raise
 import bridge
 import ready as ready
+
+import api_Flask.output as output
 
 np.set_printoptions(threshold=np.inf, linewidth=np.inf)
 
@@ -47,7 +50,7 @@ class VideoCamera(object):
 
 
 def gen(camera):
-    
+    global message
     with tf.compat.v1.Session() as sess:
         model_cfg, model_outputs = posenet.load_model(args['model'], sess)
         output_stride = model_cfg['output_stride']
@@ -124,7 +127,7 @@ def gen(camera):
                     if exerciseCode == 1 and ready.isSide(keypoint_coords[0]):
                         init2 = False
                         init3 = True
-                        stretching4.setting(exerciseCode)
+                        squat.setting(exerciseCode)
                         #message = "스쿼트 자세 설명입니다.. 두 발을 골반 너비로 벌리고, 허벅지와 무릎이 수평이 될때까지 천천히 앉았다 일어서세요. 이때 무릎은 발끝 앞으로 나오지않도록 주의하시고, 허리는 곧게 펴세요.... 스쿼트를 1회 진행하세요."
                     elif exerciseCode == 2:
                         if flag_sp:
@@ -205,7 +208,7 @@ def gen(camera):
                             init3 = True
                 elif init3:
                     if exerciseCode == 1:
-                        if stretching4.postureCorrection(keypoint_coords[0]):
+                        if squat.postureCorrection(keypoint_coords[0]):
                             
                             message = "스쿼트 자세를 잘 잡으셨어요!,,, 잠시후 카운트를 시작합니다."
                             message = str(ready.countNumber) + "회 반복해주세요."
@@ -253,17 +256,13 @@ def gen(camera):
                             time.sleep(4)
                             finish = True
                     elif exerciseCode == 10:
-                        if stretching4.postureCorrection(keypoint_coords[0]):
+                        if stretching5.postureCorrection(keypoint_coords[0]):
                             time.sleep(4)
                             finish = True
                     elif exerciseCode == 11:
-                        if stretching4.postureCorrection(keypoint_coords[0]):
+                        if stretching10.postureCorrection(keypoint_coords[0]):
                             time.sleep(4)
                             finish = True
-
-
-
-
 
 
                 #여기부터 찐 문제임...하
@@ -273,10 +272,11 @@ def gen(camera):
                     if exerciseCode == 1:
                         if cnt == 33:
                             message = "시작해주세요."
-                        elif cnt > 33 and stretching4.counting(keypoint_coords[0]):
-                            if stretching4.CNT == ready.countNumber:
+                        elif cnt > 33 and squat.counting(keypoint_coords[0]):
+                            if squat.CNT == ready.countNumber:
                                 message = "스쿼트" + str(ready.countNumber) +" 회를 마쳤습니다. 수고하셨습니다."
-                                stretching4.CNT = 0
+                                squat.CNT = 0
+                                output.exercise_output(member_id, exercise_name, exercise_count, exercise_time)
                                 finish = True
                     elif exerciseCode == 2:
                         if cnt == 33:
