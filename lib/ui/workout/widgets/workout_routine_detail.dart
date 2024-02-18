@@ -51,10 +51,10 @@ class _RoutineDetailState extends State<RoutineDetail> {
                     backgroundColor: const Color(boxColor),
                     child: IconButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const CameraView()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const CameraView(workout: )));
                         },
                         icon: const Icon(
                           Icons.play_arrow,

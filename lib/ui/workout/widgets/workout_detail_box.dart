@@ -33,7 +33,7 @@ class WorkOutDetail extends StatelessWidget {
             showDialog(
                 context: context,
                 builder: (BuildContext context) =>
-                    WorkOutExplain(workout: workout));
+                    WorkOutExplain(workout: workout, pop: false));
           }
         },
         child: Padding(

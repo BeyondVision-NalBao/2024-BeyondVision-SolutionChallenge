@@ -1,13 +1,20 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/model/workout_model.dart';
+import 'package:beyond_vision/provider/login_provider.dart';
+import 'package:beyond_vision/ui/workout/widgets/workout_explain.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 List<CameraDescription> cameras = [];
 
 class CameraView extends StatefulWidget {
-  const CameraView({super.key});
+  final WorkOut workout;
+  final int? count;
+  const CameraView({super.key, required this.workout, this.count});
 
   @override
   _CameraViewState createState() => _CameraViewState();
@@ -16,6 +23,7 @@ class CameraView extends StatefulWidget {
 class _CameraViewState extends State<CameraView> {
   late CameraController _controller;
   late bool _isInitialized;
+  bool _isStreamingPaused = false;
 
   @override
   void initState() {
@@ -26,7 +34,7 @@ class _CameraViewState extends State<CameraView> {
 
   void _initializeCamera() async {
     cameras = await availableCameras();
-    _controller = CameraController(cameras[1], ResolutionPreset.low);
+    _controller = CameraController(cameras[1], ResolutionPreset.high);
     _controller.initialize().then((_) {
       if (!mounted) return;
       setState(() {
@@ -37,15 +45,35 @@ class _CameraViewState extends State<CameraView> {
   }
 
   void _startStreaming() async {
-    if (!_controller.value.isStreamingImages) {
-      await _controller.startImageStream((CameraImage image) {
-        // Convert image to bytes
-        List<int> bytes = image.planes[0].bytes;
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
 
-        // Send bytes to Flask server
-        _sendFrameToServer(bytes);
+    bool isReady =
+        await getReady(auth.memberId, widget.workout.name, widget.count ?? 30);
+
+    if (!_controller.value.isStreamingImages && isReady) {
+      await _controller.startImageStream((CameraImage image) async {
+        if (!_isStreamingPaused) {
+          List<int> bytes = image.planes[0].bytes;
+          _sendFrameToServer(bytes);
+        }
       });
     }
+  }
+
+  Future<bool> getReady(
+      int memberId, String exerciseName, int exerciseCount) async {
+    final url = Uri.parse('http://34.64.89.205:5000/$memberId/start');
+    var response = await http.post(url,
+        headers: {"Content-Type": "application/json; charset=UTF-8"},
+        body: json.encode({
+          "exerciseName": exerciseName,
+          "exerciseCount": exerciseCount,
+        }));
+    if (response.statusCode == 200) {
+      print("start는 성공?");
+      return true;
+    }
+    return false;
   }
 
   void _sendFrameToServer(List<int> bytes) async {
@@ -86,7 +114,64 @@ class _CameraViewState extends State<CameraView> {
     }
 
     return Scaffold(
-      body: CameraPreview(_controller),
+      backgroundColor: Colors.black,
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: [
+            CameraPreview(_controller),
+            SizedBox(
+              width: 300,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(10),
+                  backgroundColor: const Color(boxColor),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                onPressed: () {
+                  // Pause streaming when dialog is shown
+                  setState(() {
+                    _isStreamingPaused = true;
+                  });
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => WorkOutExplain(
+                      workout: widget.workout,
+                      pop: true,
+                    ),
+                  ).then((_) {
+                    setState(() {
+                      _isStreamingPaused = false;
+                    });
+                  });
+                },
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(speakerIcon, color: Color(fontYellowColor), size: 40),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "설명 다시 듣기",
+                          style: TextStyle(
+                              fontSize: 36,
+                              color: Color(fontYellowColor),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
