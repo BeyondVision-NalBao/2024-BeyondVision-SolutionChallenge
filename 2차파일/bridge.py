@@ -1,7 +1,8 @@
 import math
 import imageDetect
-from speechRecognition import tts
+#from speechRecognition import tts
 import time
+global message
 
 CNT = 0
 
@@ -48,12 +49,12 @@ def bridge_up1(keypoint):
     if up_LIMIT1 - value <= angle <= up_LIMIT1 + value:
         return True
     elif angle < up_LIMIT1 - value:
-        tts.q.queue.clear()
-        tts.q.put("엉덩이를 조금 더 들어올려 흉통과 골반 무릎이 일자에 놓여있도록 해주세요")
+        
+        message = "엉덩이를 조금 더 들어올려 흉통과 골반 무릎이 일자에 놓여있도록 해주세요"
         return False
     elif up_LIMIT1 +value < angle:
-        tts.q.queue.clear()
-        tts.q.put("엉덩이를 조금 내려 흉통과 골반 무릎이 일자에 놓여있도록 해주세요")
+        
+        message = "엉덩이를 조금 내려 흉통과 골반 무릎이 일자에 놓여있도록 해주세요"
         return False
 
 
@@ -67,12 +68,12 @@ def bridge_up2(keypoint):
     if up_LIMIT2 - value <= angle <= up_LIMIT2 + value:
         return True
     elif angle < up_LIMIT2 - value:
-        tts.q.queue.clear()
-        tts.q.put("어깨를 펴서 흉통과 골반 무릎이 일자에 놓여있도록 해주세요")
+        
+        message = "어깨를 펴서 흉통과 골반 무릎이 일자에 놓여있도록 해주세요"
         return False
     elif up_LIMIT2 +value < angle:
-        tts.q.queue.clear()
-        tts.q.put("어깨를 조금 말아 흉통과 골반 무릎이 일자에 놓여있도록 해주세요")
+        
+        message = "어깨를 조금 말아 흉통과 골반 무릎이 일자에 놓여있도록 해주세요"
         return False
 
 
@@ -87,8 +88,8 @@ def bridge_down(keypoint):
     if angle <= down_LIMIT + value:
         return True
     elif down_LIMIT +value < angle:
-        tts.q.queue.clear()
-        tts.q.put("엉덩이를 완전히 바닥에 붙혀주세요")
+        
+        message = "엉덩이를 완전히 바닥에 붙혀주세요"
         return False
 
 
@@ -141,8 +142,8 @@ def counting(keypoint):
     if bridge_count(keypoint):
         global CNT
         CNT += 1
-        tts.q.queue.clear()
-        tts.q.put("성공한 횟수 " + str(CNT))
+        
+        message = "성공한 횟수 " + str(CNT)
         return True
     else:
         return False

@@ -1,6 +1,7 @@
 import math
 import imageDetect
-from speechRecognition import tts
+#from speechRecognition import tts
+global message
 
 CNT = 0
 
@@ -36,8 +37,8 @@ def hunbred_first(keypoint):
     if first_LIMIT - value <= first_angle:
         return True
     elif first_LIMIT - value > first_angle:
-        tts.q.queue.clear()
-        tts.q.put("다리를 조금만 더 내려서 복부에 힘이 들어가도록 해주세요")
+        
+        message = "다리를 조금만 더 내려서 복부에 힘이 들어가도록 해주세요"
         return False
 
 
@@ -49,12 +50,12 @@ def hunbred_second(keypoint):
     if second_LIMIT - value <= second_angle <= second_LIMIT + value:
         return True
     elif second_angle > second_LIMIT + value:
-        tts.q.queue.clear()
-        tts.q.put("고개를 너무 많이 드셔서 복부에 힘이 가지 않고 있습니다. 고개를 조금 더 낮추고 복부에 힘이 들어가는것에 집중해보세요 ")
+        
+        message = "고개를 너무 많이 드셔서 복부에 힘이 가지 않고 있습니다. 고개를 조금 더 낮추고 복부에 힘이 들어가는것에 집중해보세요 "
         return False
     elif second_angle < second_LIMIT - value:
-        tts.q.queue.clear()
-        tts.q.put("고개를 조금 더 들어서 얼굴 정면이 무릎을 향하게 해주세요")
+        
+        message = "고개를 조금 더 들어서 얼굴 정면이 무릎을 향하게 해주세요"
         return False
     
 
@@ -64,18 +65,18 @@ def hunbred_third(keypoint):
     if pelvis[0]-value <= wrist[0] <= pelvis[0]+value:
         return True
     elif pelvis[0]-value > wrist[0]:
-        tts.q.queue.clear()
-        tts.q.put("팔을 살짝만 위로 들어주세요")
+        
+        message = "팔을 살짝만 위로 들어주세요"
         return False
     elif pelvis[0] + value < wrist[0]:
-        tts.q.queue.clear()
-        tts.q.put("팔을 살짝만 아래로 내려주세요")
+        
+        message = "팔을 살짝만 아래로 내려주세요"
         return False
 
 
 def postureCorrection(keypoint):
     if hunbred_first(keypoint) and hunbred_second(keypoint) and hunbred_third(keypoint):
-        # tts.q.put("헌드레드 자세를 잘 잡으셨어요!")
+        # message = "헌드레드 자세를 잘 잡으셨어요!")
         return True
     else:
         return False

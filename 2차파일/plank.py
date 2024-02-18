@@ -1,6 +1,8 @@
 import math
 import imageDetect
-from speechRecognition import tts
+#from speechRecognition import tts
+
+global message
 
 CNT = 0
 
@@ -35,23 +37,23 @@ def plank_first(keypoint):
     if right_first_LIMIT - value <= right_angle <= right_first_LIMIT + value:
         return True
     elif right_angle > right_first_LIMIT + value:
-        tts.q.queue.clear()
-        tts.q.put("고개를 들고 엉덩이를 낮춰서 고개부터 골반까지 일자가 되게 하세요")
+       
+        message = "고개를 들고 엉덩이를 낮춰서 고개부터 골반까지 일자가 되게 하세요"
         return False
     elif right_angle < right_first_LIMIT - value:
-        tts.q.queue.clear()
-        tts.q.put("고개를 낮추고 엉덩이를 올려서 고개부터 골반까지 일자가 되게 하세요")
+       
+        message = "고개를 낮추고 엉덩이를 올려서 고개부터 골반까지 일자가 되게 하세요"
         return False
     
     if left_first_LIMIT - value <= left_angle <= left_first_LIMIT + value:
         return True
     elif left_angle > left_first_LIMIT + value:
-        tts.q.queue.clear()
-        tts.q.put("고개를 들고 엉덩이를 낮춰서 고개부터 골반까지 일자가 되게 하세요")
+       
+        message = "고개를 들고 엉덩이를 낮춰서 고개부터 골반까지 일자가 되게 하세요"
         return False
     elif left_angle < left_first_LIMIT - value:
-        tts.q.queue.clear()
-        tts.q.put("고개를 낮추고 엉덩이를 올려서 고개부터 골반까지 일자가 되게 하세요")
+       
+        message = "고개를 낮추고 엉덩이를 올려서 고개부터 골반까지 일자가 되게 하세요"
         return False
 
 
@@ -63,23 +65,23 @@ def plank_second(keypoint):
     if right_second_LIMIT - value <= right_angle <= right_second_LIMIT + value:
         return True
     elif right_angle > right_second_LIMIT + value:
-        tts.q.queue.clear()
-        tts.q.put("엉덩이가 너무 위로 올라와있습니다. 척추와 골반이 일자가 되도록 하면서 복부에 힘이 들어가도록 해주세요  ")
+       
+        message = "엉덩이가 너무 위로 올라와있습니다. 척추와 골반이 일자가 되도록 하면서 복부에 힘이 들어가도록 해주세요  "
         return False
     elif right_angle < right_second_LIMIT - value:
-        tts.q.queue.clear()
-        tts.q.put("엉덩이가 너무 밑으로 내려와있습니다. 척추와 골반이 일자가 되도록 하면서 복부에 힘이 들어가도록 해주세요")
+       
+        message = "엉덩이가 너무 밑으로 내려와있습니다. 척추와 골반이 일자가 되도록 하면서 복부에 힘이 들어가도록 해주세요"
         return False
     
     if left_second_LIMIT - value <= left_angle <= left_second_LIMIT + value:
         return True
     elif left_angle > left_second_LIMIT + value:
-        tts.q.queue.clear()
-        tts.q.put("엉덩이가 너무 위로 올라와있습니다. 척추와 골반이 일자가 되도록 하면서 복부에 힘이 들어가도록 해주세요  ")
+       
+        message = "엉덩이가 너무 위로 올라와있습니다. 척추와 골반이 일자가 되도록 하면서 복부에 힘이 들어가도록 해주세요  "
         return False
     elif left_angle < left_second_LIMIT - value:
-        tts.q.queue.clear()
-        tts.q.put("엉덩이가 너무 밑으로 내려와있습니다. 척추와 골반이 일자가 되도록 하면서 복부에 힘이 들어가도록 해주세요")
+       
+        message = "엉덩이가 너무 밑으로 내려와있습니다. 척추와 골반이 일자가 되도록 하면서 복부에 힘이 들어가도록 해주세요"
         return False
 
 
@@ -92,21 +94,21 @@ def plank_third(keypoint):
     if right_angle <= right_third_LIMIT:
         return True
     elif right_angle > right_third_LIMIT:
-        tts.q.queue.clear()
-        tts.q.put("무릎이 굽혀져 있습니다. 무릎을 펴주세요")
+       
+        message = "무릎이 굽혀져 있습니다. 무릎을 펴주세요"
         return False
     
     if left_angle <= left_third_LIMIT:
         return True
     elif left_angle > left_third_LIMIT:
-        tts.q.queue.clear()
-        tts.q.put("무릎이 굽혀져 있습니다. 무릎을 펴주세요")
+       
+        message = "무릎이 굽혀져 있습니다. 무릎을 펴주세요"
         return False
 
 
 def postureCorrection(keypoint):
     if plank_first(keypoint) and plank_second(keypoint) and plank_third(keypoint):
-        # tts.q.put("플랭크 자세를 잘 잡으셨어요!")
+        # message = "플랭크 자세를 잘 잡으셨어요!")
         return True
     else:
         return False

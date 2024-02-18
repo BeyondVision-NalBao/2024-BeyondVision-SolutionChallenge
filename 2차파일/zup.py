@@ -58,12 +58,12 @@ def zup_up1(keypoint):
     if up_LIMIT1 - value <= angle <= up_LIMIT1 + value:
         return True
     elif angle < up_LIMIT1 - value:
-        tts.q.queue.clear()
-        tts.q.put("고개를 조금만 뒤로 빼주세요")
+        
+        message = "고개를 조금만 뒤로 빼주세요"
         return False
     elif up_LIMIT1 +value < angle:
-        tts.q.queue.clear()
-        tts.q.put("고개를 조금만 당겨주세요")
+        
+        message = "고개를 조금만 당겨주세요"
         return False
 
 
@@ -77,12 +77,12 @@ def zup_up2(keypoint):
     if up_LIMIT2 - value <= angle <= up_LIMIT2 + value:
         return True
     elif angle < up_LIMIT2 - value:
-        tts.q.queue.clear()
-        tts.q.put("등을 조금만 펴주세요")
+        
+        message = "등을 조금만 펴주세요"
         return False
     elif up_LIMIT2 +value < angle:
-        tts.q.queue.clear()
-        tts.q.put("등을 조금만 말아주세요")
+        
+        message = "등을 조금만 말아주세요"
         return False
     
 def zup_up3(keypoint):
@@ -96,8 +96,8 @@ def zup_up3(keypoint):
     if up_LIMIT3 - value <= angle <= up_LIMIT3 + value:
         return True
     elif up_LIMIT3 +value < angle:
-        tts.q.queue.clear()
-        tts.q.put("조금 더 누워주세요")
+        
+        message = "조금 더 누워주세요"
         return False
 
 
@@ -111,12 +111,12 @@ def zup_down1(keypoint):
     if down_LIMIT1 - value <= angle <= down_LIMIT1 + value:
         return True
     elif angle < down_LIMIT1 - value:
-        tts.q.queue.clear()
-        tts.q.put("고개를 조금만 뒤로 빼주세요")
+        
+        message = "고개를 조금만 뒤로 빼주세요"
         return False
     elif down_LIMIT1 +value < angle:
-        tts.q.queue.clear()
-        tts.q.put("고개를 조금만 당겨주세요")
+        
+        message = "고개를 조금만 당겨주세요"
         return False
 
 
@@ -130,12 +130,12 @@ def zup_down2(keypoint):
     if down_LIMIT2 - value <= angle <= down_LIMIT2 + value:
         return True
     elif angle < down_LIMIT2 - value:
-        tts.q.queue.clear()
-        tts.q.put("등을 조금만 펴주세요")
+        
+        message = "등을 조금만 펴주세요"
         return False
     elif down_LIMIT2 +value < angle:
-        tts.q.queue.clear()
-        tts.q.put("등을 조금만 말아주세요")
+        
+        message = "등을 조금만 말아주세요"
         return False
     
 def zup_down3(keypoint):
@@ -149,8 +149,8 @@ def zup_down3(keypoint):
     if down_LIMIT3 - value <= angle <= down_LIMIT3 + value:
         return True
     elif down_LIMIT3 -value > angle:
-        tts.q.queue.clear()
-        tts.q.put("조금 더 일어나 주세요")
+        
+        message = "조금 더 일어나 주세요"
         return False
 
 
@@ -220,8 +220,8 @@ def counting(keypoint):
     if zup_count(keypoint):
         global CNT
         CNT += 1
-        tts.q.queue.clear()
-        tts.q.put("성공한 횟수 " + str(CNT))
+        
+        message = "성공한 횟수 " + str(CNT)
         return True
     else:
         return False

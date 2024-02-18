@@ -48,15 +48,15 @@ def pressDown1(keypoint):
     if down_left_LIMIT1 - value <= left_angle_1 <= down_left_LIMIT1 + value:
         flag_l = True
     else:
-        tts.q.queue.clear()
-        tts.q.put("왼쪽 팔을 직각으로 들어주세요.")
+        
+        message = "왼쪽 팔을 직각으로 들어주세요."
         flag_l = False
 
     if down_right_LIMIT1 - value <= right_angle_1 <= down_right_LIMIT1 + value:
         flag_r = True
     else:
-        tts.q.queue.clear()
-        tts.q.put("오른쪽 팔을 직각으로 들어주세요.")
+        
+        message = "오른쪽 팔을 직각으로 들어주세요."
         flag_r = False
 
     if flag_l and flag_r:
@@ -76,12 +76,12 @@ def pressDown2(keypoint):
     if down_right_LIMIT2 <= left_angle_2 <= down_left_LIMIT2:
         flag_l = True
     elif left_angle_2 > down_left_LIMIT2:
-        tts.q.queue.clear()
-        tts.q.put("왼쪽 팔을 안쪽으로 더 접어주세요.")
+        
+        message = "왼쪽 팔을 안쪽으로 더 접어주세요."
         flag_l = False
     elif left_angle_2 < down_right_LIMIT2:
-        tts.q.queue.clear()
-        tts.q.put("왼쪽 팔을 바깥쪽으로 더 펴주세요.")
+        
+        message = "왼쪽 팔을 바깥쪽으로 더 펴주세요."
         flag_l = False
     else:
         flag_l = False
@@ -89,12 +89,12 @@ def pressDown2(keypoint):
     if down_right_LIMIT2 <= right_angle_2 <= down_left_LIMIT2:
         flag_r = True
     elif right_angle_2 > down_left_LIMIT2:
-        tts.q.queue.clear()
-        tts.q.put("오른쪽 팔을 안쪽으로 더 접어주세요.")
+        
+        message = "오른쪽 팔을 안쪽으로 더 접어주세요."
         flag_r = False
     elif right_angle_2 < down_right_LIMIT2:
-        tts.q.queue.clear()
-        tts.q.put("오른쪽 팔을 바깥쪽으로 더 펴세요.")
+        
+        message = "오른쪽 팔을 바깥쪽으로 더 펴세요."
         flag_r = False
     else:
         flag_r = False
@@ -120,14 +120,14 @@ def pressUp(keypoint):
     if up_left_LIMIT - value < left_angle:
         l_flag = True
     else:
-        tts.q.queue.clear()
-        tts.q.put("왼쪽 팔꿈치를 좀 더 올려주세요!")
+        
+        message = "왼쪽 팔꿈치를 좀 더 올려주세요!"
 
     if up_right_LIMIT - value < right_angle:
         r_flag = True
     else:
-        tts.q.queue.clear()
-        tts.q.put("오른쪽 팔꿈치를 좀 더 올려주세요!")
+        
+        message = "오른쪽 팔꿈치를 좀 더 올려주세요!"
 
     if l_flag and r_flag:
         return True
@@ -142,8 +142,8 @@ def isDown(keypoint):
 
 def postureCorrection(keypoint):
     if pressUp(keypoint):
-        tts.q.queue.clear()
-        tts.q.put("숄드 프레스 자세를 잘 잡으셨어요!")
+        
+        message = "숄드 프레스 자세를 잘 잡으셨어요!"
         return True
     else:
         return False
@@ -177,8 +177,8 @@ def counting(keypoint):
     if shoulderPress_count(keypoint):
         global CNT
         CNT += 1
-        tts.q.queue.clear()
-        tts.q.put("성공한 횟수 " + str(CNT))
+        
+        message = "성공한 횟수 " + str(CNT)
         return True
     else:
         return False

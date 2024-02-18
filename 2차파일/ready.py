@@ -1,17 +1,12 @@
-#from speechRecognition import tts
-#from speechRecognition import stt
-
-
-global countNumber
-#exerciseCode = 0
-global messege
+global countNumber, exerciseCode, message
 
 # 솔챌에서는 음성인식 과정을 거치지 않고 프론트에서 직접 값을 받아오기로 함. 
-# 원래 코드는 ready_ver0.py 파일에 저장되어있습니다
+# 원래 코드는 ready_ver0.py 파일에 저장되어있습니다 -> 이거 삭제함
+#flask에서 넘겨준 값을 여기서 저장하고 있어야 함. 해당 값을 가지고 camera에서 돌아가게 해야함.
 
 #운동코드 받아오기
 #횟수 설정하기
-print('this is test messege')
+print('this is test message ')
 def selectExercise(name,count='30'): #경원이가 디폴트 30으로 해놓으라고 했음 ㅎㅎ
     global exerciseCode
     if name=='스쿼트':
@@ -42,13 +37,13 @@ def isReady(keypoint):
     MIN_LIMIT = 250
 
     if MIN_LIMIT <= height <= MAX_LIMIT:
-        messege="준비상태가 되었습니다."
+        message ="준비상태가 되었습니다."
         return True
     elif height > MAX_LIMIT:    
-        messege="뒤로 가주세요"
+        message ="뒤로 가주세요"
         return False
     elif height < MIN_LIMIT:
-        messege="앞으로 가주세요"
+        message ="앞으로 가주세요"
         return False
 
 
@@ -58,10 +53,10 @@ def isSide(keypoint):
     limit = 20
 
     if pelvis <= limit:
-        messege="측면입니다."
+        message ="측면입니다."
         return True
     else:
-        messege="측면으로 서주세요."
+        message ="측면으로 서주세요."
         return False
 
 
@@ -71,8 +66,8 @@ def isFront(keypoint):
     limit = 30
 
     if pelvis <= limit:
-        messege="정면으로 서주세요."
+        message ="정면으로 서주세요."
         return False
     else:
-        messege="정면입니다."
+        message ="정면입니다."
         return True

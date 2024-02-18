@@ -19,7 +19,7 @@ def start(memberId, routineId, routineDetailId):
     cursor.close()
     conn.close()
     result = ready.selectExercise(results[0][0],results[0][1])
-    print(result)
+    #print(result)
     return str(result) #postnat
 
 
