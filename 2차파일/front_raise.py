@@ -1,7 +1,7 @@
 import math
 import imageDetect
-from speechRecognition import tts
-
+#from speechRecognition import tts
+global message
 CNT = 0
 
 
@@ -48,30 +48,30 @@ def leg_position(keypoint):
         if leg_right_up_LIMIT - value >= right_leg:
             right_leg_check = True
         elif leg_right_up_LIMIT - value < right_leg:
-            tts.q.queue.clear()
-            tts.q.put("오른쪽 발을 조금만 안으로 모아주세요")
+            
+            message = "오른쪽 발을 조금만 안으로 모아주세요"
             right_leg_check = False
     elif right_leg >= leg_right_up_LIMIT:
         if leg_right_up_LIMIT + value <= right_leg:
             right_leg_check = True
         elif leg_right_up_LIMIT + value > right_leg:
-            tts.q.queue.clear()
-            tts.q.put("오른쪽 발을 조금만 밖으로 빼주세요")
+            
+            message = "오른쪽 발을 조금만 밖으로 빼주세요"
             right_leg_check = False
             
     if left_leg<leg_left_up_LIMIT:
         if leg_left_up_LIMIT - value <= left_leg:
             left_leg_check = True
         elif leg_left_up_LIMIT - value > left_leg:
-            tts.q.queue.clear()
-            tts.q.put("왼쪽 발을 조금만 안으로 모아주세요")
+            
+            message = "왼쪽 발을 조금만 안으로 모아주세요"
             left_leg_check = False
     elif left_leg >= leg_left_up_LIMIT:
         if leg_left_up_LIMIT + value >= left_leg:
             left_leg_check = True
         elif leg_left_up_LIMIT + value < left_leg:
-            tts.q.queue.clear()
-            tts.q.put("왼쪽 발을 조금만 밖으로 빼주세요")
+            
+            message = "왼쪽 발을 조금만 밖으로 빼주세요"
             left_leg_check = False
             
     if left_leg_check and right_leg_check:
@@ -90,15 +90,15 @@ def raiseup(keypoint):
         if up_right_LIMIT + value >= right:
             right_arm_check = True
         elif up_right_LIMIT + value < right:
-            tts.q.queue.clear()
-            tts.q.put("오른팔을 조금만 내려 어깨와 손목이 같은 높이가 되도록 해주세요")
+            
+            message = "오른팔을 조금만 내려 어깨와 손목이 같은 높이가 되도록 해주세요"
             right_arm_check = False
     elif right < up_right_LIMIT:
         if up_right_LIMIT - value <= right:
             right_arm_check = True
         elif up_right_LIMIT - value > right:
-            tts.q.queue.clear()
-            tts.q.put("오른팔을 조금만 더 올려서 팔 근육에 더 자극이 오도록 해주세요")
+            
+            message = "오른팔을 조금만 더 올려서 팔 근육에 더 자극이 오도록 해주세요"
             right_arm_check = False
     
     # 왼쪽
@@ -106,15 +106,15 @@ def raiseup(keypoint):
         if up_left_LIMIT + value >= left:
             left_arm_check = True
         elif up_left_LIMIT + value < left:
-            tts.q.queue.clear()
-            tts.q.put("오른팔을 조금만 내려 어깨와 손목이 같은 높이가 되도록 해주세요")
+            
+            message = "오른팔을 조금만 내려 어깨와 손목이 같은 높이가 되도록 해주세요"
             left_arm_check = False
     elif left < up_left_LIMIT:
         if up_left_LIMIT - value <= left:
             left_arm_check = True
         elif up_left_LIMIT - value > left:
-            tts.q.queue.clear()
-            tts.q.put("오른팔을 조금만 더 올려서 팔 근육에 더 자극이 오도록 해주세요")
+            
+            message = "오른팔을 조금만 더 올려서 팔 근육에 더 자극이 오도록 해주세요"
             left_arm_check = False
             
     if right_arm_check and left_arm_check:
@@ -131,15 +131,15 @@ def raisesDown(keypoint):
     
     # 오른쪽
     if right > down_right_LIMIT + value:
-        tts.q.queue.clear()
-        tts.q.put("오른팔을 완전히 내려주세요")
+        
+        message = "오른팔을 완전히 내려주세요"
         right_arm_check = False
     else: right_arm_check=True
     
     # 왼쪽
     if left > down_left_LIMIT + value:
-        tts.q.queue.clear()
-        tts.q.put("왼팔을 완전히 내려주세요")
+        
+        message = "왼팔을 완전히 내려주세요"
         left_arm_check = False
     
     if left_arm_check and right_arm_check:
@@ -176,8 +176,8 @@ def counting(keypoint):
     if front_raise_count(keypoint):
         global CNT
         CNT += 1
-        tts.q.queue.clear()
-        tts.q.put("성공한 횟수 " + str(CNT))
+        
+        message = "성공한 횟수 " + str(CNT)
         return True
     else:
         return False

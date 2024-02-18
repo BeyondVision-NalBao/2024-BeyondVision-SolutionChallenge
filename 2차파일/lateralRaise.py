@@ -1,9 +1,10 @@
 import math
 import imageDetect
-from speechRecognition import tts
+#from speechRecognition import tts
 
 CNT = 0
 
+global message
 
 def getDegree(key1, key2, key3):
     try:
@@ -54,15 +55,15 @@ def raiseDown(keypoint):
     if(1 <= left_slope <= 20):
         flag_l = True
     else:
-        tts.q.queue.clear()
-        tts.q.put("왼쪽 팔을 내려주세요.")
+        
+        message = "왼쪽 팔을 내려주세요."
         flag_l = False
 
     if(1 <= right_slope <= 20):
         flag_r = True
     else:
-        tts.q.queue.clear()
-        tts.q.put("오른쪽 팔을 내려주세요.")
+        
+        message = "오른쪽 팔을 내려주세요."
         flag_r = False
 
     if flag_l and flag_r:
@@ -88,15 +89,15 @@ def raiseUp(keypoint):
     if(0 <= left_slope <= 0.5):
         flag_l = True
     else:
-        tts.q.queue.clear()
-        tts.q.put("왼쪽 팔을 수직으로 올려주세요.")
+        
+        message = "왼쪽 팔을 수직으로 올려주세요."
         flag_l = False
 
     if(0 <= right_slope <= 0.5):
         flag_r = True
     else:
-        tts.q.queue.clear()
-        tts.q.put("오른쪽 팔을 수직으로 올려주세요.")
+        
+        message = "오른쪽 팔을 수직으로 올려주세요."
         flag_r = False
 
     if flag_l and flag_r:
@@ -107,8 +108,8 @@ def raiseUp(keypoint):
 
 def postureCorrection(keypoint):
     if(raiseUp(keypoint)):
-        tts.q.queue.clear()
-        tts.q.put("레터럴 레이즈 자세를 잘 잡으셨어요!")
+        
+        message = "레터럴 레이즈 자세를 잘 잡으셨어요!"
         return True
     else:
         return False
@@ -144,8 +145,8 @@ def counting(keypoint):
     if lateralRaise_count(keypoint):
         global CNT
         CNT += 1
-        tts.q.queue.clear()
-        tts.q.put("성공한 횟수 " + str(CNT))
+        
+        message = "성공한 횟수 " + str(CNT)
         return True
     else:
         return False

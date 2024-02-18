@@ -38,12 +38,12 @@ def squat_down(keypoint):
     if d_LIMIT - value <= hip_knee <= d_LIMIT + value:
         return True
     # elif hip_knee > d_LIMIT + value:
-    #     tts.q.queue.clear()
-    #     tts.q.put("조금 일어나세요.")
+    #     
+    #     message = "조금 일어나세요.")
     #     return False
     elif hip_knee < d_LIMIT - value:
-        tts.q.queue.clear()
-        tts.q.put("조금 더 앉으세요")
+        
+        message = "조금 더 앉으세요"
         return False
 
 
@@ -55,12 +55,12 @@ def squat_straight(keypoint):
     if s_LIMIT-value <= angle <= s_LIMIT+value:
         return True
     elif angle < s_LIMIT-value:
-        tts.q.queue.clear()
-        tts.q.put("허리를 조금 더 세워주세요.")
+        
+        message = "허리를 조금 더 세워주세요."
         return False
     elif angle > s_LIMIT+value:
-        tts.q.queue.clear()
-        tts.q.put("허리를 조금 더 구부려주세요.")
+        
+        message = "허리를 조금 더 구부려주세요."
         return False
 
 
@@ -74,8 +74,8 @@ def squat_knee_angle(keypoint):
     if angle >= LIMIT:
         return True
     else:
-        tts.q.queue.clear()
-        tts.q.put("무릎이 발보다 앞으로 더 나와있습니다.")
+        
+        message = "무릎이 발보다 앞으로 더 나와있습니다."
         return False
 
 
@@ -98,7 +98,7 @@ def squat_count(keypoint):
 
 def postureCorrection(keypoint):
     if squat_down(keypoint) and squat_straight(keypoint) and squat_knee_angle(keypoint):
-        # tts.q.put("스쿼트 자세를 잘 잡으셨어요!")
+        # message = "스쿼트 자세를 잘 잡으셨어요!")
         return True
     else:
         return False
@@ -108,8 +108,8 @@ def counting(keypoint):
     if squat_count(keypoint):
         global CNT
         CNT += 1
-        tts.q.queue.clear()
-        tts.q.put("성공한 횟수 " + str(CNT))
+        
+        message = "성공한 횟수 " + str(CNT)
         return True
     else:
         return False

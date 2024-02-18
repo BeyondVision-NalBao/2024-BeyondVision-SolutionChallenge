@@ -7,6 +7,8 @@ import numpy as np
 
 import posenet
 
+global message
+
 # parser = argparse.ArgumentParser()
 # parser.add_argument('--model', type=int, default=101)
 # parser.add_argument('--scale_factor', type=float, default=1.0)
@@ -46,7 +48,8 @@ def main(exerciseCode):
         exercise = {1: 'squat', 2: 'press_up',
                     2.5: 'press_down', 3: 'raise_up', 3.5: 'raise_down',
                     4: 'hundred', 5: 'plank', 6: 'front_up', 6.5: 'front_down',
-                    7: 'zup_up', 7.5: 'zup_down',8: 'bridge_up', 8.5: 'bridge_down'}
+                    7: 'zup_up', 7.5: 'zup_down',8: 'bridge_up', 8.5: 'bridge_down',
+                    9:'streching1', 10:'streching2', 11:'streching3'}
         f = './images\\' + exercise[exerciseCode] + '.jpg'
         start = time.time()
 

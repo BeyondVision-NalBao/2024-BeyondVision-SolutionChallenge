@@ -4,7 +4,9 @@ import cv2
 import numpy as np
 
 import time
-import squat
+import stretching4
+import stretching5
+import stretching10
 import shoulderPress
 import lateralRaise
 import hundred
@@ -13,7 +15,7 @@ import zup
 import front_raise
 import bridge
 import ready as ready
-#from speechRecognition import tts
+
 np.set_printoptions(threshold=np.inf, linewidth=np.inf)
 
 args = {"model": 101, "scale_factor": 1.0, "notxt": True, "image_dir": './images',
@@ -109,7 +111,7 @@ def gen(camera):
 
             if cnt == 1:
                 
-                messege = "잠시후에 시작합니다. 자리를 잡아주세요."
+                message = "잠시후에 시작합니다. 자리를 잡아주세요."
 
             if cnt % cycle == 0:
                 if init:
@@ -122,15 +124,15 @@ def gen(camera):
                     if exerciseCode == 1 and ready.isSide(keypoint_coords[0]):
                         init2 = False
                         init3 = True
-                        squat.setting(exerciseCode)
-                        messege = "스쿼트 자세 설명입니다.. 두 발을 골반 너비로 벌리고, 허벅지와 무릎이 수평이 될때까지 천천히 앉았다 일어서세요. 이때 무릎은 발끝 앞으로 나오지않도록 주의하시고, 허리는 곧게 펴세요.... 스쿼트를 1회 진행하세요."
+                        stretching4.setting(exerciseCode)
+                        #message = "스쿼트 자세 설명입니다.. 두 발을 골반 너비로 벌리고, 허벅지와 무릎이 수평이 될때까지 천천히 앉았다 일어서세요. 이때 무릎은 발끝 앞으로 나오지않도록 주의하시고, 허리는 곧게 펴세요.... 스쿼트를 1회 진행하세요."
                     elif exerciseCode == 2:
                         if flag_sp:
                             if ready.isFront(keypoint_coords[0]):
                                 flag_sp = False
                         elif init3:
                             shoulderPress.setting(exerciseCode)
-                            messege = "숄더프레스 자세 설명입니다.. 손이 귀와 수평이 되고, 팔꿈치가 직각이 되도록 위치 시킨후, 이두근이 귀에 닿는 느낌으로 손을 머리위로 들어올리세요. 이후, 천천히 저항을 느끼면서 다시 내려옵니다.... 숄더프레스를 1회 진행하세요."
+                            #message = "숄더프레스 자세 설명입니다.. 손이 귀와 수평이 되고, 팔꿈치가 직각이 되도록 위치 시킨후, 이두근이 귀에 닿는 느낌으로 손을 머리위로 들어올리세요. 이후, 천천히 저항을 느끼면서 다시 내려옵니다.... 숄더프레스를 1회 진행하세요."
                             init3 = False
                         elif shoulderPress.isDown(keypoint_coords[0]):
                             init2 = False
@@ -141,7 +143,7 @@ def gen(camera):
                                 flag_lr = False
                         elif init3:
                             lateralRaise.setting(exerciseCode)
-                            messege = "리터럴 레이즈 자세 설명입니다.. 승모근에 힘을 빼고, 무릎을 살짝 굽힌 상태로, 양쪽으로 팔을 밀어올린다는 느낌으로 양 팔을 어깨 높이까지 들어올리세요. 내릴 때는, 천천히 내려주시고, 이 두 동작을 반복해주세요.... 레터럴 레이즈를 1회 진행하세요."
+                            #message = "리터럴 레이즈 자세 설명입니다.. 승모근에 힘을 빼고, 무릎을 살짝 굽힌 상태로, 양쪽으로 팔을 밀어올린다는 느낌으로 양 팔을 어깨 높이까지 들어올리세요. 내릴 때는, 천천히 내려주시고, 이 두 동작을 반복해주세요.... 레터럴 레이즈를 1회 진행하세요."
                             init3 = False
                         elif lateralRaise.raiseDown(keypoint_coords[0]):
                             init2 = False
@@ -152,7 +154,7 @@ def gen(camera):
                                 flag_lr = False
                         elif init3:
                             hundred.setting(exerciseCode)
-                            messege = "헌드레드 자세 설명입니다.. 설명 적기 헌드레드를 1회 진행하세요."
+                            #message = "헌드레드 자세 설명입니다.. 설명 적기 헌드레드를 1회 진행하세요."
                             init3 = False
                         elif hundred.postureCorrection(keypoint_coords[0]):
                             init2 = False
@@ -163,7 +165,7 @@ def gen(camera):
                                 flag_lr = False
                         elif init3:
                             plank.setting(exerciseCode)
-                            messege = "플랭크 자세 설명입니다.. 설명 적기 플랭크를 1회 진행하세요."
+                            #message = "플랭크 자세 설명입니다.. 설명 적기 플랭크를 1회 진행하세요."
                             init3 = False
                         elif plank.postureCorrection(keypoint_coords[0]):
                             init2 = False
@@ -174,7 +176,7 @@ def gen(camera):
                                 flag_lr = False
                         elif init3:
                             front_raise.setting(exerciseCode)
-                            messege = "프론트 레이즈 자세 설명입니다.. 설명 적기 프론트 레이즈를 1회 진행하세요."
+                            #message = "프론트 레이즈 자세 설명입니다.. 설명 적기 프론트 레이즈를 1회 진행하세요."
                             init3 = False
                         elif front_raise.postureCorrection(keypoint_coords[0]):
                             init2 = False
@@ -185,7 +187,7 @@ def gen(camera):
                                 flag_lr = False
                         elif init3:
                             zup.setting(exerciseCode)
-                            messege = "제트 업 자세 설명입니다.. 설명 적기 제트 업을 1회 진행하세요."
+                            #message = "제트 업 자세 설명입니다.. 설명 적기 제트 업을 1회 진행하세요."
                             init3 = False
                         elif zup.isUp(keypoint_coords[0]):
                             init2 = False
@@ -196,63 +198,71 @@ def gen(camera):
                                 flag_lr = False
                         elif init3:
                             bridge.setting(exerciseCode)
-                            messege = "브릿지 자세 설명입니다.. 설명 적기 브릿지를 1회 진행하세요."
+                            #message = "브릿지 자세 설명입니다.. 설명 적기 브릿지를 1회 진행하세요."
                             init3 = False
                         elif bridge.isUp(keypoint_coords[0]):
                             init2 = False
                             init3 = True
                 elif init3:
                     if exerciseCode == 1:
-                        if squat.postureCorrection(keypoint_coords[0]):
+                        if stretching4.postureCorrection(keypoint_coords[0]):
                             
-                            messege = "스쿼트 자세를 잘 잡으셨어요!,,, 잠시후 카운트를 시작합니다."
-                            messege = str(ready.countNumber) + "회 반복해주세요."
+                            message = "스쿼트 자세를 잘 잡으셨어요!,,, 잠시후 카운트를 시작합니다."
+                            message = str(ready.countNumber) + "회 반복해주세요."
                             cnt = 2
                             init3 = False
                     elif exerciseCode == 2:
                         if shoulderPress.postureCorrection(keypoint_coords[0]):
-                            messege = "숄더 프레스 자세를 잘 잡으셨어요!,,, 잠시후 카운트를 시작합니다."
-                            messege = str(ready.countNumber) + "회 반복해주세요."
+                            message = "숄더 프레스 자세를 잘 잡으셨어요!,,, 잠시후 카운트를 시작합니다."+ str(ready.countNumber) + "회 반복해주세요."
                             cnt = 2
                             init3 = False
                     elif exerciseCode == 3:
                         if lateralRaise.postureCorrection(keypoint_coords[0]):
-                            messege = "레터럴 레이즈 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다."
-                            messege = str(ready.countNumber) + "회 반복해주세요."
+                            message = "레터럴 레이즈 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다"+ str(ready.countNumber) + "회 반복해주세요."
                             cnt = 2
                             init3 = False
                     elif exerciseCode == 4:
                         if hundred.postureCorrection(keypoint_coords[0]):
-                            messege = "헌드레드 레이즈 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다."
-                            messege = str(ready.countNumber) + "초 동안 자세를 유지해주세요."
+                            message = "헌드레드 레이즈 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다."+ str(ready.countNumber) + "초 동안 자세를 유지해주세요."
                             cnt = 2
                             time.sleep(ready.countNumber)
                             init3 = False
                     elif exerciseCode == 5:
                         if plank.postureCorrection(keypoint_coords[0]):
-                            messege = "플랭크 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다."
-                            messege = str(ready.countNumber) + "초 동안 자세를 유지해주세요."
+                            message = "플랭크 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다." + str(ready.countNumber) + "초 동안 자세를 유지해주세요."
                             cnt = 2
                             time.sleep(ready.countNumber)
                             init3 = False
                     elif exerciseCode == 6:
                         if front_raise.raisesDown(keypoint_coords[0]):
-                            messege = "프론트 레이즈 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다."
-                            messege = str(ready.countNumber) + "회 반복해주세요."
+                            message = "프론트 레이즈 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다." + str(ready.countNumber) + "회 반복해주세요."
                             cnt = 2
                             init3 = False
                     elif exerciseCode == 7:
                         if zup.isDown(keypoint_coords[0]):
-                            messege = "제트 업 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다."
-                            messege = str(ready.countNumber) + "회 반복해주세요."
+                            message = "제트 업 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다." + str(ready.countNumber) + "회 반복해주세요."
                             cnt = 2
                             init3 = False
                     elif exerciseCode == 8:
                         if bridge.bridge_down(keypoint_coords[0]):
-                            messege = "브리지 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다."
-                            messege = str(ready.countNumber) + "회 반복해주세요."
+                            message = "브리지 자세를 잘 잡으셨어요! ,,, 잠시후 카운트를 시작합니다." + str(ready.countNumber) + "회 반복해주세요."
                             cnt = 2
                             init3 = False
+                    elif exerciseCode == 9:
+                        if stretching4.postureCorrection(keypoint_coords[0]):
+                            time.sleep(4)
+                            finish = True
+                    elif exerciseCode == 10:
+                        if stretching4.postureCorrection(keypoint_coords[0]):
+                            time.sleep(4)
+                            finish = True
+                    elif exerciseCode == 11:
+                        if stretching4.postureCorrection(keypoint_coords[0]):
+                            time.sleep(4)
+                            finish = True
+
+
+
 
 
 
@@ -262,59 +272,62 @@ def gen(camera):
                 else:
                     if exerciseCode == 1:
                         if cnt == 33:
-                            messege = "시작해주세요."
-                        elif cnt > 33 and squat.counting(keypoint_coords[0]):
-                            if squat.CNT == ready.countNumber:
-                                messege = "스쿼트" + str(ready.countNumber) +" 회를 마쳤습니다. 수고하셨습니다."
-                                squat.CNT = 0
+                            message = "시작해주세요."
+                        elif cnt > 33 and stretching4.counting(keypoint_coords[0]):
+                            if stretching4.CNT == ready.countNumber:
+                                message = "스쿼트" + str(ready.countNumber) +" 회를 마쳤습니다. 수고하셨습니다."
+                                stretching4.CNT = 0
                                 finish = True
                     elif exerciseCode == 2:
                         if cnt == 33:
-                            messege = "시작해주세요."
+                            message = "시작해주세요."
                         elif cnt > 33 and shoulderPress.counting(keypoint_coords[0]):
                             if shoulderPress.CNT == ready.countNumber:
-                                messege = "숄더프레스" + str(ready.countNumber) + " 회를 마쳤습니다. 수고하셨습니다."
+                                message = "숄더프레스" + str(ready.countNumber) + " 회를 마쳤습니다. 수고하셨습니다."
                                 shoulderPress.CNT = 0
                                 finish = True
                     elif exerciseCode == 3:
                         if cnt == 33:
-                            messege = "시작해주세요."
+                            message = "시작해주세요."
                         elif cnt > 33 and lateralRaise.counting(keypoint_coords[0]):
                             if lateralRaise.CNT == ready.countNumber:
-                                messege = "레터럴레이즈" + str(ready.countNumber) + " 회를 마쳤습니다. 수고하셨습니다."
+                                message = "레터럴레이즈" + str(ready.countNumber) + " 회를 마쳤습니다. 수고하셨습니다."
                                 lateralRaise.CNT = 0
                                 finish = True
                     elif exerciseCode == 6:
                         if cnt == 33:
-                            messege = "시작해주세요."
+                            message = "시작해주세요."
                         elif cnt > 33 and front_raise.counting(keypoint_coords[0]):
                             if front_raise.CNT == ready.countNumber:
-                                messege = "프론트 레이즈" + str(ready.countNumber) + " 회를 마쳤습니다. 수고하셨습니다."
+                                message = "프론트 레이즈" + str(ready.countNumber) + " 회를 마쳤습니다. 수고하셨습니다."
                                 lateralRaise.CNT = 0
                                 finish = True
                     elif exerciseCode == 7:
                         if cnt == 33:
-                            messege = "시작해주세요."
+                            message = "시작해주세요."
                         elif cnt > 33 and zup.counting(keypoint_coords[0]):
                             if zup.CNT == ready.countNumber:
-                                messege = "제트 업" + str(ready.countNumber) + " 회를 마쳤습니다. 수고하셨습니다."
+                                message = "제트 업" + str(ready.countNumber) + " 회를 마쳤습니다. 수고하셨습니다."
                                 zup.CNT = 0
                                 finish = True
                     elif exerciseCode == 8:
                         if cnt == 33:
-                            messege = "시작해주세요."
+                            message = "시작해주세요."
                         elif cnt > 33 and bridge.counting(keypoint_coords[0]):
                             if bridge.CNT == ready.countNumber:
-                                messege = "레터럴레이즈" + str(ready.countNumber) + " 회를 마쳤습니다. 수고하셨습니다."
+                                message = "레터럴레이즈" + str(ready.countNumber) + " 회를 마쳤습니다. 수고하셨습니다."
                                 bridge.CNT = 0
                                 finish = True
                     elif exerciseCode == (4 or 5):
                         if exerciseCode ==4:
-                            messege="헌드레드를"+ str(ready.countNumber) + "초 동안 하셨습니다. 수고하셨습니다."
+                            time.sleep(30)
+                            message ="헌드레드를"+ str(ready.countNumber) + "초 동안 하셨습니다. 수고하셨습니다."
                             finish = True
                         elif exerciseCode ==5:
-                            messege="플랭크를"+ str(ready.countNumber) + "초 동안 하셨습니다. 수고하셨습니다."
+                            time.sleep(30)
+                            message ="플랭크를"+ str(ready.countNumber) + "초 동안 하셨습니다. 수고하셨습니다."
                             finish = True
+                    #스트레칭은 여기서 할게 아닌것 같아서 안함.....
 
             # TODO this isn't particularly fast, use GL for drawing and display someday...
             overlay_image = posenet.draw_skel_and_kp(
@@ -339,3 +352,4 @@ def gen(camera):
                 yield (b'--frame\r\n'
                        b'Content-Type: image/jpeg\r\n\r\n' + frame.tostring() + b'\r\n')
                 break
+    return message
