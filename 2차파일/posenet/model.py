@@ -2,7 +2,7 @@ import tensorflow as tf
 import os
 import posenet.converter.config
 
-MODEL_DIR = './_models'
+MODEL_DIR = '../_models'
 DEBUG_OUTPUT = False
 
 
