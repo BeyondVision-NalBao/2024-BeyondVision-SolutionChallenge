@@ -1,6 +1,4 @@
 import 'package:beyond_vision/core/constants.dart';
-import 'package:beyond_vision/ui/record/record.dart';
-import 'package:beyond_vision/ui/routine/routine.dart';
 import 'package:beyond_vision/ui/setting/setting.dart';
 import 'package:beyond_vision/ui/setting/widgets/delete_account.dart';
 import 'package:beyond_vision/ui/setting/widgets/edit_goal.dart';

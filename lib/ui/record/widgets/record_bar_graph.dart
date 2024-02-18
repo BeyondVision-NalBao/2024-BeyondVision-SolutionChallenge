@@ -2,10 +2,10 @@ import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/provider/date_provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class RecordBar extends StatefulWidget {
-  const RecordBar({super.key});
+  final DateProvider provider;
+  const RecordBar({super.key, required this.provider});
 
   final Color barColor = Colors.white;
   final Color touchedBarColor = const Color(fontYellowColor);
@@ -33,7 +33,7 @@ class RecordBarState extends State<RecordBar> {
                   SizedBox(
                     height: 199,
                     child: BarChart(
-                      mainBarData(),
+                      mainBarData(widget.provider),
                       swapAnimationDuration: animDuration,
                     ),
                   ),
@@ -54,11 +54,16 @@ class RecordBarState extends State<RecordBar> {
     double width = 22,
   }) {
     barColor ??= widget.barColor;
+
     return BarChartGroupData(
       x: x,
       barRods: [
         BarChartRodData(
-          toY: y,
+          toY: y == 0
+              ? 0
+              : y > 30
+                  ? 30
+                  : y,
           color: isSelected ? widget.touchedBarColor : barColor,
           width: width,
           backDrawRodData: BackgroundBarChartRodData(
@@ -72,31 +77,30 @@ class RecordBarState extends State<RecordBar> {
     );
   }
 
-  List<BarChartGroupData> showingGroups() {
-    DateProvider provider = Provider.of<DateProvider>(context);
+  List<BarChartGroupData> showingGroups(DateProvider provider) {
     int selectedIndex = provider.selectedIndex;
     return List.generate(7, (i) {
       switch (i) {
         case 0:
-          return makeGroupData(0, provider.thisWeekExerciseTime[0].toDouble(),
+          return makeGroupData(0, provider.thisWeekExerciseTime[0],
               isSelected: i == selectedIndex);
         case 1:
-          return makeGroupData(1, provider.thisWeekExerciseTime[1].toDouble(),
+          return makeGroupData(1, provider.thisWeekExerciseTime[1],
               isSelected: i == selectedIndex);
         case 2:
-          return makeGroupData(2, provider.thisWeekExerciseTime[2].toDouble(),
+          return makeGroupData(2, provider.thisWeekExerciseTime[2],
               isSelected: i == selectedIndex);
         case 3:
-          return makeGroupData(3, provider.thisWeekExerciseTime[3].toDouble(),
+          return makeGroupData(3, provider.thisWeekExerciseTime[3],
               isSelected: i == selectedIndex);
         case 4:
-          return makeGroupData(4, provider.thisWeekExerciseTime[4].toDouble(),
+          return makeGroupData(4, provider.thisWeekExerciseTime[4],
               isSelected: i == selectedIndex);
         case 5:
-          return makeGroupData(5, provider.thisWeekExerciseTime[5].toDouble(),
+          return makeGroupData(5, provider.thisWeekExerciseTime[5],
               isSelected: i == selectedIndex);
         case 6:
-          return makeGroupData(6, provider.thisWeekExerciseTime[6].toDouble(),
+          return makeGroupData(6, provider.thisWeekExerciseTime[6],
               isSelected: i == selectedIndex);
         default:
           return throw Error();
@@ -104,7 +108,7 @@ class RecordBarState extends State<RecordBar> {
     });
   }
 
-  BarChartData mainBarData() {
+  BarChartData mainBarData(DateProvider provider) {
     return BarChartData(
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
@@ -112,13 +116,15 @@ class RecordBarState extends State<RecordBar> {
           tooltipMargin: -5,
           tooltipHorizontalAlignment: FLHorizontalAlignment.center,
           getTooltipItem: (group, groupIndex, rod, rodIndex) {
-            return BarTooltipItem(
-                (rod.toY - 1).toString(),
-                const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ));
+            return provider.todayExerciseTime > 30
+                ? null
+                : BarTooltipItem(
+                    (rod.toY).toString(),
+                    const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ));
           },
         ),
       ),
@@ -145,7 +151,7 @@ class RecordBarState extends State<RecordBar> {
       borderData: FlBorderData(
         show: false,
       ),
-      barGroups: showingGroups(),
+      barGroups: showingGroups(provider),
       gridData: const FlGridData(show: false),
     );
   }

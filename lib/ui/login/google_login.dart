@@ -4,8 +4,6 @@ import 'package:beyond_vision/ui/home/home.dart';
 import 'package:beyond_vision/ui/login/newInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:beyond_vision/service/date_service.dart';
 import 'package:beyond_vision/model/user_model.dart';
 
 class LoginPage extends StatefulWidget {
@@ -40,7 +38,11 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(
+                builder: (context) => HomePage(
+                      memberId: currentUser.memberId!,
+                      exerciseGoal: currentUser.exerciseGoal,
+                    )),
           );
         }
       }

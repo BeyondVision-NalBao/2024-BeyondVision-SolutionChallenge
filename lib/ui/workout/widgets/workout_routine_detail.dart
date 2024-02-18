@@ -1,6 +1,4 @@
-import 'dart:ui';
 import 'package:beyond_vision/core/constants.dart';
-import 'package:beyond_vision/service/workout_service.dart';
 import 'package:beyond_vision/ui/appbar.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_camera_view.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_routine_detail_box.dart';
@@ -53,8 +51,6 @@ class _RoutineDetailState extends State<RoutineDetail> {
                     backgroundColor: const Color(boxColor),
                     child: IconButton(
                         onPressed: () {
-                          WorkOutService workoutService = WorkOutService();
-                          workoutService.postReady();
                           Navigator.push(
                               context,
                               MaterialPageRoute(

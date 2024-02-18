@@ -1,8 +1,11 @@
 import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/model/routine_model.dart';
+import 'package:beyond_vision/provider/routine_provider.dart';
+import 'package:beyond_vision/service/routine_service.dart';
 import 'package:beyond_vision/ui/routine/widgets/new_routine_name.dart';
 import 'package:beyond_vision/ui/routine/widgets/routine_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RoutineButton extends StatelessWidget {
   final Routine routine;
@@ -51,6 +54,11 @@ class RoutineButton extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
+                    RoutineService routineService = RoutineService();
+                    routineService.deleteRoutine(routine, 1);
+                    RoutineProvider routineProvider =
+                        Provider.of<RoutineProvider>(context, listen: false);
+                    routineProvider.deleteRoutine(index);
                     Navigator.of(context).pop();
                   },
                 ),
@@ -108,6 +116,7 @@ class RoutineButton extends StatelessWidget {
                         fontSize: 64)),
                 Text(
                   routine.routineName,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                       fontSize: 36,
                       color: Colors.white,

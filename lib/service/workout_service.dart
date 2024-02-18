@@ -8,40 +8,42 @@ class WorkOutService {
   Future<List<WorkOut>> getAllWorkOut(int categoryNumber) async {
     List<WorkOut> workoutInstances = [];
     final url = Uri.parse('$baseUrl/detail/$categoryNumber');
+
     final response = await http.get(url);
+
     if (response.statusCode == 200) {
       final List<dynamic> workouts =
           jsonDecode(utf8.decode(response.bodyBytes));
       for (var workout in workouts) {
         workoutInstances.add(WorkOut.fromJson(workout));
       }
+
       return workoutInstances;
     }
     throw Error();
   }
 
-  Future<void> postReady() async {
-    final url = Uri.parse('$baseUrl/1/ready');
+  // Future<void> postReady() async {
+  //   final url = Uri.parse('$baseUrl/1/ready');
 
-    var response = await http.post(url,
-        headers: {"Content-Type": "application/json; charset=UTF-8"},
-        body: json.encode({"routineName": "멋지게 살자"}));
+  //   var response = await http.post(url,
+  //       headers: {"Content-Type": "application/json; charset=UTF-8"},
+  //       body: json.encode({"routineName": "멋지게 살자"}));
 
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      var data = jsonDecode(utf8.decode(response.bodyBytes));
-      postStart();
-    }
-    throw Error();
-  }
+  //   if (response.statusCode == 200) {
+  //     var data = jsonDecode(utf8.decode(response.bodyBytes));
+  //     postStart();
+  //   }
+  //   throw Error();
+  // }
 
-  Future<void> postStart() async {
-    final url = Uri.parse('$baseUrl/1/1/1/start');
+  // Future<void> postStart() async {
+  //   final url = Uri.parse('$baseUrl/1/1/1/start');
 
-    var response = await http.post(url);
-    if (response.statusCode == 200) {
-      var data = jsonDecode(utf8.decode(response.bodyBytes));
-    }
-    throw Error();
-  }
+  //   var response = await http.post(url);
+  //   if (response.statusCode == 200) {
+  //     var data = jsonDecode(utf8.decode(response.bodyBytes));
+  //   }
+  //   throw Error();
+  // }
 }

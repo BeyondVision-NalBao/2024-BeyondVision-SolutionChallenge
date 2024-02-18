@@ -24,7 +24,7 @@ class DetailBox extends StatelessWidget {
                       color: Colors.white,
                       fontSize: 32,
                       fontWeight: FontWeight.bold)),
-              Text(time,
+              Text('$time분',
                   style: const TextStyle(color: Colors.white, fontSize: 28)),
             ],
           ),

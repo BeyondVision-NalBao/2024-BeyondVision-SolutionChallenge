@@ -1,4 +1,3 @@
-import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/ui/appbar.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_detail_box.dart';
 import 'package:flutter/material.dart';

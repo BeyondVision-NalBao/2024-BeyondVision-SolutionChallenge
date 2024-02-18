@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:beyond_vision/service/date_service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:ffi';
 
 class UserService {
   DateService dateService = DateService();
@@ -27,6 +26,9 @@ class UserService {
         prefs.setString("loginDate", dateService.loginDate(DateTime.now()));
         if (!currentUser.isNewMember!) {
           prefs.setInt("memberId", currentUser.memberId!);
+          prefs.setInt("exerciseGoal", currentUser.exerciseGoal);
+          print(currentUser.memberId!);
+          print(currentUser.exerciseGoal);
         }
 
         return currentUser;
@@ -53,10 +55,9 @@ class UserService {
     if (response.statusCode == 200) {
       var data = jsonDecode(utf8.decode(response.bodyBytes));
       User currentUser = User.fromJson(data);
-      auth.getMemberId(currentUser.memberId!);
-      auth.getGoal(currentUser.exerciseGoal);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setInt("memberId", currentUser.memberId!);
+      prefs.setInt("exerciseGoal", currentUser.exerciseGoal);
       return currentUser;
     }
     throw Error();

@@ -34,8 +34,7 @@ class _RoutineDetailState extends State<RoutineDetail> {
   @override
   Widget build(BuildContext context) {
     RoutineProvider routineProvider = Provider.of<RoutineProvider>(context);
-    RoutineService routineService = RoutineService();
-    List<RoutineExercise> items = widget.routine.routineDetail;
+    List<RoutineExercise> items = widget.routine.routineDetails;
     // @override
     // void dispose() {
     //   routineService.editRoutine(routineProvider.routines[widget.index], 3);

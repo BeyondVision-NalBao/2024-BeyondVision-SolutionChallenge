@@ -1,14 +1,33 @@
-import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/provider/login_provider.dart';
 import 'package:beyond_vision/ui/appbar.dart';
 import 'package:beyond_vision/ui/home/widgets/home_grid_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  final int? memberId;
+  final int? exerciseGoal;
+  const HomePage({Key? key, this.memberId, this.exerciseGoal})
+      : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    // initState 메서드에서 상태를 변경하도록 함
+    AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
+    if (widget.memberId != null && widget.exerciseGoal != null) {
+      auth.getMemberId(widget.memberId!);
+      auth.getGoal(widget.exerciseGoal!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    //provider 적용시키기
     return Scaffold(
       appBar: MyAppBar(context, titleText: " "),
       backgroundColor: Colors.black,

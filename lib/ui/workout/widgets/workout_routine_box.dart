@@ -1,6 +1,5 @@
 import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_with_routine.dart';
-
 import 'package:flutter/material.dart';
 
 class RoutineBox extends StatelessWidget {

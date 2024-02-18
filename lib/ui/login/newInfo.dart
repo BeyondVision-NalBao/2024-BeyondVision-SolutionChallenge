@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 enum SingingCharacter { lafayette, jefferson }
 
 class NewInfo extends StatefulWidget {
-  User currentUser;
-  NewInfo({super.key, required this.currentUser});
+  final User currentUser;
+  const NewInfo({super.key, required this.currentUser});
 
   @override
   State<NewInfo> createState() => _NewInfoState();

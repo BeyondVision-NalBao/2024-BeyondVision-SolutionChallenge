@@ -1,41 +1,34 @@
 import 'package:beyond_vision/model/routine_model.dart';
-import 'package:beyond_vision/model/user_model.dart';
+import 'package:beyond_vision/service/routine_service.dart';
 import 'package:flutter/material.dart';
 
 class RoutineProvider with ChangeNotifier {
   bool isChanged = false;
   String newName = "";
-  List<Routine> routines = [
-    Routine(1, "매일 저녁", [
-      RoutineExercise("스쿼트", 30, 1),
-      RoutineExercise("런지", 30, 2),
-      RoutineExercise("플랭크", 30, 3)
-    ]),
-    Routine(2, "하체", [
-      RoutineExercise("스쿼트", 30, 1),
-      RoutineExercise("런지", 30, 2),
-      RoutineExercise("와이드 스쿼트", 30, 3)
-    ]),
-    Routine(3, "스트레칭", [
-      RoutineExercise("스쿼트", 30, 1),
-      RoutineExercise("런지", 30, 2),
-      RoutineExercise("플랭크", 30, 3)
-    ])
-  ];
+  List<Routine> routines = [];
+  Routine newRoutine = Routine(null, "", []);
   int indexNum = -1;
+  RoutineService routineService = RoutineService();
 
-  void getRoutine(Routine routine) {
-    routines = [];
-    routines.add(routine);
+  void getRoutine(List<Routine> routine) {
+    routines = routine;
   }
 
   void addWorkout(String name, int count) {
     if (indexNum == -1) {
       //새로 생성
-      routines.add(Routine(4, newName, [RoutineExercise(name, count, 1)]));
+      routineService.addRoutine(
+          Routine(null, newName, [RoutineExercise(null, name, count, 1)]), 3);
+      routines
+          .add(Routine(null, newName, [RoutineExercise(null, name, count, 1)]));
     } else {
-      int order = routines[indexNum].routineDetail.length;
-      routines[indexNum].routineDetail.add(RoutineExercise(name, count, order));
+      int order = routines[indexNum].routineDetails.length;
+
+      routines[indexNum]
+          .routineDetails
+          .add(RoutineExercise(null, name, count, order));
+      routineService.editRoutine(routines[indexNum], 1);
+
       indexNum = -1;
     }
   }
@@ -46,6 +39,19 @@ class RoutineProvider with ChangeNotifier {
   }
 
   void editOrder(int index, List<RoutineExercise> routineExercise) {
-    routines[index].routineDetail = routineExercise;
+    for (int i = 0; i < routineExercise.length; i++) {
+      routineExercise[i].exerciseOrder = i + 1;
+    }
+    routines[index].routineDetails = routineExercise;
+  }
+
+  void deleteRoutine(int index) {
+    try {
+      // index가 유효한지 확인
+      if (index >= 0 && index < routines.length) {
+        // 해당 인덱스의 루틴을 삭제합니다.
+        routines.removeAt(index);
+      }
+    } catch (e) {}
   }
 }

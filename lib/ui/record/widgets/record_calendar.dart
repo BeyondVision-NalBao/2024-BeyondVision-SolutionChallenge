@@ -1,12 +1,11 @@
 import 'package:beyond_vision/core/constants.dart';
-import 'package:beyond_vision/model/record_model.dart';
 import 'package:beyond_vision/provider/date_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calendar extends StatefulWidget {
-  const Calendar({super.key});
+  final DateProvider provider;
+  const Calendar({super.key, required this.provider});
 
   @override
   State<Calendar> createState() => _CalendarState();
@@ -15,8 +14,7 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
-    DateProvider provider = Provider.of<DateProvider>(context);
-    DateTime selectedDay = provider.selectedDay;
+    DateTime selectedDay = widget.provider.selectedDay;
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -40,9 +38,10 @@ class _CalendarState extends State<Calendar> {
         startingDayOfWeek: StartingDayOfWeek.monday,
         focusedDay: selectedDay,
         firstDay: DateTime(2023, 1, 1),
-        lastDay: DateTime(2024, 4, 1),
+        lastDay: DateTime(2024, 12, 12),
         calendarFormat: CalendarFormat.week,
-        onDaySelected: provider.updateSelectedDay,
+        onDaySelected: widget.provider.updateSelectedDay,
+        onPageChanged: widget.provider.moveWeek,
         selectedDayPredicate: (day) => isSameDay(day, selectedDay),
         headerStyle: const HeaderStyle(
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 24),

@@ -4,14 +4,16 @@ import 'package:beyond_vision/provider/routine_provider.dart';
 import 'package:beyond_vision/service/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:beyond_vision/service/date_service.dart';
-
 import 'package:beyond_vision/ui/home/home.dart';
 import 'package:beyond_vision/ui/login/google_login.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   initializeDateFormatting().then((_) => runApp(const MyApp()));
 }
 
@@ -26,12 +28,17 @@ class _MyAppState extends State<MyApp> {
   UserService userService = UserService();
   DateService dateService = DateService();
   bool isLogined = false;
+  int memberId = -1;
+  int exerciseGoal = 0;
 
   checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getInt('memberId') != null) {
+    if (prefs.getInt("memberId") != null) {
       if (dateService.compareDate(prefs.getString("loginDate")!)) {
+        prefs.setString("loginDate", dateService.loginDate(DateTime.now()));
         setState(() {
+          memberId = prefs.getInt("memberId")!;
+          exerciseGoal = prefs.getInt("exerciseGoal")!;
           isLogined = true;
         });
       }
@@ -40,6 +47,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    FlutterNativeSplash.remove();
     // TODO: implement initState
     checkLogin();
     super.initState();
@@ -56,7 +64,12 @@ class _MyAppState extends State<MyApp> {
         ],
         child: MaterialApp(
           title: 'Beyond Vision',
-          home: isLogined ? const HomePage() : const LoginPage(),
+          home: isLogined
+              ? HomePage(
+                  memberId: memberId,
+                  exerciseGoal: exerciseGoal,
+                )
+              : const LoginPage(),
           debugShowCheckedModeBanner: false,
           builder: (context, child) {
             return MediaQuery(

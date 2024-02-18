@@ -5,45 +5,49 @@ import 'package:table_calendar/table_calendar.dart';
 class DateProvider extends ChangeNotifier {
   DateTime selectedDay = DateTime.now();
   int selectedIndex = -1;
-  int todayExerciseTime = 0;
-  List<int> thisWeekExerciseTime = [
-    0,
+  double todayExerciseTime = 0.0;
+  List<double> thisWeekExerciseTime = [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
   ];
-  DateProvider dateProvider = DateProvider();
-  List<Record> records = [
-    Record(1, null, 30, "숄더프레스", DateTime.now()),
-    Record(2, 30, 45, "프론트레이즈", DateTime.now()),
-    Record(3, null, 30, "레터럴레이즈", DateTime.now()),
-    Record(4, null, 30, "스쿼트", DateTime.parse('2024-02-11')),
-    Record(5, null, 30, "스쿼트", DateTime.parse('2024-02-11')),
-    Record(6, null, 30, "스쿼트", DateTime.parse('2024-02-11')),
-    Record(7, null, 30, "스쿼트", DateTime.parse('2024-02-17')),
-    Record(8, null, 30, "스쿼트", DateTime.parse('2024-02-17')),
-    Record(9, null, 30, "스쿼트", DateTime.parse('2024-02-17')),
-  ];
+  List<Record> records = [];
   List<List<Record>> thisWeek = [];
   List<Record> todayRecords = [];
 
   DateProvider() {
     selectedIndex = selectedDay.weekday - 1;
+    updateSelectedDay(selectedDay, selectedDay);
   }
 
   void getRecord(List<Record> newRecords) {
     records = newRecords;
   }
 
+  void moveWeek(DateTime newDay) {
+    selectedDay = newDay;
+    updateSelectedDay(selectedDay, selectedDay);
+  }
+
   void updateSelectedDay(DateTime newDay, DateTime focusedDay) {
+    thisWeek = [];
+    todayRecords = [];
+    todayExerciseTime = 0.0;
+    thisWeekExerciseTime = [];
     selectedDay = newDay;
     selectedIndex = selectedDay.weekday - 1;
 
     //오늘 기록
-
     todayRecords = records
         .where((record) => isSameDay(record.exerciseDate, selectedDay))
         .toList();
 
     for (int i = 0; i < todayRecords.length; i++) {
-      todayExerciseTime += todayRecords[i].exerciseTime;
+      todayExerciseTime += todayRecords[i].exerciseTime!;
     }
 
     //이번주 기록
@@ -51,20 +55,27 @@ class DateProvider extends ChangeNotifier {
     DateTime newDate = selectedDay.subtract(Duration(days: mondayOffset));
 
     for (int i = 0; i < 7; i++) {
-      List<Record> record = records
-          .where((record) =>
-              isSameDay(record.exerciseDate, newDate.add(Duration(days: i))))
+      List<Record> record = [];
+      DateTime currentDate = newDate.add(Duration(days: i));
+      record = records
+          .where((record) => isSameDay(record.exerciseDate, currentDate))
           .toList();
-      thisWeek.add(record);
+      if (record.isEmpty) {
+        thisWeek.add([Record(null, null, null, null, currentDate)]);
+      } else {
+        thisWeek.add(record);
+      }
     }
 
     for (int i = 0; i < thisWeek.length; i++) {
-      int sum = 0;
+      double sum = 0.0;
       for (int j = 0; j < thisWeek[i].length; j++) {
-        sum += thisWeek[i][j].exerciseTime;
+        if (thisWeek[i][j].exerciseTime != null) {
+          sum += thisWeek[i][j].exerciseTime!;
+        }
       }
       thisWeekExerciseTime.add(sum);
     }
-    //notifyListeners(); // 상태가 변경될 때마다 리스너들에게 알림
+    notifyListeners(); // 상태가 변경될 때마다 리스너들에게 알림
   }
 }

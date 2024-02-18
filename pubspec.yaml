@@ -20,6 +20,10 @@ dependencies:
   flutter_tts: ^3.8.5
   shared_preferences:
   http:
+  path_provider:
+  flutter_image_compress: ^2.1.0
+  dio: ^5.4.0
+  flutter_native_splash:
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class TtsService {
   final String wrongNotice = "이동과 설명 중 하나를 말씀해주세요";
   final String recodeExplain = "이동과 설명 중 하나를 말씀해주세요";

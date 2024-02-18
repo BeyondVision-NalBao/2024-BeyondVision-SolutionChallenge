@@ -57,9 +57,10 @@ class _SetCountState extends State<SetCount> {
             onPressed: () {
               routineProvider.addWorkout(
                   widget.workoutName, int.parse(_count.text));
-              Navigator.pop(context);
 
               Navigator.pop(context);
+              Navigator.pop(context);
+
               Navigator.pop(context);
               Navigator.pop(context);
             },
