@@ -75,8 +75,8 @@ def gen(camera):
             cnt += 1
             input_image, display_image, output_scale = posenet.read_cap(
                 camera, scale_factor=args['scale_factor'], output_stride=output_stride)
-
-            return "success"
+            
+            return "Success"
 
             heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = sess.run(
                 model_outputs,
