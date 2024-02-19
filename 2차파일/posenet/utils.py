@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 
 import posenet.constants
+from PIL import Image
+from io import BytesIO
 
 
 def valid_resolution(width, height, output_stride=16):
@@ -14,8 +16,7 @@ def _process_input(source_img, scale_factor=1.0, output_stride=16):
     target_width, target_height = valid_resolution(
         source_img.shape[1] * scale_factor, source_img.shape[0] * scale_factor, output_stride=output_stride)
     scale = np.array([source_img.shape[0] / target_height,
-                     source_img.shape[1] / target_width])
-
+                    source_img.shape[1] / target_width])
     input_img = cv2.resize(
         source_img, (target_width, target_height), interpolation=cv2.INTER_LINEAR)
     input_img = cv2.cvtColor(input_img, cv2.COLOR_BGR2RGB).astype(np.float32)
@@ -25,9 +26,10 @@ def _process_input(source_img, scale_factor=1.0, output_stride=16):
 
 
 def read_cap(cap, scale_factor=1.0, output_stride=16):
-    res, img = cap.read()
-    if not res:
-        raise IOError("webcam failure")
+    # res, img = cap.read()
+    # if not res:
+    #     raise IOError("webcam failure")
+    img = cv2.imdecode(np.frombuffer(cap, np.uint8), cv2.IMREAD_COLOR)
     return _process_input(img, scale_factor, output_stride)
 
 

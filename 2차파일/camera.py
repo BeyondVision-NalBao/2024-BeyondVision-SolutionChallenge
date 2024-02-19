@@ -43,6 +43,7 @@ def getAverage(pos, n):
 
 class VideoCamera(object):
     def __init__(self):
+        print("Camera Capture")
         self.cap = cv2.VideoCapture(0)
 
     def __del__(self):
@@ -59,9 +60,11 @@ def gen(camera):
         frame_count = 0
         cnt = 0
         cycle = 3
+        #FIXME init이 뭐죠 -----------------------
         init = True
         init2 = False
         init3 = False
+        #-----------------------------------------
         flag_sp = True
         flag_lr = True
         finish = False
@@ -71,7 +74,7 @@ def gen(camera):
         while True:
             cnt += 1
             input_image, display_image, output_scale = posenet.read_cap(
-                camera.cap, scale_factor=args['scale_factor'], output_stride=output_stride)
+                camera, scale_factor=args['scale_factor'], output_stride=output_stride)
 
             heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = sess.run(
                 model_outputs,
@@ -86,7 +89,8 @@ def gen(camera):
                 output_stride=output_stride,
                 max_pose_detections=10,
                 min_pose_score=0.15)
-
+            
+            print("pose_scores success")
             # 0:코, 1:왼쪽눈, 2:오른쪽눈, 3:왼쪽귀, 4:오른쪽귀", 5:왼쪽어깨, 6:오른쪽어깨
             # 7:왼쪽팔꿈치, 8:오른쪽팔꿈치, 9:왼쪽손목, 10:오른쪽손목, 11:왼쪽골반부위, 12:오른쪽골반부위
             # 13:왼쪽무릎, 14:오른쪽무릎, 15:왼쪽발목, 16:오른쪽발목
@@ -115,9 +119,11 @@ def gen(camera):
             if cnt == 1:
                 
                 message = "잠시후에 시작합니다. 자리를 잡아주세요."
+                print(message)
 
             if cnt % cycle == 0:
                 if init:
+                    print("success init")
                     if cnt > 30 and ready.isReady(keypoint_coords[0]):
                         init = False
                         init2 = True
@@ -125,6 +131,7 @@ def gen(camera):
 
                 elif init2:
                     if exerciseCode == 1 and ready.isSide(keypoint_coords[0]):
+                        print("스쿼트 시작")
                         init2 = False
                         init3 = True
                         squat.setting(exerciseCode)
@@ -209,7 +216,7 @@ def gen(camera):
                 elif init3:
                     if exerciseCode == 1:
                         if squat.postureCorrection(keypoint_coords[0]):
-                            
+                            print("스쿼트")
                             message = "스쿼트 자세를 잘 잡으셨어요!,,, 잠시후 카운트를 시작합니다."
                             message = str(ready.countNumber) + "회 반복해주세요."
                             cnt = 2
@@ -264,7 +271,6 @@ def gen(camera):
                             time.sleep(4)
                             finish = True
 
-
                 #여기부터 찐 문제임...하
                 #일단 counting있는 애들만 넣고, 아닌 애들은 위에서 처리하게 하기
 
@@ -272,6 +278,7 @@ def gen(camera):
                     if exerciseCode == 1:
                         if cnt == 33:
                             message = "시작해주세요."
+                            print(cnt)
                         elif cnt > 33 and squat.counting(keypoint_coords[0]):
                             if squat.CNT == ready.countNumber:
                                 message = "스쿼트" + str(ready.countNumber) +" 회를 마쳤습니다. 수고하셨습니다."
@@ -328,7 +335,7 @@ def gen(camera):
                             message ="플랭크를"+ str(ready.countNumber) + "초 동안 하셨습니다. 수고하셨습니다."
                             finish = True
                     #스트레칭은 여기서 할게 아닌것 같아서 안함.....
-
+            print(cnt)
             # TODO this isn't particularly fast, use GL for drawing and display someday...
             overlay_image = posenet.draw_skel_and_kp(
                 display_image, pose_scores, keypoint_scores, keypoint_coords,
@@ -351,5 +358,7 @@ def gen(camera):
                 tmp, frame = cv2.imencode('.JPEG', jpeg)
                 yield (b'--frame\r\n'
                        b'Content-Type: image/jpeg\r\n\r\n' + frame.tostring() + b'\r\n')
+                print("break!")
                 break
+    print(message)
     return message

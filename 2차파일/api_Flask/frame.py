@@ -66,7 +66,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 @app.route("/frame", methods=["POST"])
 def frame():
-    file = request.files['frame']
+    file = request.files['frame'].read()
     print("Success")
     return camera.gen(file)
 
