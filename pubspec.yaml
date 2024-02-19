@@ -25,6 +25,7 @@ dependencies:
   dio: ^5.4.0
   flutter_native_splash:
   image:
+  wakelock: ^0.6.2
 
 
 dev_dependencies:
