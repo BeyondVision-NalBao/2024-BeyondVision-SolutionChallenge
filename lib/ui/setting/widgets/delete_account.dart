@@ -16,8 +16,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
   @override
   Widget build(BuildContext context) {
     UserService userService = UserService();
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    print(authProvider);
+    AuthProvider auth = Provider.of<AuthProvider>(context);
     return AlertDialog(
       backgroundColor: const Color(boxColor),
       elevation: 5,
@@ -38,7 +37,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
           const SizedBox(height: 30),
           TextButton(
               onPressed: () {
-                userService.quitUser(authProvider.memberId);
+                userService.quitUser(auth.memberId);
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => const LoginPage()));
               },

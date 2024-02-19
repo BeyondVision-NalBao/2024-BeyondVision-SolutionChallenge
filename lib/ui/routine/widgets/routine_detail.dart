@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/model/routine_model.dart';
+import 'package:beyond_vision/provider/login_provider.dart';
 import 'package:beyond_vision/provider/routine_provider.dart';
 import 'package:beyond_vision/service/routine_service.dart';
 import 'package:beyond_vision/ui/appbar.dart';
@@ -35,6 +36,7 @@ class _RoutineDetailState extends State<RoutineDetail> {
   Widget build(BuildContext context) {
     RoutineProvider routineProvider = Provider.of<RoutineProvider>(context);
     List<RoutineExercise> items = widget.routine.routineDetails;
+    AuthProvider auth = Provider.of<AuthProvider>(context);
     // @override
     // void dispose() {
     //   routineService.editRoutine(routineProvider.routines[widget.index], 3);
@@ -78,30 +80,40 @@ class _RoutineDetailState extends State<RoutineDetail> {
               ),
             ),
             const SizedBox(height: 20),
-            if (routineProvider.isChanged)
-              Center(
-                child: Material(
-                  shape: const CircleBorder(side: BorderSide.none),
-                  elevation: 15,
-                  child: CircleAvatar(
-                      radius: 50,
-                      backgroundColor: const Color(boxColor),
-                      child: IconButton(
-                          onPressed: () {
-                            routineProvider.editOrder(widget.index, items);
-                            setState(() {
-                              routineProvider.isChanged = false;
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.check,
-                            size: 80,
-                            color: Color(fontYellowColor),
-                          ))),
-                ),
-              )
+            if (routineProvider.isWorkout == false)
+              if (routineProvider.isChanged)
+                Center(
+                  child: Material(
+                    shape: const CircleBorder(side: BorderSide.none),
+                    elevation: 15,
+                    child: CircleAvatar(
+                        radius: 50,
+                        backgroundColor: const Color(boxColor),
+                        child: IconButton(
+                            onPressed: () {
+                              routineProvider.editOrder(
+                                  widget.index, items, auth.memberId);
+                              setState(() {
+                                routineProvider.isChanged = false;
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.check,
+                              size: 80,
+                              color: Color(fontYellowColor),
+                            ))),
+                  ),
+                )
+              else
+                NewButton(previousPage: false, index: widget.index)
             else
-              NewButton(previousPage: false, index: widget.index)
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.play_arrow,
+                    size: 80,
+                    color: Color(fontYellowColor),
+                  ))
           ]),
         ));
   }

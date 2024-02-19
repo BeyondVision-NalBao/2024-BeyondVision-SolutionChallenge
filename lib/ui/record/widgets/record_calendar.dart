@@ -38,7 +38,7 @@ class _CalendarState extends State<Calendar> {
         startingDayOfWeek: StartingDayOfWeek.monday,
         focusedDay: selectedDay,
         firstDay: DateTime(2023, 1, 1),
-        lastDay: DateTime(2024, 12, 12),
+        lastDay: DateTime.now(),
         calendarFormat: CalendarFormat.week,
         onDaySelected: widget.provider.updateSelectedDay,
         onPageChanged: widget.provider.moveWeek,

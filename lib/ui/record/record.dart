@@ -1,4 +1,5 @@
 import 'package:beyond_vision/provider/date_provider.dart';
+import 'package:beyond_vision/provider/login_provider.dart';
 import 'package:beyond_vision/service/record_service.dart';
 import 'package:beyond_vision/ui/appbar.dart';
 import 'package:beyond_vision/ui/record/widgets/record_calendar.dart';
@@ -14,12 +15,13 @@ class Record extends StatelessWidget {
   Widget build(BuildContext context) {
     DateProvider provider = Provider.of<DateProvider>(context);
     RecordService recordService = RecordService();
+    AuthProvider auth = Provider.of<AuthProvider>(context);
 
     return Scaffold(
         appBar: MyAppBar(context, titleText: "운동 기록"),
         backgroundColor: Colors.black,
         body: FutureBuilder(
-            future: recordService.getAllRecord(3),
+            future: recordService.getAllRecord(auth.memberId),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 provider.getRecord(snapshot.data!);

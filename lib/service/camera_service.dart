@@ -250,6 +250,7 @@ class _CameraServiceState extends State<CameraService>
   // 앱이 화면에서 사라질 때 호출
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+
     cameraController?.dispose();
     super.dispose();
   }

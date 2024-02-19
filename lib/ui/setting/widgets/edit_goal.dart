@@ -1,6 +1,8 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/provider/login_provider.dart';
 import 'package:beyond_vision/service/user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EditGoal extends StatefulWidget {
   const EditGoal({super.key});
@@ -28,6 +30,8 @@ class _EditGoalState extends State<EditGoal> {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+
     return Dialog(
       backgroundColor: const Color(boxColor),
       elevation: 5,
@@ -58,7 +62,8 @@ class _EditGoalState extends State<EditGoal> {
             TextButton(
                 onPressed: () {
                   UserService userService = UserService();
-                  userService.editUserInfo(int.parse(_count.text), 3);
+                  userService.editUserInfo(
+                      int.parse(_count.text), auth.memberId);
                   Navigator.pop(context);
                 },
                 child: const Text("수정하기",

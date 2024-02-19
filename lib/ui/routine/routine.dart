@@ -6,8 +6,9 @@ import 'package:beyond_vision/ui/routine/widgets/routine_button.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
-class Routine extends StatelessWidget {
-  const Routine({super.key});
+class RoutinePage extends StatelessWidget {
+  final bool isWorkout;
+  const RoutinePage({super.key, required this.isWorkout});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class Routine extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               routineProvider.getRoutine(snapshot.data!);
+              routineProvider.isWorkout = isWorkout;
               return SingleChildScrollView(
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.8,
@@ -40,10 +42,13 @@ class Routine extends StatelessWidget {
                         );
                       } else {
                         // 마지막 요소로 NewButton 위젯 추가
-                        return NewButton(
-                          previousPage: true,
-                        );
+                        if (!isWorkout) {
+                          return NewButton(
+                            previousPage: true,
+                          );
+                        }
                       }
+                      return null;
                     },
                   ),
                 ),

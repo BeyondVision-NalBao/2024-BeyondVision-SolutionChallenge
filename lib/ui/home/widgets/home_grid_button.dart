@@ -26,8 +26,10 @@ class HomeButton extends StatelessWidget {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const WorkOut()));
           } else if (name == "운동 루틴") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Routine()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const RoutinePage(isWorkout: false)));
           } else if (name == "운동 기록") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const Record()));
