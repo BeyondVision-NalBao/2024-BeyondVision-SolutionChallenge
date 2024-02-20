@@ -30,6 +30,7 @@ def setting(exCode):
 
 
 def plank_first(keypoint):
+    global message
     right_angle = getDegree(keypoint[4],keypoint[6],keypoint[12])
     left_angle = getDegree(keypoint[3],keypoint[5],keypoint[11])
     value = 10
@@ -58,6 +59,7 @@ def plank_first(keypoint):
 
 
 def plank_second(keypoint):
+    global message
     right_angle = getDegree(keypoint[6],keypoint[12],keypoint[14])
     left_angle = getDegree(keypoint[5],keypoint[11],keypoint[13])
     value = 10
@@ -86,6 +88,7 @@ def plank_second(keypoint):
 
 
 def plank_third(keypoint):
+    global message
     # keypoint[12] : 오른쪽골반, keypoint[14] : 오른쪽무릎, keypoint[16] : 오른쪽발목
     # keypoint[11] : 왼쪽골반, keypoint[13] : 왼쪽무릎, keypoint[15] : 왼쪽발목
     right_angle = getDegree(keypoint[12], keypoint[14], keypoint[16])
@@ -105,10 +108,3 @@ def plank_third(keypoint):
         message = "무릎이 굽혀져 있습니다. 무릎을 펴주세요"
         return False
 
-
-def postureCorrection(keypoint):
-    if plank_first(keypoint) and plank_second(keypoint) and plank_third(keypoint):
-        # message = "플랭크 자세를 잘 잡으셨어요!")
-        return True
-    else:
-        return False

@@ -6,28 +6,63 @@
 
 #운동코드 받아오기
 #횟수 설정하기
+
+import imageDetect
+
+import squat
+import lateralRaise
+import shoulderPress
+import hundred
+import plank
+import zup
+import bridge
+import front_raise
+import stretching10
+import stretching4
+import stretching5
+
 print('this is test message ')
 def selectExercise(name, memberId, count='30'): #경원이가 디폴트 30으로 해놓으라고 했음 ㅎㅎ
-    global exerciseCode, countNumber
+    global exerciseCode, countNumber, member_id, WorkOutName, cnt, cnt_1
+    cnt = 0
+    cnt_1 =0
     if name=='스쿼트':
         exerciseCode = 1
+        squat.setting(1)
     elif name=='숄더프레스':
         exerciseCode = 2
+        shoulderPress.setting(2)
     elif name=='레터럴레이즈':
         exerciseCode = 3
+        lateralRaise.setting(3)
     elif name=='헌드레드':
         exerciseCode = 4
+        hundred.setting(4)
     elif name=='플랭크':
         exerciseCode = 5
+        plank.setting(5)
     elif name=='프론트레이즈':
         exerciseCode = 6
+        front_raise.setting(6)
     elif name=='제트업':
         exerciseCode = 7
+        zup.setting(7)
     elif name=='브릿지':
         exerciseCode = 8
+        bridge.setting(8)
+    elif name=='스트레칭1':
+        exerciseCode = 9
+        bridge.setting(9)
+    elif name=='스트레칭2':
+        exerciseCode = 10
+        bridge.setting(10)
+    elif name=='스트레칭3':
+        exerciseCode = 11
+        bridge.setting(11)
     
     countNumber = int(count)
-    print(memberId)
+    member_id=memberId
+    WorkOutName=name
     return str(exerciseCode)
         
     
@@ -39,7 +74,7 @@ def isReady(keypoint):
     MIN_LIMIT = 250
 
     if MIN_LIMIT <= height <= MAX_LIMIT:
-        message ="준비상태가 되었습니다."
+        #message ="준비상태가 되었습니다."
         return True
     elif height > MAX_LIMIT:    
         message ="뒤로 가주세요"

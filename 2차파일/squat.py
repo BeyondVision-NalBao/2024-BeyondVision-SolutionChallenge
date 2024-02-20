@@ -1,6 +1,5 @@
 import math
 import imageDetect
-from speechRecognition import tts
 
 CNT = 0
 
@@ -25,6 +24,7 @@ def setting(exCode):
 
 
 def squat_down(keypoint):
+    global message
     # keypoint[11][0] : 왼쪽 골반 y좌표, keypoint[13][0] : 왼쪽 무릎 y좌표
     # keypoint[12][0] : 오른쪽 골반 y좌표, keypoint[14][0] : 오른쪽 무릎 y좌표
     hip_knee_l = keypoint[11][0] - keypoint[13][0]
@@ -37,17 +37,16 @@ def squat_down(keypoint):
 
     if d_LIMIT - value <= hip_knee <= d_LIMIT + value:
         return True
-    # elif hip_knee > d_LIMIT + value:
-    #     
-    #     message = "조금 일어나세요.")
-    #     return False
+    elif hip_knee > d_LIMIT + value:
+        message = "조금 일어나세요."
+        return False
     elif hip_knee < d_LIMIT - value:
-        
         message = "조금 더 앉으세요"
         return False
 
 
 def squat_straight(keypoint):
+    global message
     # keypoint[17] : 척수상, keypoint[18] : 척수중, keypoint[19] : 척추하
     value = 5
     angle = getDegree(keypoint[17], keypoint[18], keypoint[19])
@@ -55,16 +54,15 @@ def squat_straight(keypoint):
     if s_LIMIT-value <= angle <= s_LIMIT+value:
         return True
     elif angle < s_LIMIT-value:
-        
         message = "허리를 조금 더 세워주세요."
         return False
     elif angle > s_LIMIT+value:
-        
         message = "허리를 조금 더 구부려주세요."
         return False
 
 
 def squat_knee_angle(keypoint):
+    global message
     # keypoint[12] : 오른쪽골반, keypoint[14] : 오른쪽무릎, keypoint[16] : 오른쪽발목
     # keypoint[11] : 왼쪽골반, keypoint[13] : 왼쪽무릎, keypoint[15] : 왼쪽발목
     right_angle = getDegree(keypoint[12], keypoint[14], keypoint[16])
@@ -72,44 +70,7 @@ def squat_knee_angle(keypoint):
     angle = abs((right_angle + left_angle) / 2)
 
     if angle >= LIMIT:
-        return True
+         return True
     else:
-        
-        message = "무릎이 발보다 앞으로 더 나와있습니다."
-        return False
-
-
-def squat_count(keypoint):
-    # keypoint[11][0] : 왼쪽 골반 y좌표, keypoint[13][0] : 왼쪽 무릎 y좌표
-    # keypoint[12][0] : 오른쪽 골반 y좌표, keypoint[14][0] : 오른쪽 무릎 y좌표
-    hip_knee_l = keypoint[11][0] - keypoint[13][0]
-    hip_knee_r = keypoint[12][0] - keypoint[14][0]
-    hip_knee = (hip_knee_l + hip_knee_r) / 2
-    value = 35
-    global cnt_flag
-
-    if cnt_flag and d_LIMIT - value <= hip_knee <= d_LIMIT + value:
-        cnt_flag = False
-        return True
-    elif d_LIMIT - value > hip_knee or hip_knee > d_LIMIT + value:
-        cnt_flag = True
-        return False
-
-
-def postureCorrection(keypoint):
-    if squat_down(keypoint) and squat_straight(keypoint) and squat_knee_angle(keypoint):
-        # message = "스쿼트 자세를 잘 잡으셨어요!")
-        return True
-    else:
-        return False
-
-
-def counting(keypoint):
-    if squat_count(keypoint):
-        global CNT
-        CNT += 1
-        
-        message = "성공한 횟수 " + str(CNT)
-        return True
-    else:
-        return False
+         message = "무릎이 발보다 앞으로 더 나와있습니다."
+         return False
