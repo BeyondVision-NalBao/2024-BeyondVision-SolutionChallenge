@@ -17,6 +17,7 @@
 ## 🎯 Our Goal
 
 ## 🛠 Project Architecture
+<img src="https://i.ibb.co/YQkcPZJ/beyondvision-drawio-2.png" alt="beyondvision-drawio-2" border="0"></a>
 
 ## 💻 Demo Video
 
