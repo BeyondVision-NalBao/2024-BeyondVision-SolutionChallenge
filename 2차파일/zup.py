@@ -1,6 +1,6 @@
 import math
 import imageDetect
-from speechRecognition import tts
+#from speechRecognition import tts
 import time
 
 CNT = 0
@@ -48,60 +48,8 @@ def setting(exCode):
     cnt_flag = True
 
 
-def zup_up1(keypoint):
-    ear = (keypoint[3]+keypoint[4])/2
-    
-    # 귀-척추 상- 척추 중
-    angle = getDegree(ear, keypoint[17], keypoint[18])
-    value = 10
-
-    if up_LIMIT1 - value <= angle <= up_LIMIT1 + value:
-        return True
-    elif angle < up_LIMIT1 - value:
-        
-        message = "고개를 조금만 뒤로 빼주세요"
-        return False
-    elif up_LIMIT1 +value < angle:
-        
-        message = "고개를 조금만 당겨주세요"
-        return False
-
-
-def zup_up2(keypoint):
-    pelvis=(keypoint[11]+keypoint[12])/2
-    value=10
-
-    # 척추 상- 척추 중- 척추 하
-    angle = getDegree(keypoint[17], keypoint[18], keypoint[19])
-
-    if up_LIMIT2 - value <= angle <= up_LIMIT2 + value:
-        return True
-    elif angle < up_LIMIT2 - value:
-        
-        message = "등을 조금만 펴주세요"
-        return False
-    elif up_LIMIT2 +value < angle:
-        
-        message = "등을 조금만 말아주세요"
-        return False
-    
-def zup_up3(keypoint):
-    pelvis=(keypoint[11]+keypoint[12])/2
-    knee=(keypoint[13]+keypoint[14])/2
-    value= 20
-    
-    # 무릎-골반-척추 중
-    angle = getDegree(knee, pelvis, keypoint[18])
-
-    if up_LIMIT3 - value <= angle <= up_LIMIT3 + value:
-        return True
-    elif up_LIMIT3 +value < angle:
-        
-        message = "조금 더 누워주세요"
-        return False
-
-
 def zup_down1(keypoint):
+    global message
     ear = (keypoint[3]+keypoint[4])/2
     
     # 귀-척추 상- 척추 중
@@ -111,16 +59,15 @@ def zup_down1(keypoint):
     if down_LIMIT1 - value <= angle <= down_LIMIT1 + value:
         return True
     elif angle < down_LIMIT1 - value:
-        
         message = "고개를 조금만 뒤로 빼주세요"
         return False
     elif down_LIMIT1 +value < angle:
-        
         message = "고개를 조금만 당겨주세요"
         return False
 
 
 def zup_down2(keypoint):
+    global message
     pelvis=(keypoint[11]+keypoint[12])/2
     value=10
 
@@ -130,15 +77,14 @@ def zup_down2(keypoint):
     if down_LIMIT2 - value <= angle <= down_LIMIT2 + value:
         return True
     elif angle < down_LIMIT2 - value:
-        
         message = "등을 조금만 펴주세요"
         return False
     elif down_LIMIT2 +value < angle:
-        
         message = "등을 조금만 말아주세요"
         return False
     
 def zup_down3(keypoint):
+    global message
     pelvis=(keypoint[11]+keypoint[12])/2
     knee=(keypoint[13]+keypoint[14])/2
     value= 20
@@ -149,79 +95,5 @@ def zup_down3(keypoint):
     if down_LIMIT3 - value <= angle <= down_LIMIT3 + value:
         return True
     elif down_LIMIT3 -value > angle:
-        
         message = "조금 더 일어나 주세요"
-        return False
-
-
-def isUp(keypoint):
-    if zup_up1(keypoint) and zup_up2(keypoint) and zup_up3(keypoint):
-        return True
-    else:
-        return False
-    
-def isDown(keypoint):
-    if zup_down1(keypoint) and zup_down2(keypoint) and zup_down3(keypoint):
-        return True
-    else:
-        return False
-
-
-
-def zup_count(keypoint):
-    global cnt_flag
-    knee= (keypoint[13]+keypoint[14])/2
-    pelvis=(keypoint[11]+keypoint[12])/2
-    ear = (keypoint[3]+keypoint[4])/2
-    
-    # 귀-척추 상- 척추 중
-    angle = getDegree(ear, keypoint[17], keypoint[18])
-    value = 10
-
-    if up_LIMIT1 - value <= angle <= up_LIMIT1 + value:
-        checkpoint1=True
-    elif angle < up_LIMIT1 - value:
-        checkpoint1= False
-    elif up_LIMIT1 +value < angle:
-        checkpoint1= False
-    
-
-    # 척추 상- 척추 중- 척추 하
-    angle1 = getDegree(keypoint[17], keypoint[18], keypoint[19])
-    value1=10
-    
-    if up_LIMIT2 - value1 <= angle1 <= up_LIMIT2 + value1:
-        checkpoint2= True
-    elif angle1 < up_LIMIT2 - value1:
-        checkpoint2= False
-    elif up_LIMIT2 +value1 < angle1:
-        checkpoint2= False
-        
-    
-    # 무릎-골반-척추 중
-    angle = getDegree(knee, pelvis, keypoint[18])
-    value2= 20
-    
-    if up_LIMIT3 - value2 <= angle <= up_LIMIT3 + value2:
-        checkpoint3= True
-    elif up_LIMIT3 +value2 < angle:
-        checkpoint3= True
-    
-    
-    if cnt_flag and checkpoint1 and checkpoint2 and checkpoint3:
-        cnt_flag = False
-        return True
-    elif not (checkpoint1 and checkpoint2 and checkpoint3):
-        cnt_flag = True
-        return False
-
-
-def counting(keypoint):
-    if zup_count(keypoint):
-        global CNT
-        CNT += 1
-        
-        message = "성공한 횟수 " + str(CNT)
-        return True
-    else:
         return False
