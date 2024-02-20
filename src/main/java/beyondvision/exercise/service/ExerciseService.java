@@ -8,7 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 import static beyondvision.global.exeption.ExceptionCode.INVALID_EXERCISE_CATEGORY;
 
@@ -29,5 +32,13 @@ public class ExerciseService {
         return exercises.stream()
                 .map(ExerciseDetailResponse::of)
                 .toList();
+    }
+
+    @Transactional
+    public ExerciseDetailResponse getRandomExercise(){
+        Random random = new Random();
+        long randomNumber = random.nextInt(11) + 1;
+        Exercise randomExercise = exerciseRepository.findExerciseById(randomNumber);
+        return ExerciseDetailResponse.of(randomExercise);
     }
 }

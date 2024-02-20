@@ -40,8 +40,7 @@ public class RecordService {
     public ExerciseRecordResponse saveExerciseRecord(final Long exerciseId, final ExerciseRecordRequest exerciseRecordRequest) {
         Member member = checkExistMember(exerciseRecordRequest.getMemberId());
 
-        Exercise exercise = exerciseRepository.findExerciseById(exerciseId)
-                .orElseThrow(() -> new BadRequestException(INVALID_EXERCISE));
+        Exercise exercise = exerciseRepository.findExerciseById(exerciseId);
 
         Record record = Record.builder()
                 .exerciseTime(exerciseRecordRequest.getExerciseTime())

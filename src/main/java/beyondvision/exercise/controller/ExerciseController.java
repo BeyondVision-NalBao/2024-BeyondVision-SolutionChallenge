@@ -30,4 +30,9 @@ public class ExerciseController {
     public ResponseEntity<?> getExerciseDetail(@PathVariable("categoryNumber") final Integer categoryNumber) {
         return ResponseEntity.ok().body(exerciseService.getExerciseDetailByCategory(categoryNumber));
     }
+
+    @GetMapping("/random")
+    public ResponseEntity<?> getRandomExercise(){
+        return ResponseEntity.ok().body(exerciseService.getRandomExercise());
+    }
 }
