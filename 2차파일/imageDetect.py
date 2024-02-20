@@ -17,7 +17,7 @@ global message
 # parser.add_argument('--output_dir', type=str, default='./output')
 # args = parser.parse_args()
 
-args = {"model": 101, "scale_factor": 1.0, "notxt": True, "image_dir": './images',
+args = {"model": 101, "scale_factor": 1.0, "notxt": True, "image_dir": '../images',
         "output_dir": './output'}
 
 
@@ -50,7 +50,7 @@ def main(exerciseCode):
                     4: 'hundred', 5: 'plank', 6: 'front_up', 6.5: 'front_down',
                     7: 'zup_up', 7.5: 'zup_down',8: 'bridge_up', 8.5: 'bridge_down',
                     9:'stretching1', 10:'stretching2', 11:'stretching3'}
-        f = './images\\' + exercise[exerciseCode] + '.jpg'
+        f = r"../images\\" + exercise[exerciseCode] + '.jpg'
         start = time.time()
 
         input_image, draw_image, output_scale = posenet.read_imgfile(

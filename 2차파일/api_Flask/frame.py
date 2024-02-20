@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, jsonify
 from db import connect_to_db
 from pymysql import connect
 import os, sys
@@ -59,7 +59,6 @@ def start_exercise(memberId):
     print(result)
     return str(result) #postnat
 
-
 UPLOAD_FOLDER = 'uploads'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -67,14 +66,18 @@ if not os.path.exists(UPLOAD_FOLDER):
 @app.route("/frame", methods=["POST"])
 def frame():
     file = request.files['frame'].read()
-    print("Success")
-    camera.gen(file)
-    return "Success"
+    return camera.gen(file)
 
+@app.route('/exercise/output', methods=['GET'])
+def exercise_output(count, time, name):
+    data = {
+        'count': count,
+        'time': time,
+        'name': name
+    }
+    return data
 
-
-
-if __name__ == '__main__':
+if __name__== "__main__":
     app.run(debug=True)
 
 

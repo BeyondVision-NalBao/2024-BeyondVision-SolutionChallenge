@@ -65,7 +65,7 @@ def gen(camera):
         exerciseCode = ready.exerciseCode
 
         input_image, display_image, output_scale = posenet.read_cap(
-            camera.cap, scale_factor=args['scale_factor'], output_stride=output_stride)
+            camera, scale_factor=args['scale_factor'], output_stride=output_stride)
 
         heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = sess.run(
             model_outputs,
@@ -108,7 +108,7 @@ def gen(camera):
 
         if init ==True:
             if ready.isReady(keypoint_coords[0]):
-                if exerciseCode == 1 and ready.isSide(keypoint_coords[0]): 
+                if exerciseCode == 1 and ready.isSide(keypoint_coords[0]):
                     init = False
                     init2 = True
                     return ready.message
@@ -152,16 +152,18 @@ def gen(camera):
                     init = False
                     init2 = True
                     return ready.message
-                else: return ready.message
-            else: return ready.message
-        
+                else:
+                    return ready.message
+            else: 
+                return ready.message
+
         if init2 == True:
             if exerciseCode == 1:  
                 if squat.squat_knee_angle(keypoint_coords[0]):
                     if squat.squat_down(keypoint_coords[0]):
                         if squat.squat_straight(keypoint_coords[0]):
                             message = "스쿼트 자세가 좋습니다 "
-                            cnt += 1   
+                            cnt += 1
                     else: return squat.message
                 else: return squat.message
             elif exerciseCode == 2:
@@ -233,8 +235,6 @@ def gen(camera):
                         message =" 좋습니다! 3초간 유지합니다"
                     else: return stretching10.message
                 else: return stretching10.message
-                            
-        
 
         # 여기에 count종료 코드 써야 함
         # TODO this isn't particularly fast, use GL for drawing and display someday...
@@ -253,16 +253,15 @@ def gen(camera):
             output.exercise_output(ready.member_id, ready.WorkOutName, ready.countNumber, cnt_1*2)
             #exerciseCode, countNumber, member_id, WorkOutName
             
-            
-
-        if finish == False:
-            ret, jpeg = cv2.imencode('.jpg', overlay_image)
-            frame = jpeg.tobytes()
-            yield (b'--frame\r\n'
-                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-        else:
-            jpeg = cv2.imread('images/finish.png', cv2.IMREAD_COLOR)
-            tmp, frame = cv2.imencode('.JPEG', jpeg)
-            yield (b'--frame\r\n'
-                    b'Content-Type: image/jpeg\r\n\r\n' + frame.tostring() + b'\r\n')
+        # if finish == False:
+        #     ret, jpeg = cv2.imencode('.jpg', overlay_image)
+        #     frame = jpeg.tobytes()
+        #     yield (b'--frame\r\n'
+        #             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+        # else:
+        #     jpeg = cv2.imread('images/finish.png', cv2.IMREAD_COLOR)
+        #     tmp, frame = cv2.imencode('.JPEG', jpeg)
+        #     yield (b'--frame\r\n'
+        #             b'Content-Type: image/jpeg\r\n\r\n' + frame.tostring() + b'\r\n')
+        
     return message
