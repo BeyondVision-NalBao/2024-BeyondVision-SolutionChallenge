@@ -1,6 +1,6 @@
 import math
 import imageDetect
-from speechRecognition import tts
+#from speechRecognition import tts
 
 CNT = 0
 
@@ -33,6 +33,7 @@ def setting(exCode):
 
 
 def pressDown1(keypoint):
+    global message
     # keypoint[7] : 왼쪽팔꿈치, keypoint[17] : 척추상, keypoint[18] : 척추중
     # keypoint[8] : 오른쪽팔꿈치, keypoint[17] : 척추상, keypoint[18] : 척추중
 
@@ -66,6 +67,7 @@ def pressDown1(keypoint):
 
 
 def pressDown2(keypoint):
+    global message
     # keypoint[9] : 왼쪽손목, keypoint[7] : 왼쪽팔꿈치, keypoint[17] : 척추상
     # keypoint[10]  : 오른쪽손목, keypoint[8] : 오른쪽팔꿈치, keypoint[17] : 척추상
 
@@ -106,6 +108,7 @@ def pressDown2(keypoint):
 
 
 def pressUp(keypoint):
+    global message
     # keypoint[5] : 왼쪽어깨, keypoint[7] : 왼쪽팔꿈치, keypoint[9] : 왼쪽손목
     # keypoint[6] : 오른쪽어깨, keypoint[8] : 오른쪽팔꿈치, keypoint[10] : 오른쪽손목
 
@@ -141,6 +144,7 @@ def isDown(keypoint):
 
 
 def postureCorrection(keypoint):
+    global message
     if pressUp(keypoint):
         
         message = "숄드 프레스 자세를 잘 잡으셨어요!"
@@ -174,6 +178,7 @@ def shoulderPress_count(keypoint):
 
 
 def counting(keypoint):
+    
     if shoulderPress_count(keypoint):
         global CNT
         CNT += 1
