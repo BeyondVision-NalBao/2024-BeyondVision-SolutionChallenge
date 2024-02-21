@@ -23,21 +23,23 @@ Our United Nations' Sustainable Development goals are as follows.
 <br>
 **10.2 Reduced Inequalities** - By 2030, empower and promote the social, economic and political inclusion of all, irrespective of age, sex, disability, race, ethnicity, origin, religion or economic or other status
 <br>
-<img src="https://i.postimg.cc/QNYGxFWR/Solution-Challenge.jpg" width="500">
+<br>
+<img src="https://i.postimg.cc/QNYGxFWR/Solution-Challenge.jpg" width="800">
 <br>
 <br>
 
 
 ## 🛠 Project Architecture
-<img src="https://i.ibb.co/YQkcPZJ/beyondvision-drawio-2.png" alt="beyondvision-drawio-2" border="0"></a>
+<img src="https://i.ibb.co/YQkcPZJ/beyondvision-drawio-2.png" alt="beyondvision-drawio-2" border="0" width="1000"></a>
 
 ## 💻 Demo Video
 
 ## 📸 Feature
+[![image.png](https://i.postimg.cc/NMp5GSS8/image.png)](https://postimg.cc/Hc8pBZpj)
+[![image.png](https://i.postimg.cc/jSP2nLBS/image.png)](https://postimg.cc/CRMSWLF3)
+[![image.png](https://i.postimg.cc/PJ0fPj4D/image.png)](https://postimg.cc/fSjQr11W)
+[![image.png](https://i.postimg.cc/440x86g3/image.png)](https://postimg.cc/8shGcrs8)
 
-## 🔎 Preview I can read
-
-## 📲 Execution Method
 
 ## 👩🏻‍💻 Contributors
 
