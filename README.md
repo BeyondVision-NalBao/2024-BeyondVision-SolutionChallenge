@@ -13,7 +13,7 @@
 
 **BeyondVision** is an application that helps you exercise effectively on your own. It analyzes exercise videos taken by the camera in real time and gives you the feedback you need to be in a more accurate position. You can also freely set up your own exercise routine and check your exercise records anytime, anywhere with BeyondVision.
 <br>
-
+<br>
 
 
 ## 🎯 Our Goal
@@ -23,7 +23,9 @@ Our United Nations' Sustainable Development goals are as follows.
 <br>
 **10.2 Reduced Inequalities** - By 2030, empower and promote the social, economic and political inclusion of all, irrespective of age, sex, disability, race, ethnicity, origin, religion or economic or other status
 <br>
-
+<img src="https://i.postimg.cc/QNYGxFWR/Solution-Challenge.jpg" width="500">
+<br>
+<br>
 
 
 ## 🛠 Project Architecture
