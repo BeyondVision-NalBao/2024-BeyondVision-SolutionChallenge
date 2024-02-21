@@ -40,7 +40,7 @@ def get_record_id():
         return get_record_row[0] + 1
     except:
         print("Fail to get record id")
-
+        
 if __name__== "__main__":
     app.run(debug=True)
 

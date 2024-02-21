@@ -69,11 +69,11 @@ def frame():
     return camera.gen(file)
 
 @app.route('/exercise/output', methods=['GET'])
-def exercise_output(count, time, name):
+def exercise_output():
     data = {
-        'count': count,
-        'time': time,
-        'name': name
+        'count': ready.cnt,
+        'time': ready.cnt * 5,
+        'name': ready.WorkOutName
     }
     return data
 

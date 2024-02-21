@@ -74,7 +74,7 @@ def isReady(keypoint):
     MIN_LIMIT = 250
 
     if MIN_LIMIT <= height <= MAX_LIMIT:
-        #message ="준비상태가 되었습니다."
+        message ="준비상태가 되었습니다."
         return True
     elif height > MAX_LIMIT:    
         message ="뒤로 가주세요"

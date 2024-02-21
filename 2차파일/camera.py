@@ -57,6 +57,13 @@ cnt_1 = 0
 
 def gen(camera):
     global message,START,END, init, init2, init3, up , cnt, cnt_1
+
+    if cnt_1==ready.countNumber:
+        message = "운동이 끝났습니다"
+        finish = True
+        output.exercise_output(ready.member_id, ready.WorkOutName, ready.countNumber, cnt_1*5)
+        return message
+
     cnt_1 +=1
     with tf.compat.v1.Session() as sess:
         model_cfg, model_outputs = posenet.load_model(args['model'], sess)
@@ -158,12 +165,13 @@ def gen(camera):
                 return ready.message
 
         if init2 == True:
-            if exerciseCode == 1:  
+            if exerciseCode == 1:
                 if squat.squat_knee_angle(keypoint_coords[0]):
                     if squat.squat_down(keypoint_coords[0]):
                         if squat.squat_straight(keypoint_coords[0]):
                             message = "스쿼트 자세가 좋습니다 "
                             cnt += 1
+                        else: return squat.message
                     else: return squat.message
                 else: return squat.message
             elif exerciseCode == 2:
@@ -215,7 +223,6 @@ def gen(camera):
                     else: return bridge.message
                 else: return bridge.message
             elif exerciseCode == 9:
-                cnt_1 += 1
                 if stretching4.leftArm_position(keypoint_coords[0]):
                     if stretching4.rightArm_position(keypoint_coords[0]):
                         message =" 좋습니다! 3초간 유지합니다"
@@ -246,22 +253,5 @@ def gen(camera):
             1240, 920), interpolation=cv2.INTER_AREA)
 
         overlay_image = cv2.flip(overlay_image, 1)
-
-        if cnt_1==ready.countNumber:
-            message = "운동이 끝났습니다"
-            finish = True
-            output.exercise_output(ready.member_id, ready.WorkOutName, ready.countNumber, cnt_1*2)
-            #exerciseCode, countNumber, member_id, WorkOutName
-            
-        # if finish == False:
-        #     ret, jpeg = cv2.imencode('.jpg', overlay_image)
-        #     frame = jpeg.tobytes()
-        #     yield (b'--frame\r\n'
-        #             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-        # else:
-        #     jpeg = cv2.imread('images/finish.png', cv2.IMREAD_COLOR)
-        #     tmp, frame = cv2.imencode('.JPEG', jpeg)
-        #     yield (b'--frame\r\n'
-        #             b'Content-Type: image/jpeg\r\n\r\n' + frame.tostring() + b'\r\n')
         
     return message
