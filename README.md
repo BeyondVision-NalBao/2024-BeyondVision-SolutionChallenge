@@ -5,16 +5,26 @@
 > GDSC Sookmyung - Team NalBao
 >
 > Team Member: Heekyung Kim, Kyungwon Shin, Youngseo Cho, Goeun Ha
+<br>
 
 
 
 ## 💡 Project Introduction
 
-**BeyondVision** 
+**BeyondVision** is an application that helps you exercise effectively on your own. It analyzes exercise videos taken by the camera in real time and gives you the feedback you need to be in a more accurate position. You can also freely set up your own exercise routine and check your exercise records anytime, anywhere with BeyondVision.
+<br>
 
 
 
 ## 🎯 Our Goal
+Our United Nations' Sustainable Development goals are as follows.
+<br>
+**3.4 Good Health And Well-Being** - By 2030, reduce by one third premature mortality from non-communicable diseases through prevention and treatment and promote mental health and well-being
+<br>
+**10.2 Reduced Inequalities** - By 2030, empower and promote the social, economic and political inclusion of all, irrespective of age, sex, disability, race, ethnicity, origin, religion or economic or other status
+<br>
+
+
 
 ## 🛠 Project Architecture
 <img src="https://i.ibb.co/YQkcPZJ/beyondvision-drawio-2.png" alt="beyondvision-drawio-2" border="0"></a>
