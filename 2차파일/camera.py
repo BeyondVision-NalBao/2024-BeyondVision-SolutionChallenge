@@ -58,13 +58,13 @@ cnt_1 = 0
 def gen(camera):
     global message,START,END, init, init2, init3, up , cnt, cnt_1
 
-    if cnt_1==ready.countNumber:
+    if ready.cnt_1==ready.countNumber:
         message = "운동이 끝났습니다"
         finish = True
-        output.exercise_output(ready.member_id, ready.WorkOutName, ready.countNumber, cnt_1*5)
+        output.exercise_output(ready.member_id, ready.WorkOutName, ready.countNumber, ready.cnt_1*5)
         return message
 
-    cnt_1 +=1
+    ready.cnt_1 +=1
     with tf.compat.v1.Session() as sess:
         model_cfg, model_outputs = posenet.load_model(args['model'], sess)
         output_stride = model_cfg['output_stride']
@@ -169,7 +169,7 @@ def gen(camera):
                 if squat.squat_knee_angle(keypoint_coords[0]):
                     if squat.squat_down(keypoint_coords[0]):
                         if squat.squat_straight(keypoint_coords[0]):
-                            message = "스쿼트 자세가 좋습니다 "
+                            message = "자세가 좋습니다 "
                             cnt += 1
                         else: return squat.message
                     else: return squat.message
@@ -177,20 +177,20 @@ def gen(camera):
             elif exerciseCode == 2:
                 if shoulderPress.pressDown1(keypoint_coords[0]):
                     if shoulderPress.pressDown2(keypoint_coords[0]):
-                        message = "숄더 프레스 자세가 좋습니다"
+                        message = "자세가 좋습니다"
                         cnt += 1  
                     else: return shoulderPress.message 
                 else: return shoulderPress.message
             elif exerciseCode == 3:
                 if lateralRaise.raiseUp(keypoint_coords[0]):
-                    message = " 레터럴레이즈 자세가 좋습니다"
+                    message = "자세가 좋습니다"
                     cnt += 1  
                 else : return lateralRaise.message
             elif exerciseCode == 4:
                 if hundred.hundred_first(keypoint_coords[0]):
                     if hundred.hunbred_secon(keypoint_coords[0]):
                         if hundred.hundred_third:
-                            message = "좋습니다! 자세를 유지해주세요!"
+                            message = "자세를 유지해주세요!"
                         else: return hundred.message
                     else: return hundred.message
                 else: return hundred.message
@@ -198,48 +198,48 @@ def gen(camera):
                 if plank.plank_first(keypoint_coords[0]):
                     if plank.plank_second(keypoint_coords[0]):
                         if plank.plank_third(keypoint_coords[0]):
-                            message = "좋습니다! 자세를 유지해주세요!"
+                            message = "자세를 유지해주세요!"
                         else: return plank.message
                     else: return plank.message
                 else: return plank.message
             elif exerciseCode == 6:
                 if front_raise.raiseup:
-                    message = "프론트레이즈 자세가 좋습니다"
+                    message = "자세가 좋습니다"
                     cnt += 1
                 else: return front_raise.message
             elif exerciseCode == 7:
                 if zup.zup_down1(keypoint_coords[0]):
                     if zup.zup_down2(keypoint_coords[0]):
                         if zup.zup_down3(keypoint_coords[0]):
-                            message = "좋습니다! 자세를 유지해주세요!"
+                            message = "자세를 유지해주세요!"
                         else: return zup.message
                     else: return zup.message
                 else: return zup.message
             elif exerciseCode == 8:
                 if bridge.bridge_up1(keypoint_coords[0]):
                     if bridge.bridge_up2(keypoint_coords[0]):
-                        message =" 브릿지 자세가 좋습니다"
+                        message ="자세가 좋습니다"
                         cnt += 1
                     else: return bridge.message
                 else: return bridge.message
             elif exerciseCode == 9:
                 if stretching4.leftArm_position(keypoint_coords[0]):
                     if stretching4.rightArm_position(keypoint_coords[0]):
-                        message =" 좋습니다! 3초간 유지합니다"
+                        message ="3초간 유지합니다"
                     else: return stretching4.message
                 else: return stretching4.message
             elif exerciseCode == 10:
                 if stretching5.leftArm_position(keypoint_coords[0]):
                     if stretching5.rightArm_position(keypoint_coords[0]):
                         if stretching5.check_backbone(keypoint_coords[0]):
-                            message =" 좋습니다! 3초간 유지합니다"
+                            message ="3초간 유지합니다"
                         else: return stretching5.message
                     else: return stretching5.message
                 else: return stretching5.message
             elif exerciseCode ==11:
                 if stretching10.right_down(keypoint_coords[0]):
                     if stretching10.right_leg_straight(keypoint_coords[0]):
-                        message =" 좋습니다! 3초간 유지합니다"
+                        message ="3초간 유지합니다"
                     else: return stretching10.message
                 else: return stretching10.message
 
