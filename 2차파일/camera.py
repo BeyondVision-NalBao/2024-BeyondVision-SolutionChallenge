@@ -170,7 +170,7 @@ def gen(camera):
                     if squat.squat_down(keypoint_coords[0]):
                         if squat.squat_straight(keypoint_coords[0]):
                             message = "자세가 좋습니다 "
-                            cnt += 1
+                            ready.cnt += 1
                         else: return squat.message
                     else: return squat.message
                 else: return squat.message
@@ -178,13 +178,13 @@ def gen(camera):
                 if shoulderPress.pressDown1(keypoint_coords[0]):
                     if shoulderPress.pressDown2(keypoint_coords[0]):
                         message = "자세가 좋습니다"
-                        cnt += 1  
+                        ready.cnt += 1  
                     else: return shoulderPress.message 
                 else: return shoulderPress.message
             elif exerciseCode == 3:
                 if lateralRaise.raiseUp(keypoint_coords[0]):
                     message = "자세가 좋습니다"
-                    cnt += 1  
+                    ready.cnt += 1  
                 else : return lateralRaise.message
             elif exerciseCode == 4:
                 if hundred.hundred_first(keypoint_coords[0]):
@@ -205,7 +205,7 @@ def gen(camera):
             elif exerciseCode == 6:
                 if front_raise.raiseup:
                     message = "자세가 좋습니다"
-                    cnt += 1
+                    ready.cnt += 1
                 else: return front_raise.message
             elif exerciseCode == 7:
                 if zup.zup_down1(keypoint_coords[0]):
@@ -219,7 +219,7 @@ def gen(camera):
                 if bridge.bridge_up1(keypoint_coords[0]):
                     if bridge.bridge_up2(keypoint_coords[0]):
                         message ="자세가 좋습니다"
-                        cnt += 1
+                        ready.cnt += 1
                     else: return bridge.message
                 else: return bridge.message
             elif exerciseCode == 9:
