@@ -71,7 +71,7 @@ def frame():
 @app.route('/exercise/output', methods=['GET'])
 def exercise_output():
     data = {
-        'count': ready.cnt,
+        'count': camera.cnt,
         'time': ready.cnt * 5,
         'name': ready.WorkOutName
     }
