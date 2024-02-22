@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    detabase-platform: org.hibernate.dialect.MySQL8Dialect
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+  profiles:
+    include: db
+
