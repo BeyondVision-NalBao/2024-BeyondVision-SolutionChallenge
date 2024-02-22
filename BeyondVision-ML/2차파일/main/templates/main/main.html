@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+  <style>
+    .container { text-align: center; }
+    .Footer { position: fixed; left: 0px; bottom: 0px; width: 100%; }
+    .btn {
+        width: 150px;
+        height: 50px;
+        margin-left: 940px; 
+        margin-top: 20px;
+        background: #00739d;
+        color: #ffffff;
+        border: none;
+        position: relative;
+        font-size: 1.2em;
+        padding: 0 2em;
+        cursor: pointer;
+        transition: 800ms ease all;
+        outline: none;
+      }
+      .btn:hover {
+        background: #004E6a;
+        color: #ffffff;
+      }
+      /* .btn:before,
+      .btn:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 2px;
+        width: 0;
+        background: #45b1d8;
+        transition: 400ms ease all;
+      }
+      .btn:after {
+        right: inherit;
+        top: inherit;
+        left: 0;
+        bottom: 0;
+      }
+      .btn:hover:before,
+      .btn:hover:after {
+        width: 100%;
+        transition: 800ms ease all;
+      } */
+  </style>
+  <script>
+    window.addEventListener("keydown", (e) => {
+      const key = document.getElementById(e.key);
+      if (key) key.classList.add("pressed");
+      location.href="http://127.0.0.1:8000";
+    
+    });
+  </script>
+</head>
+
+<body>
+  <nav>
+    <img src="https://i.esdrop.com/d/j09wmqn009xs/fRGaFyj08q.png" style="margin-left:150px; margin-top:20px; cursor: pointer;" onClick="location.href='http://127.0.0.1:8000'">
+    <button type="button" class="btn" onClick="location.href='http://127.0.0.1:8000'">QUIT</button>
+  </nav>
+  <div class="container">
+    <img src="http://127.0.0.1:8000/camera" style="width:650px;" />
+  </div>
+  <!-- Footer -->
+  <div class="hi"></div>
+  <div class="Footer">
+    <footer class="page-footer font-small unique-color darken-3">
+      <div class="container" style="height:60px;">
+        <div class="row">
+          <div class="col-md-12 py-3">
+            <div class="mb-3 flex-center">
+              <a class="fb-ic" style="margin-left:5%;"
+                href="https://github.com/4PT5/PersonalTraining-for-Visually-Impaired">
+                <i class="fab fa-github fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright text-center py-2">© 2021 Copyright</div>
+    </footer>
+  </div>
+</body>
+
+</html>
