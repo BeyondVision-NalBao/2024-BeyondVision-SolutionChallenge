@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/model/routine_model.dart';
 import 'package:beyond_vision/provider/login_provider.dart';
 import 'package:beyond_vision/provider/workout_provider.dart';
 import 'package:beyond_vision/ui/home/home.dart';
@@ -22,24 +23,27 @@ import 'package:wakelock/wakelock.dart';
 List<CameraDescription> cameras = [];
 
 class CameraView extends StatefulWidget {
-  final String name;
-  const CameraView({super.key, required this.name});
+  final List<RoutineExercise> exercises;
+  const CameraView({super.key, required this.exercises});
 
   @override
   _CameraViewState createState() => _CameraViewState();
 }
 
 class _CameraViewState extends State<CameraView> {
+  List<WorkoutResult> results = [];
   FlutterTts tts = FlutterTts();
   late CameraController _controller;
   late bool _isInitialized;
+  late Timer timer;
   bool _isStreamingPaused = false;
   bool isReady = false;
+  int count = 1;
 
   @override
   void initState() {
+    tts.setSpeechRate(0.6);
     super.initState();
-
     Wakelock.enable();
     _isInitialized = false;
     _initializeCamera();
@@ -48,27 +52,25 @@ class _CameraViewState extends State<CameraView> {
   void _initializeCamera() async {
     cameras = await availableCameras();
     _controller = CameraController(cameras[1], ResolutionPreset.low);
+
     _controller.initialize().then((_) {
       if (!mounted) return;
+      print(_controller);
       setState(() {
         _isInitialized = true;
       });
-      _startStreaming(); // 카메라 컨트롤러가 초기화된 후에 호출
+
+      _startStreaming(count - 1); // 카메라 컨트롤러가 초기화된 후에 호출
     });
   }
 
-  void _startStreaming() async {
+  Future _startStreaming(int index) async {
     AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
+    tts.speak("잠시후 운동을 시작합니다. 신호에 맞춰 동작을 수행해주세요");
 
-    bool isReady = await getReady(auth.memberId, widget.name, 3);
-
-    if (isReady == true) {
-      tts.setSpeechRate(0.6);
-
-      tts.speak("${widget.name}를 시작합니다. 신호에 맞춰 동작을 수행해주세요");
-    }
-
-    Timer timer = Timer.periodic(const Duration(seconds: 5), (_) async {
+    isReady =
+        await getReady(auth.memberId, widget.exercises[index].exerciseName, 3);
+    timer = Timer.periodic(const Duration(seconds: 5), (_) async {
       // "삑"이라는 문자열을 말하기
       if (!_isStreamingPaused) {
         await tts.speak("삑");
@@ -143,7 +145,6 @@ class _CameraViewState extends State<CameraView> {
           contentType: 'multipart/form-data',
         ),
       );
-
       if (response.statusCode == 200) {
         tts.speak(response.data);
 
@@ -166,31 +167,50 @@ class _CameraViewState extends State<CameraView> {
     }
   }
 
-  void getResultAfterWorkout() async {
+  Future<void> getResultAfterWorkout() async {
     final url =
         Uri.parse('https://6b53-1-209-144-251.ngrok-free.app/exercise/output');
 
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      List<WorkoutResult> results = [];
       final Map<String, dynamic> data =
           jsonDecode(utf8.decode(response.bodyBytes));
       WorkoutResult workoutResult = WorkoutResult.fromJson(data);
 
       results.add(workoutResult);
-      Navigator.pop(context);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => WorkoutResultPage(
-                    results: results,
-                  )));
     }
+
+    if (count != widget.exercises.length) {
+      count++;
+      setState(() {
+        _isStreamingPaused = false;
+        _isInitialized = true;
+      });
+      timer.cancel();
+      _initializeCamera();
+    } else {
+      goToResult();
+    }
+  }
+
+  void goToResult() {
+    Navigator.pop(context);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomePage()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const WorkOut()));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => WorkoutResultPage(
+                  results: results,
+                )));
   }
 
   @override
   void dispose() {
+    timer.cancel();
     _isInitialized = false;
     _isStreamingPaused = true;
     _controller.dispose(); // 카메라 컨트롤러 해제

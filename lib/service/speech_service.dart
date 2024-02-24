@@ -22,27 +22,11 @@ class StsService {
 
   void speechString(String words) {}
   void startListening() async {
-    await speechText.listen(onResult: _onSpeechResult);
+    await speechText.listen(onResult: _onSpeechResult, localeId: 'ko_KR');
   }
 
-  Future<String> stopListening() async {
-    await speechText.stop().then((value) => {
-          if (lastWords.contains("이동"))
-            {result = "이동"}
-          else if (lastWords.contains("설명"))
-            {result = "설명"}
-          else if (lastWords.contains("하기"))
-            {result = "운동 하기"}
-          else if (lastWords.contains("기록"))
-            {result = "운동 기록"}
-          else if (lastWords.contains("루틴"))
-            {result = "운동 루틴"}
-          else if (lastWords.contains("설정"))
-            {result = "앱 설정"}
-          else
-            {result = "이동과 설명 중 하나를 말씀해주세요"}
-        });
-    return result;
+  Future<void> stopListening() async {
+    await speechText.stop();
   }
 
   void speakResult() {}

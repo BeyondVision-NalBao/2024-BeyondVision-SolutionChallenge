@@ -1,6 +1,8 @@
 import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/provider/date_provider.dart';
+import 'package:beyond_vision/provider/login_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calendar extends StatefulWidget {
@@ -15,10 +17,27 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     DateTime selectedDay = widget.provider.selectedDay;
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+
+    bool getEventsForDay(List<double> records, int day) {
+      if (records.length < day) {
+        if (records[day] >= auth.goal) {
+          print("왜");
+          return true;
+        }
+      }
+
+      return false;
+    }
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: TableCalendar(
+        // eventLoader: (day) {
+        //   bool isSuccess = getEventsForDay(
+        //       widget.provider.thisWeekExerciseTime, day.weekday);
+        //   return isSuccess ? [true] : [];
+        // },
         daysOfWeekStyle:
             const DaysOfWeekStyle(weekdayStyle: TextStyle(color: Colors.white)),
         calendarStyle: const CalendarStyle(

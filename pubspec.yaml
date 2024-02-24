@@ -21,9 +21,8 @@ dependencies:
   shared_preferences:
   http:
   path_provider:
-  flutter_image_compress: ^2.1.0
-  dio: ^5.4.0
   flutter_native_splash:
+  dio: ^5.4.0
   image:
   wakelock: ^0.6.2
 

@@ -143,7 +143,7 @@ class _NewInfoState extends State<NewInfo> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                              builder: (context) => HomePage(isFirst: true)));
                     },
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),

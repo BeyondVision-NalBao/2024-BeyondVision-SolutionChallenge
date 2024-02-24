@@ -3,10 +3,11 @@ import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/model/routine_model.dart';
 import 'package:beyond_vision/provider/login_provider.dart';
 import 'package:beyond_vision/provider/routine_provider.dart';
-import 'package:beyond_vision/service/routine_service.dart';
+import 'package:beyond_vision/service/tts_service.dart';
 import 'package:beyond_vision/ui/appbar.dart';
 import 'package:beyond_vision/ui/routine/widgets/new_button.dart';
 import 'package:beyond_vision/ui/routine/widgets/routine_detail_box.dart';
+import 'package:beyond_vision/ui/workout/widgets/workout_camera_routine.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,7 @@ class _RoutineDetailState extends State<RoutineDetail> {
     RoutineProvider routineProvider = Provider.of<RoutineProvider>(context);
     List<RoutineExercise> items = widget.routine.routineDetails;
     AuthProvider auth = Provider.of<AuthProvider>(context);
+    TtsService tts = TtsService();
     // @override
     // void dispose() {
     //   routineService.editRoutine(routineProvider.routines[widget.index], 3);
@@ -45,7 +47,9 @@ class _RoutineDetailState extends State<RoutineDetail> {
 
     return Scaffold(
         backgroundColor: Colors.black,
-        appBar: MyAppBar(context, titleText: widget.routine.routineName),
+        appBar: MyAppBar(context,
+            titleText: widget.routine.routineName,
+            getString: tts.getRoutineDetailExplain(widget.routine)),
         body: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Column(children: [
@@ -108,7 +112,16 @@ class _RoutineDetailState extends State<RoutineDetail> {
                 NewButton(previousPage: false, index: widget.index)
             else
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CameraView(
+                          exercises: items,
+                        ),
+                      ),
+                    );
+                  },
                   icon: const Icon(
                     Icons.play_arrow,
                     size: 80,

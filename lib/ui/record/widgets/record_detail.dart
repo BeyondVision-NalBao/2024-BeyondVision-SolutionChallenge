@@ -5,13 +5,14 @@ import 'package:beyond_vision/ui/record/widgets/record_detail_info_title.dart';
 import 'package:beyond_vision/ui/record/widgets/record_detail_info_line.dart';
 import 'package:beyond_vision/provider/date_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RecordDetail extends StatelessWidget {
-  final DateProvider provider;
-  const RecordDetail({super.key, required this.provider});
+  const RecordDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
+    DateProvider provider = Provider.of<DateProvider>(context);
     List<Widget> todays = provider.todayRecords
         .map((value) => DetailBox(
             title: value.exerciseName!, time: value.exerciseTime!.toString()))

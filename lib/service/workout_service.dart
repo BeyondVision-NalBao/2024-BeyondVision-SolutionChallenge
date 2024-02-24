@@ -1,26 +1,31 @@
 import 'package:beyond_vision/model/workout_model.dart';
+import 'package:beyond_vision/provider/workout_provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WorkOutService {
   static const String baseUrl = "http://34.64.89.205/api/v1/exercise";
 
-  Future<List<WorkOut>> getAllWorkOut(int categoryNumber) async {
-    List<WorkOut> workoutInstances = [];
-    final url = Uri.parse('$baseUrl/detail/$categoryNumber');
+  Future<List<List<WorkOut>>> getAllWorkOut() async {
+    List<List<WorkOut>> workoutInstances = [];
 
-    final response = await http.get(url);
+    for (int i = 0; i < 4; i++) {
+      List<WorkOut> workouts = [];
+      final url = Uri.parse('$baseUrl/detail/$i');
 
-    if (response.statusCode == 200) {
-      final List<dynamic> workouts =
-          jsonDecode(utf8.decode(response.bodyBytes));
-      for (var workout in workouts) {
-        workoutInstances.add(WorkOut.fromJson(workout));
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final List<dynamic> workoutsData =
+            jsonDecode(utf8.decode(response.bodyBytes));
+        for (var workout in workoutsData) {
+          workouts.add(WorkOut.fromJson(workout));
+        }
       }
 
-      return workoutInstances;
+      workoutInstances.add(workouts);
     }
-    throw Error();
+    return workoutInstances;
   }
 
   Future<WorkOut> getRandom() async {
@@ -34,6 +39,21 @@ class WorkOutService {
       WorkOut randomWorkout = WorkOut.fromJson(data);
 
       return randomWorkout;
+    }
+    throw Error();
+  }
+
+  Future<WorkoutResult> getresults() async {
+    final url =
+        Uri.parse('https://52ff-221-145-51-165.ngrok-free.app/exercise/output');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data =
+          jsonDecode(utf8.decode(response.bodyBytes));
+      WorkoutResult workoutResult = WorkoutResult.fromJson(data);
+      return workoutResult;
     }
     throw Error();
   }

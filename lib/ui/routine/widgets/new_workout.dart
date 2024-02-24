@@ -1,6 +1,5 @@
 import 'package:beyond_vision/ui/appbar.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_big_box.dart';
-
 import 'package:flutter/material.dart';
 
 class NewWorkOut extends StatelessWidget {

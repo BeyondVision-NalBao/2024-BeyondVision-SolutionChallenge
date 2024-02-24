@@ -19,6 +19,7 @@ class _WorkOutExplainState extends State<WorkOutExplain> {
 
   bool isListening = false;
   int isResult = 1;
+  String networkUrl = "";
 
   @override
   void initState() {
@@ -27,6 +28,7 @@ class _WorkOutExplainState extends State<WorkOutExplain> {
     tts.setPitch(0.9);
     tts.speak(widget.workout.description);
     super.initState();
+    networkUrl = widget.workout.exerciseImageUrl;
   }
 
   @override
@@ -43,6 +45,7 @@ class _WorkOutExplainState extends State<WorkOutExplain> {
       elevation: 5,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.9,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -55,14 +58,18 @@ class _WorkOutExplainState extends State<WorkOutExplain> {
                       fontSize: 40,
                       fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 50),
                 SizedBox(
-                  height: 550,
+                  height: 520,
                   child: SingleChildScrollView(
-                    child: Text(widget.workout.description,
-                        textAlign: TextAlign.center,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 28)),
+                    child: Column(
+                      children: [
+                        Image.network(networkUrl),
+                        Text(widget.workout.description,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 28)),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 50),
@@ -79,11 +86,12 @@ class _WorkOutExplainState extends State<WorkOutExplain> {
                           TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => CameraView(
-                                            workout: widget.workout)));
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => CameraView(
+                                //             name: widget.workout.name,
+                                //             count: 30)));
                               },
                               child: const Text("확인 후 운동하기",
                                   style: TextStyle(

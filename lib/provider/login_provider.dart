@@ -17,7 +17,13 @@ class AuthProvider with ChangeNotifier {
     memberId = id;
   }
 
-  void getGoal(int memberGoal) {
-    goal = memberGoal;
+  void getGoal(int newGoal) {
+    goal = newGoal;
+    //notifyListeners(); // 리스너들에게 상태 변경 알림
+  }
+
+  void editGoal(int newGoal) {
+    goal = newGoal;
+    notifyListeners(); // 리스너들에게 상태 변경 알림
   }
 }
