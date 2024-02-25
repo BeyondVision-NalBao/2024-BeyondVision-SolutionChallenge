@@ -21,11 +21,9 @@ Our United Nations' Sustainable Development goals are as follows.
 <br>
 **3.4 Good Health And Well-Being** - By 2030, reduce by one third premature mortality from non-communicable diseases through prevention and treatment and promote mental health and well-being
 <br>
-**10.2 Reduced Inequalities** - By 2030, empower and promote the social, economic and political inclusion of all, irrespective of age, sex, disability, race, ethnicity, origin, religion or economic or other status
+**4.7 Quality Education** - By 2030, ensure that all learners acquire the knowledge and skills needed to promote sustainable development, including, among others, through education for sustainable development and sustainable lifestyles, human rights, gender equality, promotion of a culture of peace and non-violence, global citizenship and appreciation of cultural diversity and of culture’s contribution to sustainable development<br>
 <br>
-<br>
-<img src="https://i.postimg.cc/QNYGxFWR/Solution-Challenge.jpg" width="800">
-<br>
+[![Solution-Challenge-6.png](https://i.postimg.cc/y8sSLxSj/Solution-Challenge-6.png)](https://postimg.cc/Czr11F7n)<br>
 <br>
 
 
