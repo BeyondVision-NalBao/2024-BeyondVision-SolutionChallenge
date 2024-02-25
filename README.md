@@ -41,9 +41,9 @@ Our United Nations' Sustainable Development goals are as follows.
 ## 💻 Demo Video
 |Sign In and Sign up with Google Oauth        |Voice assistant                 |Exercise                           | 
 |---|---|---| 
-|![SignIn](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/7f447b11-2222-416d-a21c-8e2894c699b4) |![Voice](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/a9ed54e8-e79a-4ec1-9b15-cd36150022cf) |![Workout ](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/46efe4e3-b2cb-475b-a77c-781432ed60e5)                          | 
+|![SignIn](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/7f447b11-2222-416d-a21c-8e2894c699b4) |![Voice](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/a9ed54e8-e79a-4ec1-9b15-cd36150022cf) |![Workout ](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/46efe4e3-b2cb-475b-a77c-781432ed60e5) 
 |With Sound      |With Sound              |With Sound                           | 
-|Sign In and Sign up with Google Oauth        |Voice assistant                 |Exercise                           | 
+|[Sign In and Sign up with Google Oauth](https://drive.google.com/file/d/1wqNQnDHsYEUqTFZbUAm_S_9ywbi0bhpA/view?usp=sharing)        |[Voice assistant ](https://drive.google.com/file/d/1z4Kbvog8DjcLS-i3MQsrSCxz0CDZKtSN/view?usp=sharing)                |[Exercise ](https://drive.google.com/file/d/1VsWg-875UiQVhRXz3tFemRDVomjOE88e/view?usp=sharing)                          | 
 
 | Exercise Routine          | Exercise Record                      | Setting                           | 
 |---|---|---| 
@@ -51,8 +51,8 @@ Our United Nations' Sustainable Development goals are as follows.
 
 
 ## 📱How to use
-https://drive.google.com/file/d/1GragJ6g3PyAqQ4yLERRJ5zwyfF3i29HT/view?usp=sharing
-You can download apk file via this link
+> You can download apk file via [this link](https://drive.google.com/file/d/1GragJ6g3PyAqQ4yLERRJ5zwyfF3i29HT/view?usp=sharing)
+
 
 
 ## 👩🏻‍💻 Contributors
