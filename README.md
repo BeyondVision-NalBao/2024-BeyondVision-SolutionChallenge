@@ -31,6 +31,12 @@ Our United Nations' Sustainable Development goals are as follows.
 <img src="https://i.ibb.co/YQkcPZJ/beyondvision-drawio-2.png" alt="beyondvision-drawio-2" border="0" width="1000"></a>
 
 ## 💻 Demo Video
+|Sign In and Sign up with Google Oauth(sound on)         |Voice assistant(sound on)                 |Exercise(sound on)                            | 
+|![SignIn](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/7f447b11-2222-416d-a21c-8e2894c699b4)         |![Voice](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/a9ed54e8-e79a-4ec1-9b15-cd36150022cf)                |Exercise(sound on)                            | 
+| Exercise Routine          | Exercise Record                      | Setting                           | 
+| ![Routine](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/111f117a-8568-45e2-9bab-3439eb6baf4b)          | ![Record](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/60a7a2df-3356-420f-b8f6-b3c55853afd4)
+                     | ![Setting](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/792a87e9-2a67-4421-85b1-454492472855)                          |
+
 
 ## 📸 Feature
 [![image.png](https://i.postimg.cc/NMp5GSS8/image.png)](https://postimg.cc/Hc8pBZpj)
@@ -41,8 +47,8 @@ Our United Nations' Sustainable Development goals are as follows.
 
 ## 👩🏻‍💻 Contributors
 
-| Name          | Heekyung Kim                        | Kyungwon Shin                           | Youngseo Cho                                                | Goeun Ha                                              |
+| Name          | Heekyung Kim                        | Kyungwon Shin                           | Youngseo Cho                                                | Goeun Ha                                        |
 | ------------- | --------------------------------- | --------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| Role          | Machine-Learning Developer               | Front-end Developer               | Back-end Developer                                        | Back-end Developer                                        |
+| Role          | Machine-Learning Developer               | Front-end Developer               | Back-end Developer                                     | Back-end Developer                                 |
 | Profile Image | ![](https://avatars.githubusercontent.com/u/71302565?v=4) | ![](https://avatars.githubusercontent.com/u/93874872?v=4) | ![](https://avatars.githubusercontent.com/u/90203803?v=4) | ![](https://avatars.githubusercontent.com/u/93965468?v=4) |
 
