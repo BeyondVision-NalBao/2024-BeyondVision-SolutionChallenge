@@ -1,6 +1,5 @@
 import math
 import imageDetect
-#from speechRecognition import tts
 global message
 CNT = 0
 

@@ -1,6 +1,5 @@
 import math
 import imageDetect
-#from speechRecognition import tts
 import time
 
 CNT = 0
