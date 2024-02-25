@@ -1,5 +1,8 @@
 import 'package:beyond_vision/core/core.dart';
 import 'package:beyond_vision/service/speech_service.dart';
+import 'package:beyond_vision/ui/record/record.dart';
+import 'package:beyond_vision/ui/routine/routine.dart';
+import 'package:beyond_vision/ui/setting/setting.dart';
 import 'package:beyond_vision/ui/workout/workout.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
@@ -107,9 +110,10 @@ class _SpeakerState extends State<Speaker> {
                   setState(() {
                     if (isListening) {
                       _speech.stopListening().then((value) => {
-                            if (_speech.lastWords == "이동")
+                            print(_speech.lastWords),
+                            if (_speech.lastWords.contains("이동"))
                               {isResult = 5, tts.speak("어느 페이지로 이동할까요?")}
-                            else if (_speech.lastWords == "설명")
+                            else if (_speech.lastWords.contains("설명"))
                               {
                                 tts.speak(widget.getString!),
                               }
@@ -127,7 +131,8 @@ class _SpeakerState extends State<Speaker> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const WorkOut())),
+                                        builder: (context) => const RoutinePage(
+                                            isWorkout: false))),
                               }
                             else if (_speech.lastWords.contains("기록"))
                               {
@@ -135,7 +140,8 @@ class _SpeakerState extends State<Speaker> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const WorkOut())),
+                                        builder: (context) =>
+                                            const RecordPage())),
                               }
                             else if (_speech.lastWords.contains("설정"))
                               {
@@ -143,7 +149,7 @@ class _SpeakerState extends State<Speaker> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const WorkOut())),
+                                        builder: (context) => const Setting())),
                               }
                             else
                               {tts.speak("이동과 설명 중 하나를 말씀해주세요")}

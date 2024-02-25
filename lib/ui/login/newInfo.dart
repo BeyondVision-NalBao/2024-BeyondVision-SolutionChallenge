@@ -1,8 +1,10 @@
 import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/model/user_model.dart';
+import 'package:beyond_vision/service/tts_service.dart';
 import 'package:beyond_vision/service/user_service.dart';
 import 'package:beyond_vision/ui/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 enum SingingCharacter { lafayette, jefferson }
 
@@ -20,6 +22,17 @@ class _NewInfoState extends State<NewInfo> {
   TextEditingController goalController = TextEditingController();
 
   UserService userService = UserService();
+  @override
+  void initState() {
+    // TODO: implement initState
+    TtsService ttsService = TtsService();
+    FlutterTts tts = FlutterTts();
+
+    tts.setSpeechRate(0.4);
+    tts.setPitch(0.9);
+    tts.speak(ttsService.newInfoExplain);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
