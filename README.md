@@ -30,20 +30,29 @@ Our United Nations' Sustainable Development goals are as follows.
 ## 🛠 Project Architecture
 <img src="https://i.ibb.co/YQkcPZJ/beyondvision-drawio-2.png" alt="beyondvision-drawio-2" border="0" width="1000"></a>
 
-## 💻 Demo Video
-|Sign In and Sign up with Google Oauth(sound on)        |Voice assistant(sound on)                 |Exercise(sound on)                            | 
-|---|---|---| 
-|![SignIn](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/7f447b11-2222-416d-a21c-8e2894c699b4) |![Voice](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/a9ed54e8-e79a-4ec1-9b15-cd36150022cf) |Exercise(sound on)                            | 
-| Exercise Routine          | Exercise Record                      | Setting                           | 
-|---|---|---| 
-| ![Routine](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/111f117a-8568-45e2-9bab-3439eb6baf4b) | ![Record](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/60a7a2df-3356-420f-b8f6-b3c55853afd4) | ![Setting](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/792a87e9-2a67-4421-85b1-454492472855)                          |
-
 
 ## 📸 Feature
 [![image.png](https://i.postimg.cc/NMp5GSS8/image.png)](https://postimg.cc/Hc8pBZpj)
 [![image.png](https://i.postimg.cc/jSP2nLBS/image.png)](https://postimg.cc/CRMSWLF3)
 [![image.png](https://i.postimg.cc/PJ0fPj4D/image.png)](https://postimg.cc/fSjQr11W)
 [![image.png](https://i.postimg.cc/440x86g3/image.png)](https://postimg.cc/8shGcrs8)
+
+
+## 💻 Demo Video
+|Sign In and Sign up with Google Oauth        |Voice assistant                 |Exercise                           | 
+|---|---|---| 
+|![SignIn](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/7f447b11-2222-416d-a21c-8e2894c699b4) |![Voice](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/a9ed54e8-e79a-4ec1-9b15-cd36150022cf) |![Workout ](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/46efe4e3-b2cb-475b-a77c-781432ed60e5)                          | 
+|With Sound      |With Sound              |With Sound                           | 
+|Sign In and Sign up with Google Oauth        |Voice assistant                 |Exercise                           | 
+
+| Exercise Routine          | Exercise Record                      | Setting                           | 
+|---|---|---| 
+| ![Routine](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/111f117a-8568-45e2-9bab-3439eb6baf4b) | ![Routine](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/ec4195cc-780b-4f23-993a-2fb3c4cb829d) | ![Setting](https://github.com/BeyondVision-NalBao/2024-BeyondVision-SolutionChallenge/assets/93874872/792a87e9-2a67-4421-85b1-454492472855)|
+
+
+## 📱How to use
+https://drive.google.com/file/d/1GragJ6g3PyAqQ4yLERRJ5zwyfF3i29HT/view?usp=sharing
+You can download apk file via this link
 
 
 ## 👩🏻‍💻 Contributors
