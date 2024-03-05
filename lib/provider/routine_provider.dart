@@ -3,6 +3,7 @@ import 'package:beyond_vision/service/routine_service.dart';
 import 'package:flutter/material.dart';
 
 class RoutineProvider with ChangeNotifier {
+  bool isWorkout = false;
   bool isChanged = false;
   String newName = "";
   List<Routine> routines = [];
@@ -14,11 +15,12 @@ class RoutineProvider with ChangeNotifier {
     routines = routine;
   }
 
-  void addWorkout(String name, int count) {
+  void addWorkout(String name, int count, int memberId) {
     if (indexNum == -1) {
       //새로 생성
       routineService.addRoutine(
-          Routine(null, newName, [RoutineExercise(null, name, count, 1)]), 3);
+          Routine(null, newName, [RoutineExercise(null, name, count, 1)]),
+          memberId);
       routines
           .add(Routine(null, newName, [RoutineExercise(null, name, count, 1)]));
     } else {
@@ -27,7 +29,7 @@ class RoutineProvider with ChangeNotifier {
       routines[indexNum]
           .routineDetails
           .add(RoutineExercise(null, name, count, order));
-      routineService.editRoutine(routines[indexNum], 1);
+      routineService.editRoutine(routines[indexNum], memberId);
 
       indexNum = -1;
     }
@@ -38,11 +40,13 @@ class RoutineProvider with ChangeNotifier {
     newName = "";
   }
 
-  void editOrder(int index, List<RoutineExercise> routineExercise) {
+  void editOrder(
+      int index, List<RoutineExercise> routineExercise, int memberId) {
     for (int i = 0; i < routineExercise.length; i++) {
       routineExercise[i].exerciseOrder = i + 1;
     }
     routines[index].routineDetails = routineExercise;
+    routineService.editRoutine(routines[index], memberId);
   }
 
   void deleteRoutine(int index) {

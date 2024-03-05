@@ -1,4 +1,3 @@
-import 'package:beyond_vision/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class DetailText extends StatelessWidget {

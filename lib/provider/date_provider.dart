@@ -15,9 +15,13 @@ class DateProvider extends ChangeNotifier {
     0.0,
     0.0,
   ];
+  List<DateTime> successWeek = [];
   List<Record> records = [];
   List<List<Record>> thisWeek = [];
+
+  List<List<Record>> thisWeekOnlyResult = [];
   List<Record> todayRecords = [];
+  int currentIdx = 0;
 
   DateProvider() {
     selectedIndex = selectedDay.weekday - 1;
@@ -33,11 +37,18 @@ class DateProvider extends ChangeNotifier {
     updateSelectedDay(selectedDay, selectedDay);
   }
 
+  void getCurrentIdx(int index) {
+    currentIdx = index;
+    notifyListeners();
+  }
+
   void updateSelectedDay(DateTime newDay, DateTime focusedDay) {
+    successWeek = [];
     thisWeek = [];
     todayRecords = [];
     todayExerciseTime = 0.0;
     thisWeekExerciseTime = [];
+    thisWeekOnlyResult = [];
     selectedDay = newDay;
     selectedIndex = selectedDay.weekday - 1;
 
@@ -47,7 +58,8 @@ class DateProvider extends ChangeNotifier {
         .toList();
 
     for (int i = 0; i < todayRecords.length; i++) {
-      todayExerciseTime += todayRecords[i].exerciseTime!;
+      todayExerciseTime +=
+          double.parse((todayRecords[i].exerciseTime! / 60).toStringAsFixed(1));
     }
 
     //이번주 기록
@@ -64,6 +76,7 @@ class DateProvider extends ChangeNotifier {
         thisWeek.add([Record(null, null, null, null, currentDate)]);
       } else {
         thisWeek.add(record);
+        thisWeekOnlyResult.add(record);
       }
     }
 
@@ -71,11 +84,13 @@ class DateProvider extends ChangeNotifier {
       double sum = 0.0;
       for (int j = 0; j < thisWeek[i].length; j++) {
         if (thisWeek[i][j].exerciseTime != null) {
-          sum += thisWeek[i][j].exerciseTime!;
+          sum += double.parse(
+              (thisWeek[i][j].exerciseTime! / 60).toStringAsFixed(1));
         }
       }
       thisWeekExerciseTime.add(sum);
     }
+
     notifyListeners(); // 상태가 변경될 때마다 리스너들에게 알림
   }
 }

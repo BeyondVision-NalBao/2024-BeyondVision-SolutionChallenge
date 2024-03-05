@@ -1,6 +1,8 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/provider/login_provider.dart';
 import 'package:beyond_vision/service/user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EditGoal extends StatefulWidget {
   const EditGoal({super.key});
@@ -26,8 +28,41 @@ class _EditGoalState extends State<EditGoal> {
     super.dispose();
   }
 
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        Future.delayed(const Duration(seconds: 2), () {
+          Navigator.pop(context);
+        });
+
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          backgroundColor: const Color(boxColor), // 원하는 배경 색상으로 변경
+          content: const SizedBox(
+            height: 100,
+            child: Center(
+              child: Text(
+                "수정 성공",
+                style: TextStyle(
+                    color: Color(fontYellowColor),
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+
+    UserService userService = UserService();
+
     return Dialog(
       backgroundColor: const Color(boxColor),
       elevation: 5,
@@ -56,10 +91,14 @@ class _EditGoalState extends State<EditGoal> {
             ),
             const SizedBox(height: 30),
             TextButton(
-                onPressed: () {
-                  UserService userService = UserService();
-                  userService.editUserInfo(int.parse(_count.text), 3);
+                onPressed: () async {
+                  bool isSuccess = await userService.editUserInfo(
+                      int.parse(_count.text), auth.memberId);
+
                   Navigator.pop(context);
+                  if (isSuccess == true) {
+                    _showDialog();
+                  }
                 },
                 child: const Text("수정하기",
                     style: TextStyle(

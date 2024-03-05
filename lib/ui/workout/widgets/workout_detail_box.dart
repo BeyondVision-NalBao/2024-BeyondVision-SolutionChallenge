@@ -2,7 +2,6 @@ import 'package:beyond_vision/core/constants.dart';
 import 'package:beyond_vision/model/workout_model.dart';
 import 'package:beyond_vision/ui/routine/widgets/set_count.dart';
 import 'package:beyond_vision/ui/workout/widgets/workout_explain.dart';
-
 import 'package:flutter/material.dart';
 
 class WorkOutDetail extends StatelessWidget {
@@ -33,7 +32,7 @@ class WorkOutDetail extends StatelessWidget {
             showDialog(
                 context: context,
                 builder: (BuildContext context) =>
-                    WorkOutExplain(workout: workout));
+                    WorkOutExplain(workout: workout, pop: false));
           }
         },
         child: Padding(

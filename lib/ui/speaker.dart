@@ -1,11 +1,16 @@
 import 'package:beyond_vision/core/core.dart';
 import 'package:beyond_vision/service/speech_service.dart';
+import 'package:beyond_vision/ui/record/record.dart';
+import 'package:beyond_vision/ui/routine/routine.dart';
+import 'package:beyond_vision/ui/setting/setting.dart';
+import 'package:beyond_vision/ui/workout/workout.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class Speaker extends StatefulWidget {
-  const Speaker({super.key});
+  final String? getString;
+  const Speaker({super.key, required this.getString});
 
   @override
   State<Speaker> createState() => _SpeakerState();
@@ -27,7 +32,19 @@ class _SpeakerState extends State<Speaker> {
     tts.setSpeechRate(0.4);
     tts.setPitch(0.9);
     tts.speak("무엇을 하고 싶으신가요?");
+    if (isListening) {
+      tts.stop();
+    }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _speechToText.cancel();
+    isListening = false;
+    tts.stop();
+    super.dispose();
   }
 
   @override
@@ -88,30 +105,61 @@ class _SpeakerState extends State<Speaker> {
               backgroundColor: const Color(boxColor),
               child: IconButton(
                 onPressed: () {
+                  tts.stop();
                   // 상태 변경 및 setState() 호출
                   setState(() {
                     if (isListening) {
                       _speech.stopListening().then((value) => {
-                            if (value == "이동")
+                            print(_speech.lastWords),
+                            if (_speech.lastWords.contains("이동"))
                               {isResult = 5, tts.speak("어느 페이지로 이동할까요?")}
-                            else if (value == "설명")
-                              {}
-                            else if (value == "운동 하기")
-                              {}
-                            else if (value == "운동 기록")
-                              {}
-                            else if (value == "운동 루틴")
-                              {}
-                            else if (value == "앱 설정")
-                              {}
+                            else if (_speech.lastWords.contains("설명"))
+                              {
+                                tts.speak(widget.getString!),
+                              }
+                            else if (_speech.lastWords.contains("하기"))
+                              {
+                                Navigator.pop(context),
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const WorkOut())),
+                              }
+                            else if (_speech.lastWords.contains("루틴"))
+                              {
+                                Navigator.pop(context),
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const RoutinePage(
+                                            isWorkout: false))),
+                              }
+                            else if (_speech.lastWords.contains("기록"))
+                              {
+                                Navigator.pop(context),
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const RecordPage())),
+                              }
+                            else if (_speech.lastWords.contains("설정"))
+                              {
+                                Navigator.pop(context),
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Setting())),
+                              }
                             else
                               {tts.speak("이동과 설명 중 하나를 말씀해주세요")}
                           });
                     } else {
                       _speech.startListening();
                     }
-                    if (isResult == 5) isResult = 2;
+
                     isListening = !isListening;
+                    if (isResult == 5) isResult = 2;
                   });
                 },
                 tooltip: 'Listen',
@@ -130,7 +178,7 @@ class _SpeakerState extends State<Speaker> {
                 _speechToText.isListening
                     ? '듣는 중'
                     : _speech.speechEnabled
-                        ? ' '
+                        ? '원하는 걸 말씀해주세요'
                         : '마이크를 사용할 수 없습니다.',
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),

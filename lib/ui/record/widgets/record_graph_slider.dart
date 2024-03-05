@@ -3,6 +3,7 @@ import 'package:beyond_vision/ui/record/widgets/record_bar_graph.dart';
 import 'package:beyond_vision/ui/record/widgets/record_circle_graph.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
 
 class GraphSlider extends StatefulWidget {
   final DateProvider provider;
@@ -13,21 +14,23 @@ class GraphSlider extends StatefulWidget {
 }
 
 class _GraphSliderState extends State<GraphSlider> {
-  int _currentidx = 0;
   CarouselController carouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
+    DateProvider dateProvider = Provider.of<DateProvider>(context);
+
     return Stack(children: [
       CarouselSlider(
         carouselController: carouselController,
         options: CarouselOptions(
             enableInfiniteScroll: false,
             viewportFraction: 1,
-            initialPage: _currentidx,
+            initialPage: dateProvider.currentIdx,
             onPageChanged: (index, reason) {
+              dateProvider.getCurrentIdx(index);
               setState(() {
-                _currentidx = index;
+                dateProvider.currentIdx = index;
               });
             }),
         items: [
@@ -35,7 +38,7 @@ class _GraphSliderState extends State<GraphSlider> {
           SizedBox(height: 250, child: RecordBar(provider: widget.provider))
         ],
       ),
-      _currentidx == 1
+      dateProvider.currentIdx == 1
           ? Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -50,7 +53,7 @@ class _GraphSliderState extends State<GraphSlider> {
                 ),
               ))
           : Container(),
-      _currentidx == 0
+      dateProvider.currentIdx == 0
           ? Align(
               alignment: Alignment.centerRight,
               child: Padding(

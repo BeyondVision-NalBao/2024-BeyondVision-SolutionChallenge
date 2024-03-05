@@ -1,3 +1,4 @@
+import 'package:beyond_vision/service/tts_service.dart';
 import 'package:beyond_vision/ui/appbar.dart';
 import 'package:beyond_vision/ui/setting/widgets/delete_account.dart';
 import 'package:beyond_vision/ui/setting/widgets/setting_box.dart';
@@ -8,8 +9,9 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TtsService tts = TtsService();
     return Scaffold(
-      appBar: MyAppBar(context, titleText: "설정"),
+      appBar: MyAppBar(context, titleText: "설정", getString: tts.getSetting()),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SingleChildScrollView(

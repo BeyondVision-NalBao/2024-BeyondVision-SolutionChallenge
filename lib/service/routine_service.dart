@@ -8,7 +8,7 @@ class RoutineService {
   List<Routine> routineList = [];
 
   Future<List<Routine>> getAllRoutine(int memberId) async {
-    final url = Uri.parse('$baseUrl/routine/detail/1');
+    final url = Uri.parse('$baseUrl/routine/detail/$memberId');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final List<dynamic> routines =
@@ -34,7 +34,7 @@ class RoutineService {
 
   //새로운 루틴 생성
   Future<bool> addRoutine(Routine newRoutine, int memberId) async {
-    final url = Uri.parse('$baseUrl/routine/register/1');
+    final url = Uri.parse('$baseUrl/routine/register/$memberId');
     var response = await http.post(url,
         headers: {"Content-Type": "application/json; charset=UTF-8"},
         body: json.encode({
@@ -116,7 +116,8 @@ class RoutineService {
   }
 
   Future<bool> deleteRoutine(Routine routine, int memberId) async {
-    final url = Uri.parse('$baseUrl/routine/delete/1/${routine.routineId}');
+    final url =
+        Uri.parse('$baseUrl/routine/delete/$memberId/${routine.routineId}');
     var response = await http.delete(url);
 
     if (response.statusCode == 200) {

@@ -88,7 +88,10 @@ class UserService {
     if (response.statusCode == 200) {
       var data = jsonDecode(utf8.decode(response.bodyBytes));
       User currentUser = User.fromJson(data);
-      auth.getGoal(currentUser.exerciseGoal);
+      auth.editGoal(currentUser.exerciseGoal);
+      print(auth.goal);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setInt("exerciseGoal", currentUser.exerciseGoal);
       return true;
     }
     return false;

@@ -1,8 +1,10 @@
 import 'package:beyond_vision/core/constants.dart';
+import 'package:beyond_vision/service/tts_service.dart';
 import 'package:beyond_vision/service/user_service.dart';
 import 'package:beyond_vision/ui/home/home.dart';
 import 'package:beyond_vision/ui/login/newInfo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:beyond_vision/model/user_model.dart';
 
@@ -14,11 +16,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  void signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    final UserService userService = UserService();
+  @override
+  void initState() {
+    // TODO: implement initState
+    TtsService ttsService = TtsService();
+    FlutterTts tts = FlutterTts();
 
+    tts.setSpeechRate(0.4);
+    tts.setPitch(0.9);
+    tts.speak(ttsService.InitExplain);
+    super.initState();
+  }
+
+  void signInWithGoogle() async {
     try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final UserService userService = UserService();
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth =
             await googleUser.authentication;
@@ -49,9 +62,29 @@ class _LoginPageState extends State<LoginPage> {
     } catch (error) {
       showDialog(
         context: context,
-        builder: (BuildContext context) => const AlertDialog(
-          content: Text("구글 로그인에 오류가 발생했습니다."),
-        ),
+        builder: (BuildContext context) {
+          Future.delayed(const Duration(seconds: 2), () {
+            Navigator.pop(context);
+          });
+
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0)),
+            backgroundColor: const Color(boxColor), // 원하는 배경 색상으로 변경
+            content: const SizedBox(
+              height: 100,
+              child: Center(
+                child: Text(
+                  "로그인 오류",
+                  style: TextStyle(
+                      color: Color(fontYellowColor),
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          );
+        },
       );
     }
   }

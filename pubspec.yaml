@@ -15,15 +15,17 @@ dependencies:
   intl:
   provider:
   google_sign_in: ^6.2.1
-  camera: ^0.9.8+1
+  camera: ^0.10.5+9
   speech_to_text: ^6.6.0
   flutter_tts: ^3.8.5
   shared_preferences:
   http:
   path_provider:
-  flutter_image_compress: ^2.1.0
-  dio: ^5.4.0
   flutter_native_splash:
+  dio: ^5.4.0
+  image:
+  wakelock: ^0.6.2
+
 
 dev_dependencies:
   flutter_test:
