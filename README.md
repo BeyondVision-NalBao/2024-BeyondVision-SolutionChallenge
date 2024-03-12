@@ -42,7 +42,7 @@ Our United Nations' Sustainable Development goals are as follows.
 <br>
 
 ## 💻 Demo Video
-[![BeyondVision](https://i.postimg.cc/q7Xz4kC7/2024-03-05-185050.png)](https://www.youtube.com/watch?v=HcM3EjDrV1g)
+[![BeyondVision](https://i.postimg.cc/mkvZQ6gn/2024-03-12-114736.png)](https://www.youtube.com/watch?v=HcM3EjDrV1g)
 
 |Sign In and Sign up with Google Oauth|Voice assistant|Exercise| 
 | ----------------------------------- | ------------- | ------ |
